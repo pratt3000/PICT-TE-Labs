@@ -3,10 +3,13 @@ import java.util.*;
 public class Main {
     static Scanner in = new Scanner(System.in);
 
+    static account_handling acch = new account_handling();
     static HM_count qty = new HM_count();
     static HM_expDate exp = new HM_expDate();
     static ARR_names itmn = new ARR_names();
     static Admin_AUTH AUTH = new Admin_AUTH();
+    
+
     
     static int item_count=13;
     public static void main(String[] args) throws Exception {
@@ -64,7 +67,6 @@ public class Main {
                 System.out.print("ENTER PASS-KEY : ");
                 int pass = in.nextInt();
                 boolean status=AUTH.authenticate(pass);
-                //System.out.println(pass);
 
                 if(status == true){
                     admin_menu();
@@ -75,8 +77,24 @@ public class Main {
                 }
             }
             else if(ip==0){
-                customer_menu();
-                fl=0;
+                System.out.println("new account/ old account?(1/0)");
+                int new_acc = in.nextInt();
+                if(new_acc == 1){
+                    System.out.println("test");
+
+                    acch.new_user_login();
+                    customer_menu();
+                    fl=0;
+                }
+                else{
+                    if(acch.old_user_login()){
+                        customer_menu();
+                        fl=0;
+                    }
+                    else{
+                        fl=1;
+                    }
+                }            
             }
         }
     }
