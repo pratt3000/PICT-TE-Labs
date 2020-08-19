@@ -1,0 +1,19 @@
+admin:
+set time taken for a day (20s)/the actual 24 hours;
+advertisement repeat time-20s;
+
+user:   
+advertisement - priority queue-- every 20seconds
+hashmap : user basket;
+
+cost HM
+cost decline wrt dates, multiple dated products.
+
+DONE :
+restock inventory option 
+buy
+market status
+pass day function
+reduce count buy DONE
+expiry date 
+

@@ -1,0 +1,218 @@
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| professor_schema   |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use professor_schema;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> mysql> insert into professor values( 1, "Sarang", "Joshi", 1, "Professor", "100000", "1976-02-12", "sajoshi@pict.edu", "3244334321", "Nashik");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql> insert into professor values( 1, "Sarang", "Joshi", 1, "Professor", "1000' at line 1
+mysql> insert into professor values( 4, "Prashant", "rathod", 3, "Professor", "435993", "1970-02-23", "prashant@pict.edu", "1814223452", "mumbai");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into professor values( 5, "Sunil", "parasnese", 3, "Professor", "4359333", "1971-02-23", "sunilpp@pict.edu", "1814223252", "mumbai");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into professor values( 6, "naman", "joshi", 3, "assitant Professor", "123333", "1961-02-23", "rrk@pict.edu", "1814224252", "aurangabad);
+    "> 
+    "> ^[[A^[[B^[[B^[[D^[[D^[[D
+
+^C
+mysql> 
+mysql> insert into professor values( 6, "naman", "joshi", 3, "assitant Professor", "123333", "1961-02-23", "rrk@pict.edu", "1814224252", "aurangabad);
+    "> 
+
+^C
+mysql> 
+mysql> insert into professor values( 6, "naman", "joshi", 3, "assitant Professor", "123333", "1961-02-23", "rrk@pict.edu", "1814224252", "aurangabad");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from professor;
++---------+----------+-----------+---------+---------------------+---------+------------+-------------------+------------+------------+
+| prof_id | fname    | lname     | dept_id | designation         | salary  | dob        | email             | phone      | city       |
++---------+----------+-----------+---------+---------------------+---------+------------+-------------------+------------+------------+
+|       1 | Sarang   | Joshi     |       1 | Professor           | 100000  | 1976-02-12 | sajoshi@pict.edu  | 3244334321 | Nashik     |
+|       2 | Rajesh   | Ingle     |       1 | Professor           | 100000  | 1970-08-21 | ringle@pict.edu   | 1814223456 | Pune       |
+|       3 | Khatri   | Indraraj  |       2 | Associate Professor | 73200   | 1985-01-01 | khatri@pict.edu   | 9999923231 | Pune       |
+|       4 | Prashant | rathod    |       3 | Professor           | 435993  | 1970-02-23 | prashant@pict.edu | 1814223452 | mumbai     |
+|       5 | Sunil    | parasnese |       3 | Professor           | 4359333 | 1971-02-23 | sunilpp@pict.edu  | 1814223252 | mumbai     |
+|       6 | naman    | joshi     |       3 | assitant Professor  | 123333  | 1961-02-23 | rrk@pict.edu      | 1814224252 | aurangabad |
+|     102 | Girish   | Potdar    |       1 | Associate Professor | 76000   | 1974-09-16 | gpotdar@pict.edu  | 7678223314 | Pune       |
++---------+----------+-----------+---------+---------------------+---------+------------+-------------------+------------+------------+
+7 rows in set (0.00 sec)
+
+mysql> insert into professor values( 7, "Ronak", "mehta", 2, "assitant Professor", "23333", "1951-02-23", "ronakm@pict.edu", "9814224252", "mumbai");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into professor values( 8, "Pralhad", "kulkarni", 1, "assitant Professor", "903333", "1955-02-23", "pralhadk@pict.edu", "9814224252", "pune");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into professor values( 8, "shushil", "Chandak", 2, "Professor", "90000", "1987-02-23", "chandak@pict.edu", "9814224322", "aurangabad");
+ERROR 1062 (23000): Duplicate entry '8' for key 'professor.PRIMARY'
+mysql> insert into professor values( 9, "shushil", "Chandak", 2, "Professor", "90000", "1987-02-23", "chandak@pict.edu", "9814224322", "aurangabad");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from professor;
++---------+----------+-----------+---------+---------------------+---------+------------+-------------------+------------+------------+
+| prof_id | fname    | lname     | dept_id | designation         | salary  | dob        | email             | phone      | city       |
++---------+----------+-----------+---------+---------------------+---------+------------+-------------------+------------+------------+
+|       1 | Sarang   | Joshi     |       1 | Professor           | 100000  | 1976-02-12 | sajoshi@pict.edu  | 3244334321 | Nashik     |
+|       2 | Rajesh   | Ingle     |       1 | Professor           | 100000  | 1970-08-21 | ringle@pict.edu   | 1814223456 | Pune       |
+|       3 | Khatri   | Indraraj  |       2 | Associate Professor | 73200   | 1985-01-01 | khatri@pict.edu   | 9999923231 | Pune       |
+|       4 | Prashant | rathod    |       3 | Professor           | 435993  | 1970-02-23 | prashant@pict.edu | 1814223452 | mumbai     |
+|       5 | Sunil    | parasnese |       3 | Professor           | 4359333 | 1971-02-23 | sunilpp@pict.edu  | 1814223252 | mumbai     |
+|       6 | naman    | joshi     |       3 | assitant Professor  | 123333  | 1961-02-23 | rrk@pict.edu      | 1814224252 | aurangabad |
+|       7 | Ronak    | mehta     |       2 | assitant Professor  | 23333   | 1951-02-23 | ronakm@pict.edu   | 9814224252 | mumbai     |
+|       8 | Pralhad  | kulkarni  |       1 | assitant Professor  | 903333  | 1955-02-23 | pralhadk@pict.edu | 9814224252 | pune       |
+|       9 | shushil  | Chandak   |       2 | Professor           | 90000   | 1987-02-23 | chandak@pict.edu  | 9814224322 | aurangabad |
+|     102 | Girish   | Potdar    |       1 | Associate Professor | 76000   | 1974-09-16 | gpotdar@pict.edu  | 7678223314 | Pune       |
++---------+----------+-----------+---------+---------------------+---------+------------+-------------------+------------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from works;
++---------+---------+----------+
+| prof_id | dept_id | duration |
++---------+---------+----------+
+|       1 |       1 | 6        |
+|       3 |       2 | 7        |
+|       2 |       1 | 7        |
+|     102 |       2 | 9        |
++---------+---------+----------+
+4 rows in set (0.00 sec)
+
+mysql> insert into works values(3,2,9);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from works;
++---------+---------+----------+
+| prof_id | dept_id | duration |
++---------+---------+----------+
+|       1 |       1 | 6        |
+|       3 |       2 | 7        |
+|       2 |       1 | 7        |
+|     102 |       2 | 9        |
+|       3 |       2 | 9        |
++---------+---------+----------+
+5 rows in set (0.00 sec)
+
+mysql> insert into works values(4,3,10);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into works values(5,3,2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into works values(6,3,8);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into works values(7,2,8);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into works values(8,1,8);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into works values(9,2,8);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from works;
++---------+---------+----------+
+| prof_id | dept_id | duration |
++---------+---------+----------+
+|       1 |       1 | 6        |
+|       3 |       2 | 7        |
+|       2 |       1 | 7        |
+|     102 |       2 | 9        |
+|       3 |       2 | 9        |
+|       4 |       3 | 10       |
+|       5 |       3 | 2        |
+|       6 |       3 | 8        |
+|       7 |       2 | 8        |
+|       8 |       1 | 8        |
+|       9 |       2 | 8        |
++---------+---------+----------+
+11 rows in set (0.00 sec)
+
+mysql> show tables;
++----------------------------+
+| Tables_in_professor_schema |
++----------------------------+
+| department                 |
+| professor                  |
+| shift                      |
+| works                      |
++----------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from department;
++---------+-----------+
+| dept_id | dept_name |
++---------+-----------+
+|       1 | COMP      |
+|       2 | IT        |
+|       3 | ENTC      |
++---------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from shift;
++---------+-------+-------------+
+| prof_id | shift | working_hrs |
++---------+-------+-------------+
+|       1 | 1     | 9-3         |
+|       2 | 2     | 9-3         |
+|     102 | 1     | 9-3         |
+|       3 | 2     | 9-3         |
++---------+-------+-------------+
+4 rows in set (0.01 sec)
+
+mysql> insert into shift values(4,2,8-9);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into shift values(5,2,8-9);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into shift values(6,1,8-9);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into shift values(6,1,9-6);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into shift values(7,1,9-5);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into shift values(8,1,9-5);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into shift values(9,2,2-5);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show professor;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'professor' at line 1
+mysql> select *from professor;
++---------+----------+-----------+---------+---------------------+---------+------------+-------------------+------------+------------+
+| prof_id | fname    | lname     | dept_id | designation         | salary  | dob        | email             | phone      | city       |
++---------+----------+-----------+---------+---------------------+---------+------------+-------------------+------------+------------+
+|       1 | Sarang   | Joshi     |       1 | Professor           | 100000  | 1976-02-12 | sajoshi@pict.edu  | 3244334321 | Nashik     |
+|       2 | Rajesh   | Ingle     |       1 | Professor           | 100000  | 1970-08-21 | ringle@pict.edu   | 1814223456 | Pune       |
+|       3 | Khatri   | Indraraj  |       2 | Associate Professor | 73200   | 1985-01-01 | khatri@pict.edu   | 9999923231 | Pune       |
+|       4 | Prashant | rathod    |       3 | Professor           | 435993  | 1970-02-23 | prashant@pict.edu | 1814223452 | mumbai     |
+|       5 | Sunil    | parasnese |       3 | Professor           | 4359333 | 1971-02-23 | sunilpp@pict.edu  | 1814223252 | mumbai     |
+|       6 | naman    | joshi     |       3 | assitant Professor  | 123333  | 1961-02-23 | rrk@pict.edu      | 1814224252 | aurangabad |
+|       7 | Ronak    | mehta     |       2 | assitant Professor  | 23333   | 1951-02-23 | ronakm@pict.edu   | 9814224252 | mumbai     |
+|       8 | Pralhad  | kulkarni  |       1 | assitant Professor  | 903333  | 1955-02-23 | pralhadk@pict.edu | 9814224252 | pune       |
+|       9 | shushil  | Chandak   |       2 | Professor           | 90000   | 1987-02-23 | chandak@pict.edu  | 9814224322 | aurangabad |
+|     102 | Girish   | Potdar    |       1 | Associate Professor | 76000   | 1974-09-16 | gpotdar@pict.edu  | 7678223314 | Pune       |
++---------+----------+-----------+---------+---------------------+---------+------------+-------------------+------------+------------+
+10 rows in set (0.00 sec)
+
+
+
