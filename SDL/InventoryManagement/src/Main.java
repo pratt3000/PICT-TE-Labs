@@ -23,7 +23,7 @@ public class Main {
             pass_day();
 
             System.out.println("login/leave shop? (1/0) : ");
-            repeat = in.nextInt();
+            repeat = Integer.parseInt(in.nextLine());
         }        
     }
     
@@ -62,10 +62,10 @@ public class Main {
         int fl=1;
         while(fl==1){
             System.out.println("\nLogin as Admin/ Customer : (1 / 0)");
-            ip = in.nextInt();
+            ip = Integer.parseInt(in.nextLine());
             if(ip==1){
-                System.out.print("ENTER PASS-KEY : ");
-                int pass = in.nextInt();
+                System.out.print("ENTER 4-digit PASS-KEY : ");
+                int pass = Integer.parseInt(in.nextLine());
                 boolean status=AUTH.authenticate(pass);
 
                 if(status == true){
@@ -78,7 +78,7 @@ public class Main {
             }
             else if(ip==0){
                 System.out.println("new account/ old account?(1/0)");
-                int new_acc = in.nextInt();
+                int new_acc = Integer.parseInt(in.nextLine());
                 if(new_acc == 1){
                     acch.new_user_login();
                     customer_menu();
@@ -101,7 +101,7 @@ public class Main {
         System.out.println("***Admin Mode");
         System.out.println("Re-stock per category :");
         Integer quan;
-        quan = in.nextInt();
+        quan = Integer.parseInt(in.nextLine());
         
         System.out.println("Restocking...");
         for(Integer ct=0; ct<item_count; ct++){
@@ -113,13 +113,13 @@ public class Main {
     static void customer_menu(){
         Integer count;
         System.out.println("No. of items you want to BUY : ");
-        count = in.nextInt();
+        count = Integer.parseInt(in.nextLine());
         for(int ct=0; ct<count; ct++){
             Integer item_id, quan;
             System.out.println("Item_id");
-            item_id = in.nextInt();
+            item_id = Integer.parseInt(in.nextLine());
             System.out.println("Quantity");
-            quan = in.nextInt();
+            quan = Integer.parseInt(in.nextLine());
 
             if(qty.buy(item_id, quan) != true){
                 System.out.println("not in stock");
