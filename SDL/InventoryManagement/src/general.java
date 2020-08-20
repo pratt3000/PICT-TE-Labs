@@ -11,6 +11,9 @@ public class general {
 
     static int item_count=13;
 
+    general(){
+        System.out.println("\n\n**** WELCOME TO BIG-BASKET ****"); 
+    }
     void market_status(){
         System.out.println("Market Status : ");
         System.out.printf( "\n| %2s.| %-15s| %5s   | %-10s |\n ","ID", "Item Name", "QTY", "Expires in" );
