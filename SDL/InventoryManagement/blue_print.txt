@@ -1,5 +1,3 @@
-//// v2 : use database for account handling
-
 //// v1 : 
 admin:
 set time taken for a day (20s)/the actual 24 hours;
@@ -19,4 +17,4 @@ market status
 pass day function
 reduce count buy DONE
 expiry date 
-
+use database for account handling
