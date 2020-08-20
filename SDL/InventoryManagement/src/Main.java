@@ -85,13 +85,11 @@ public class Main {
                     fl=0;
                 }
                 else{
-                    if(acch.old_user_login()){
-                        customer_menu();
-                        fl=0;
-                    }
-                    else{
-                        fl=1;
-                    }
+                    int opt = acch.old_user_login();
+
+                    if(opt==0){ fl=1; }
+                    if(opt==1){ fl=0; customer_menu(); }
+                    if(opt==2){ fl=0; admin_menu(); }
                 }            
             }
         }

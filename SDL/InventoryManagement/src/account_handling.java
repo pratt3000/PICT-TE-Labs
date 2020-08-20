@@ -56,7 +56,7 @@ public class account_handling {
         }catch(Exception e){System.out.println(e);}      
     }
 
-    boolean old_user_login(){
+    int old_user_login(){
         
         String pass1, user_name;
         String retrieved="";
@@ -93,17 +93,19 @@ public class account_handling {
                 int opt = Integer.parseInt(in.nextLine());
 
                 if(opt==0){
-                    return false;
+                    return 0;
                 }
-                System.out.println("pass1 = "+pass1);
-                System.out.println("r = "+retrieved);
-
-
+                //System.out.println("pass1 = "+pass1);
+                //System.out.println("r = "+retrieved);
             }
         }while(!pass1.equals(retrieved));
 
         System.out.println("**Successful login");
-        return true;
+        if(user_name.equals("admin")){
+            //System.out.println("admin 1");
+            return 2;
+        }
+        return 1;
     }
 
 }
