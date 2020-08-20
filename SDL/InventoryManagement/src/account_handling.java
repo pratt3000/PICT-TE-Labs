@@ -6,12 +6,34 @@ public class account_handling {
 
     Scanner in = new Scanner(System.in);
 
-    void new_user_login(){
-        String pass1, pass2;
-        System.out.println("test");
+    boolean username_already_exists(String user_name){
+        String query = "select user_name from users where user_name='"+user_name+ "'";
 
-        System.out.println("Username : ");
-        String user_name = in.nextLine();
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bb_accounts","root","Hello@123");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            if (!rs.next()){
+                con.close();
+                return false;
+                }
+            else{
+                System.out.println(" **username already exists");
+                con.close();
+                return true;
+            }
+        }catch(Exception e){System.out.println(e);}
+
+        return true;
+    }
+    void new_user_login(){
+        String pass1, pass2,user_name;
+        do{
+            System.out.println("Username : ");
+            user_name = in.nextLine();
+        }while(username_already_exists(user_name));
+        username_already_exists(user_name);
 
         do{
         System.out.println("Password : ");
@@ -24,10 +46,11 @@ public class account_handling {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bb_accounts","root","Hello@123");
             Statement stmt = con.createStatement();
-            stmt.executeUpdate("insert into users" + "values("+user_name+ ","+ pass1 +")");//error
+            String updt = "insert into users values('"+user_name+ "','"+ pass1 +"')";
+            stmt.executeUpdate(updt);
             con.close();
-            System.out.print("***account created");
-        }catch(Exception e){System.out.println(e);}      //add if username already exists
+            System.out.println("***account created");
+        }catch(Exception e){System.out.println(e);}      
     }
 
     boolean old_user_login(){

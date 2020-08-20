@@ -80,8 +80,6 @@ public class Main {
                 System.out.println("new account/ old account?(1/0)");
                 int new_acc = in.nextInt();
                 if(new_acc == 1){
-                    System.out.println("test");
-
                     acch.new_user_login();
                     customer_menu();
                     fl=0;
