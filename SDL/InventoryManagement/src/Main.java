@@ -6,11 +6,8 @@ public class Main {
     static account_handling acch = new account_handling();
     static HM_count qty = new HM_count();
     static HM_expDate exp = new HM_expDate();
-    static ARR_names itmn = new ARR_names();
-    static Admin_AUTH AUTH = new Admin_AUTH();
-    
+    static ARR_names itmn = new ARR_names();  
 
-    
     static int item_count=13;
     public static void main(String[] args) throws Exception {
 
@@ -58,40 +55,22 @@ public class Main {
     }
 
     static void _login_(){
-        int ip;
         int fl=1;
         while(fl==1){
-            System.out.println("\nLogin as Admin/ Customer : (1 / 0)");
-            ip = Integer.parseInt(in.nextLine());
-            if(ip==1){
-                System.out.print("ENTER 4-digit PASS-KEY : ");
-                int pass = Integer.parseInt(in.nextLine());
-                boolean status=AUTH.authenticate(pass);
-
-                if(status == true){
-                    admin_menu();
-                    fl=0;
-                }
-                else{
-                    System.out.println("\n***WRONG pass-key**");
-                }
+            System.out.println("Sign-up/ Login : (1/0)");
+            int new_acc = Integer.parseInt(in.nextLine());
+            if(new_acc == 1){
+                acch.new_user_login();
+                customer_menu();
+                fl=0;
             }
-            else if(ip==0){
-                System.out.println("new account/ old account?(1/0)");
-                int new_acc = Integer.parseInt(in.nextLine());
-                if(new_acc == 1){
-                    acch.new_user_login();
-                    customer_menu();
-                    fl=0;
-                }
-                else{
-                    int opt = acch.old_user_login();
+            else{
+                int opt = acch.old_user_login();
 
-                    if(opt==0){ fl=1; }
-                    if(opt==1){ fl=0; customer_menu(); }
-                    if(opt==2){ fl=0; admin_menu(); }
-                }            
-            }
+                if(opt==0){ fl=1; }
+                if(opt==1){ fl=0; customer_menu(); }
+                if(opt==2){ fl=0; admin_menu(); }
+            }            
         }
     }
 
