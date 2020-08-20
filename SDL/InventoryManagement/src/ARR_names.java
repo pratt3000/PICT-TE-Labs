@@ -3,7 +3,8 @@ public class ARR_names {
     private String items[] = new String[item_count];
 
     ARR_names(){
-        items = new String[]{"Spinach",
+        items = new String[]{
+                                "Spinach",
                                 "Cauli-flower",
                                 "Mushrooms",
                                 "Beet",
@@ -16,7 +17,7 @@ public class ARR_names {
                                 "Chicken",
                                 "Fish",
                                 "Crabs"
-                                };//order must be maintained according to HM_count.java 
+                            };//order must be maintained according to HM_count.java 
     }
 
     public String get_item_name(Integer i){
