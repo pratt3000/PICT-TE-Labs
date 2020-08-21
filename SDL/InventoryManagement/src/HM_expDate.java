@@ -38,7 +38,7 @@ public class HM_expDate {
             }
         }
         return flag;
-    }
+    }//reduce expiry by a day
 
     public void set_exp_date(){
         //FIXEDD 

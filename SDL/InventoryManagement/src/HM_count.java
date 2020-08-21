@@ -38,11 +38,13 @@ public class HM_count {
     public Integer get_count(Integer item_key){
         return mp.get(item_key);
     }
+
     public void _set_(Integer item_key, Integer count){
         mp.put(item_key, count);
-    }
+    }//for re-stocking
+
     public void set_0(Integer item_key){
         mp.put(item_key, 0);
-    }
+    }//for when food get expired
 
 }
