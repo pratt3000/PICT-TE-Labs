@@ -73,5 +73,6 @@ public class exe {
     }
 
     //display tables remaining
-
+    //show index from tables name
+    
 }
