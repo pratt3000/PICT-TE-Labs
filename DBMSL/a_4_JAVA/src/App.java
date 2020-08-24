@@ -1,16 +1,43 @@
 import java.sql.*;
-
+import java.util.*; 
 
 public class App {
+    static Scanner in = new Scanner(System.in);
+    static exe ex = new exe(); 
     public static void main(String[] args) {
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/A1_professor_schema","root","Hello@123");
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from works");
-            while(rs.next())
-                System.out.println(rs.getInt(1)+" "+rs.getString(2)+" "+rs.getString(3));
-            con.close();
-        }catch(Exception e){System.out.println(e);}
+        int repeat=1, choice;
+
+        System.out.println("1.Create table");
+        System.out.println("2.Create view");
+        System.out.println("3.Create index");
+        System.out.println("4.Create sequence");
+        System.out.println("5.Create synonym");
+        System.out.println("6.exit");
+        
+        while(repeat==1){
+            System.out.print("Enter option : ");
+            choice = Integer.parseInt(in.nextLine());
+            switch (choice) { 
+                case 1: 
+                    ex.create_table("sample");
+                    break; 
+                case 2: 
+                    ex.create_view();
+                    break; 
+                case 3: 
+                    ex.create_index();
+                    break; 
+                case 4: 
+                    ex.create_seq();
+                    break; 
+                case 5: 
+                    ex.create_synonym(); 
+                    break; 
+                default: 
+                    break; 
+                }
+            System.out.println("Again? (1/0) : ");
+            repeat = Integer.parseInt(in.nextLine());
+        }
     }
 }
