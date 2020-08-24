@@ -62,15 +62,16 @@ public class exe {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/A1_professor_schema","root","Hello@123");
             Statement stmt = con.createStatement();
-            
-            stmt.executeUpdate("drop table employees;");
-            stmt.executeUpdate("drop index ind_1 from professor;");
-            stmt.executeUpdate("DROP VIEW [IF EXISTS] comp;");
-            stmt.executeUpdate("drop table sample;");
+
+            stmt.executeUpdate("drop table if exists employees;");
+            stmt.executeUpdate("drop index ind_1 on professor");
+            stmt.executeUpdate("DROP VIEW IF EXISTS comp;");
+            stmt.executeUpdate("drop table if exists sample;");
 
             con.close();
         }catch(Exception e){System.out.println(e);}
     }
 
+    //display tables remaining
 
 }

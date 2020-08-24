@@ -14,6 +14,7 @@ public class App {
         System.out.println("5.Create synonym");
         System.out.println("6.exit");
         
+        ex.reset();
         while(repeat==1){
             System.out.print("Enter option : ");
             choice = Integer.parseInt(in.nextLine());
