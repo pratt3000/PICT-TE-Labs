@@ -6,6 +6,7 @@ advertisement repeat time-20s;
 user:   
 advertisement - priority queue-- every 20seconds
 hashmap : user basket;
+PRICE!!!
 
 cost HM
 cost decline wrt dates, multiple dated products.

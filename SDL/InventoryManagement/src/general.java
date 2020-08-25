@@ -46,7 +46,7 @@ public class general {
     void _login_(){
         int fl=1;
         while(fl==1){
-            System.out.println("Sign-up/ Login : (1/0)");
+            System.out.print("\nSign-up/ Login (1/0) : ");
             int new_acc = Integer.parseInt(in.nextLine());
             if(new_acc == 1){
                 acch.new_user_login();
@@ -78,21 +78,22 @@ public class general {
 
     void customer_menu(){
         Integer count;
-        System.out.println("No. of items you want to BUY : ");
+        System.out.print("\nNo. of items you want to BUY : ");
         count = Integer.parseInt(in.nextLine());
         for(int ct=0; ct<count; ct++){
             Integer item_id, quan;
-            System.out.println("Item_id");
+            System.out.print("\nItem_id  : ");
             item_id = Integer.parseInt(in.nextLine());
-            System.out.println("Quantity");
+            System.out.print("Quantity : ");
             quan = Integer.parseInt(in.nextLine());
 
             if(qty.buy(item_id, quan) != true){
-                System.out.println("not in stock");
+                System.out.println("** not in stock **");
                 ct--;
             }
         }
-        System.out.println("Thanks for supporting us!");
+        System.out.println("---------------------------------------------");
+        System.out.println("\nThanks for supporting us!");
     }
 
 

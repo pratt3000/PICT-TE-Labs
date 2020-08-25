@@ -33,15 +33,15 @@ public class account_handling {
     void new_user_login(){
         String pass1, pass2,user_name;
         do{
-            System.out.println("Username : ");
+            System.out.print("\nUsername : ");
             user_name = in.nextLine();
         }while(username_already_exists(user_name));
         username_already_exists(user_name);
 
         do{
-        System.out.println("Password : ");
+        System.out.print("Password          : ");
         pass1 = in.nextLine();
-        System.out.println("Re-enter Password : ");
+        System.out.print("Re-enter Password : ");
         pass2 = in.nextLine();
         }while(!pass1.equals(pass2));
 
@@ -52,7 +52,7 @@ public class account_handling {
             String updt = "insert into users values('"+user_name+ "','"+ pass1 +"')";
             stmt.executeUpdate(updt);
             con.close();
-            System.out.println("***account created");
+            System.out.println("*** account created ***");
         }catch(Exception e){System.out.println(e);}      
     }
 
@@ -61,7 +61,7 @@ public class account_handling {
         String pass1, user_name;
         String retrieved="";
         do{
-            System.out.println("Username : ");
+            System.out.print("\nUsername : ");
             user_name = in.nextLine();
         }while(!username_already_exists(user_name));
 
@@ -84,7 +84,7 @@ public class account_handling {
         do{
             retrieved=backup;
             pass1="";
-            System.out.println("Password : ");
+            System.out.print("\nPassword : ");
             pass1 = in.nextLine();
             //in.nextLine();
             if( !pass1.equals(retrieved)){
@@ -100,7 +100,7 @@ public class account_handling {
             }
         }while(!pass1.equals(retrieved));
 
-        System.out.println("**Successful login");
+        System.out.println("** Successful login ***");
         if(user_name.equals("admin")){
             //System.out.println("admin 1");
             return 2;
