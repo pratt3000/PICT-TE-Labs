@@ -1,9 +1,6 @@
 import java.sql.*;
 import java.util.*;
 
-//import com.mysql.cj.protocol.Resultset;
-//import com.mysql.cj.xdevapi.Result;
-
 
 public class account_handling {
 
