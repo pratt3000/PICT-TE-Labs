@@ -1,0 +1,336 @@
+(base)  pratt3000@pratts-laptop  ~  mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.21-0ubuntu0.20.04.4 (Ubuntu)
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use A1_professor_schema
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> #1. Find the professor details and department details using NATURAL JOIN.
+
+mysql> select * from professor natural join department;
++---------+---------+----------+-----------+---------------------+--------+------------+-------------------+------------+------------+-----------+
+| dept_id | prof_id | fname    | lname     | designation         | salary | dob        | email             | phone      | city       | dept_name |
++---------+---------+----------+-----------+---------------------+--------+------------+-------------------+------------+------------+-----------+
+|       1 |       1 | Sarang   | Joshi     | Professor           | 100000 | 1976-02-12 | sajoshi@pict.edu  | 3244334321 | Nashik     | COMP      |
+|       1 |       2 | Rajesh   | Ingle     | Professor           | 50000  | 1970-08-21 | ringle@pict.edu   | 1814223456 | Pune       | COMP      |
+|       1 |       3 | Girish   | Potdar    | Associate Professor | 40000  | 1974-09-16 | gpotdar@pict.edu  | 7678223314 | Pune       | COMP      |
+|       1 |       8 | Pralhad  | kulkarni  | Assistant Professor | 90000  | 2015-01-01 | pralhadk@pict.edu | 9814224252 | pune       | COMP      |
+|       2 |       4 | Khatri   | Indraraj  | Associate Professor | 30000  | 1985-01-01 | khatri@pict.edu   | 9999923231 | Pune       | IT        |
+|       2 |       7 | dinesh   | mehta     | Assistant Professor | 15000  | 2016-01-01 | ronakm@pict.edu   | 9814224252 | mumbai     | IT        |
+|       2 |       9 | shushil  | Chandak   | Professor           | 90000  | 1987-02-23 | chandak@pict.edu  | 9814224322 | aurangabad | IT        |
+|       3 |       5 | Sunil    | parasnese | Professor           | 15000  | 1971-02-23 | sunilpp@pict.edu  | 1814223252 | mumbai     | ENTC      |
+|       3 |       6 | arun     | joshi     | Assistant Professor | 120000 | 1961-02-23 | rrk@pict.edu      | 1814224252 | aurangabad | ENTC      |
+|       3 |      10 | Prashant | rathod    | Professor           | 45000  | 1970-02-23 | prashant@pict.edu | 1814223452 | mumbai     | ENTC      |
++---------+---------+----------+-----------+---------------------+--------+------------+-------------------+------------+------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> #2. Find the prof_id, prof_name and shift.
+
+mysql> select professor.prof_id, fname, lname, shift from professor join shift using(prof_id);
++---------+----------+-----------+-------+
+| prof_id | fname    | lname     | shift |
++---------+----------+-----------+-------+
+|       6 | arun     | joshi     | 2     |
+|       7 | dinesh   | mehta     | 1     |
+|       3 | Girish   | Potdar    | 1     |
+|       4 | Khatri   | Indraraj  | 2     |
+|       8 | Pralhad  | kulkarni  | 1     |
+|      10 | Prashant | rathod    | 1     |
+|       2 | Rajesh   | Ingle     | 2     |
+|       1 | Sarang   | Joshi     | 1     |
+|       9 | shushil  | Chandak   | 1     |
+|       5 | Sunil    | parasnese | 2     |
++---------+----------+-----------+-------+
+10 rows in set (0.01 sec)
+
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> #3. List all the department details and the corresponding names of professors in the same department.
+mysql> select department.dept_id, dept_name, fname, lname from department left join professor on professor.dept_id = department.dept_id;
++---------+-----------+----------+-----------+
+| dept_id | dept_name | fname    | lname     |
++---------+-----------+----------+-----------+
+|       1 | COMP      | Sarang   | Joshi     |
+|       1 | COMP      | Rajesh   | Ingle     |
+|       1 | COMP      | Girish   | Potdar    |
+|       1 | COMP      | Pralhad  | kulkarni  |
+|       2 | IT        | Khatri   | Indraraj  |
+|       2 | IT        | dinesh   | mehta     |
+|       2 | IT        | shushil  | Chandak   |
+|       3 | ENTC      | Sunil    | parasnese |
+|       3 | ENTC      | arun     | joshi     |
+|       3 | ENTC      | Prashant | rathod    |
++---------+-----------+----------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> #4. List all the professors and the corresponding names of department.
+mysql> select fname, lname, dept_name from department right join professor on professor.dept_id = department.dept_id;
++----------+-----------+-----------+
+| fname    | lname     | dept_name |
++----------+-----------+-----------+
+| Sarang   | Joshi     | COMP      |
+| Rajesh   | Ingle     | COMP      |
+| Girish   | Potdar    | COMP      |
+| Khatri   | Indraraj  | IT        |
+| Sunil    | parasnese | ENTC      |
+| arun     | joshi     | ENTC      |
+| dinesh   | mehta     | IT        |
+| Pralhad  | kulkarni  | COMP      |
+| shushil  | Chandak   | IT        |
+| Prashant | rathod    | ENTC      |
++----------+-----------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> #5. Display professor name, dept_name, shift, salary where prof_id = 101;
+
+
+mysql> select fname, lname, dept_name, salary, shift from professor join department using(dept_id) join shift on professor.prof_id = shift.prof_id  where professor.prof_id = 1;
++--------+-------+-----------+--------+-------+
+| fname  | lname | dept_name | salary | shift |
++--------+-------+-----------+--------+-------+
+| Sarang | Joshi | COMP      | 100000 | 1     |
++--------+-------+-----------+--------+-------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> #6. list the total number of professor in each department.
+mysql> select professor.dept_id, dept_name,  count(*) from professor left join department on professor.dept_id = department.dept_id  group by
+ dept_id;
++---------+-----------+----------+
+| dept_id | dept_name | count(*) |
++---------+-----------+----------+
+|       1 | COMP      |        4 |
+|       2 | IT        |        3 |
+|       3 | ENTC      |        3 |
++---------+-----------+----------+
+3 rows in set (0.01 sec)
+
+
+mysql> select * from professor;
++---------+----------+-----------+---------+---------------------+--------+------------+-------------------+------------+------------+
+| prof_id | fname    | lname     | dept_id | designation         | salary | dob        | email             | phone      | city       |
++---------+----------+-----------+---------+---------------------+--------+------------+-------------------+------------+------------+
+|       1 | Sarang   | Joshi     |       1 | Professor           | 100000 | 1976-02-12 | sajoshi@pict.edu  | 3244334321 | Nashik     |
+|       2 | Rajesh   | Ingle     |       1 | Professor           | 50000  | 1970-08-21 | ringle@pict.edu   | 1814223456 | Pune       |
+|       3 | Girish   | Potdar    |       1 | Associate Professor | 40000  | 1974-09-16 | gpotdar@pict.edu  | 7678223314 | Pune       |
+|       4 | Khatri   | Indraraj  |       2 | Associate Professor | 30000  | 1985-01-01 | khatri@pict.edu   | 9999923231 | Pune       |
+|       5 | Sunil    | parasnese |       3 | Professor           | 15000  | 1971-02-23 | sunilpp@pict.edu  | 1814223252 | mumbai     |
+|       6 | arun     | joshi     |       3 | Assistant Professor | 120000 | 1961-02-23 | rrk@pict.edu      | 1814224252 | aurangabad |
+|       7 | dinesh   | mehta     |       2 | Assistant Professor | 15000  | 2016-01-01 | ronakm@pict.edu   | 9814224252 | mumbai     |
+|       8 | Pralhad  | kulkarni  |       1 | Assistant Professor | 90000  | 2015-01-01 | pralhadk@pict.edu | 9814224252 | pune       |
+|       9 | shushil  | Chandak   |       2 | Professor           | 90000  | 1987-02-23 | chandak@pict.edu  | 9814224322 | aurangabad |
+|      10 | Prashant | rathod    |       3 | Professor           | 45000  | 1970-02-23 | prashant@pict.edu | 1814223452 | mumbai     |
++---------+----------+-----------+---------+---------------------+--------+------------+-------------------+------------+------------+
+10 rows in set (0.00 sec)
+
+
+
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> #7. List the prof_id associated department and the dept_name having name ‘computer’;
+
+mysql> select prof_id, fname, lname, dept_name, department.dept_id from professor join department using(dept_id) where dept_id = ( select dept_id from department where dept_name = 'COMP');
++---------+---------+----------+-----------+---------+
+| prof_id | fname   | lname    | dept_name | dept_id |
++---------+---------+----------+-----------+---------+
+|       1 | Sarang  | Joshi    | COMP      |       1 |
+|       2 | Rajesh  | Ingle    | COMP      |       1 |
+|       3 | Girish  | Potdar   | COMP      |       1 |
+|       8 | Pralhad | kulkarni | COMP      |       1 |
++---------+---------+----------+-----------+---------+
+4 rows in set (0.00 sec)
+
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> #8. Find the names of all departments where the professors joined in year 2015 (or date of joining is 1-1-2015).
+
+
+mysql> select dept_name from department where dept_id in(select dept_id from professor where dob = '2015-01-01');
++-----------+
+| dept_name |
++-----------+
+| COMP      |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> #9. Create view showing the professor and shift details.
+
+mysql> create view ProfShift as select fname, lname, shift, working_hrs from professor join shift using(prof_id);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from ProfShift;
++----------+-----------+-------+-------------+
+| fname    | lname     | shift | working_hrs |
++----------+-----------+-------+-------------+
+| arun     | joshi     | 2     | 8-9         |
+| dinesh   | mehta     | 1     | 8-9         |
+| Girish   | Potdar    | 1     | 9-3         |
+| Khatri   | Indraraj  | 2     | 9-3         |
+| Pralhad  | kulkarni  | 1     | 9-6         |
+| Prashant | rathod    | 1     | 9-5         |
+| Rajesh   | Ingle     | 2     | 9-3         |
+| Sarang   | Joshi     | 1     | 9-3         |
+| shushil  | Chandak   | 1     | 9-5         |
+| Sunil    | parasnese | 2     | 8-9         |
++----------+-----------+-------+-------------+
+10 rows in set (0.01 sec)
+
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> #10. Perform Manipulation on simple view-Insert, update, delete, drop view.
+mysql> create view ProfDetails as select prof_id, fname, lname, designation from professor;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from ProfDetails;
++---------+----------+-----------+---------------------+
+| prof_id | fname    | lname     | designation         |
++---------+----------+-----------+---------------------+
+|       1 | Sarang   | Joshi     | Professor           |
+|       2 | Rajesh   | Ingle     | Professor           |
+|       3 | Girish   | Potdar    | Associate Professor |
+|       4 | Khatri   | Indraraj  | Associate Professor |
+|       5 | Sunil    | parasnese | Professor           |
+|       6 | arun     | joshi     | Assistant Professor |
+|       7 | dinesh   | mehta     | Assistant Professor |
+|       8 | Pralhad  | kulkarni  | Assistant Professor |
+|       9 | shushil  | Chandak   | Professor           |
+|      10 | Prashant | rathod    | Professor           |
++---------+----------+-----------+---------------------+
+10 rows in set (0.00 sec)
+
+mysql> insert into ProfDetails values(102, 'Pranjali', 'Joshi', 'Professor');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from ProfDetails;
++---------+----------+-----------+---------------------+
+| prof_id | fname    | lname     | designation         |
++---------+----------+-----------+---------------------+
+|       1 | Sarang   | Joshi     | Professor           |
+|       2 | Rajesh   | Ingle     | Professor           |
+|       3 | Girish   | Potdar    | Associate Professor |
+|       4 | Khatri   | Indraraj  | Associate Professor |
+|       5 | Sunil    | parasnese | Professor           |
+|       6 | arun     | joshi     | Assistant Professor |
+|       7 | dinesh   | mehta     | Assistant Professor |
+|       8 | Pralhad  | kulkarni  | Assistant Professor |
+|       9 | shushil  | Chandak   | Professor           |
+|      10 | Prashant | rathod    | Professor           |
+|     102 | Pranjali | Joshi     | Professor           |
++---------+----------+-----------+---------------------+
+11 rows in set (0.00 sec)
+
+mysql> update ProfDetails set designation = 'Professor' where prof_id = 10;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> select * from ProfDetails;
++---------+----------+-----------+---------------------+
+| prof_id | fname    | lname     | designation         |
++---------+----------+-----------+---------------------+
+|       1 | Sarang   | Joshi     | Professor           |
+|       2 | Rajesh   | Ingle     | Professor           |
+|       3 | Girish   | Potdar    | Associate Professor |
+|       4 | Khatri   | Indraraj  | Associate Professor |
+|       5 | Sunil    | parasnese | Professor           |
+|       6 | arun     | joshi     | Assistant Professor |
+|       7 | dinesh   | mehta     | Assistant Professor |
+|       8 | Pralhad  | kulkarni  | Assistant Professor |
+|       9 | shushil  | Chandak   | Professor           |
+|      10 | Prashant | rathod    | Professor           |
+|     102 | Pranjali | Joshi     | Professor           |
++---------+----------+-----------+---------------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from professor;
++---------+----------+-----------+---------+---------------------+--------+------------+-------------------+------------+------------+
+| prof_id | fname    | lname     | dept_id | designation         | salary | dob        | email             | phone      | city       |
++---------+----------+-----------+---------+---------------------+--------+------------+-------------------+------------+------------+
+|       1 | Sarang   | Joshi     |       1 | Professor           | 100000 | 1976-02-12 | sajoshi@pict.edu  | 3244334321 | Nashik     |
+|       2 | Rajesh   | Ingle     |       1 | Professor           | 50000  | 1970-08-21 | ringle@pict.edu   | 1814223456 | Pune       |
+|       3 | Girish   | Potdar    |       1 | Associate Professor | 40000  | 1974-09-16 | gpotdar@pict.edu  | 7678223314 | Pune       |
+|       4 | Khatri   | Indraraj  |       2 | Associate Professor | 30000  | 1985-01-01 | khatri@pict.edu   | 9999923231 | Pune       |
+|       5 | Sunil    | parasnese |       3 | Professor           | 15000  | 1971-02-23 | sunilpp@pict.edu  | 1814223252 | mumbai     |
+|       6 | arun     | joshi     |       3 | Assistant Professor | 120000 | 1961-02-23 | rrk@pict.edu      | 1814224252 | aurangabad |
+|       7 | dinesh   | mehta     |       2 | Assistant Professor | 15000  | 2016-01-01 | ronakm@pict.edu   | 9814224252 | mumbai     |
+|       8 | Pralhad  | kulkarni  |       1 | Assistant Professor | 90000  | 2015-01-01 | pralhadk@pict.edu | 9814224252 | pune       |
+|       9 | shushil  | Chandak   |       2 | Professor           | 90000  | 1987-02-23 | chandak@pict.edu  | 9814224322 | aurangabad |
+|      10 | Prashant | rathod    |       3 | Professor           | 45000  | 1970-02-23 | prashant@pict.edu | 1814223452 | mumbai     |
+|     102 | Pranjali | Joshi     |    NULL | Professor           | NULL   | NULL       | NULL              | NULL       | NULL       |
++---------+----------+-----------+---------+---------------------+--------+------------+-------------------+------------+------------+
+11 rows in set (0.00 sec)
+
+mysql> delete from ProfDetails where prof_id = 102;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from ProfDetails;
++---------+----------+-----------+---------------------+
+| prof_id | fname    | lname     | designation         |
++---------+----------+-----------+---------------------+
+|       1 | Sarang   | Joshi     | Professor           |
+|       2 | Rajesh   | Ingle     | Professor           |
+|       3 | Girish   | Potdar    | Associate Professor |
+|       4 | Khatri   | Indraraj  | Associate Professor |
+|       5 | Sunil    | parasnese | Professor           |
+|       6 | arun     | joshi     | Assistant Professor |
+|       7 | dinesh   | mehta     | Assistant Professor |
+|       8 | Pralhad  | kulkarni  | Assistant Professor |
+|       9 | shushil  | Chandak   | Professor           |
+|      10 | Prashant | rathod    | Professor           |
++---------+----------+-----------+---------------------+
+10 rows in set (0.00 sec)
+
+mysql> drop view if exists ProfDetails;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> drop view if exists ProfShift;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
