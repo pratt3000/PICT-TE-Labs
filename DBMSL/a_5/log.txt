@@ -1,0 +1,127 @@
+mysql> drop database if exists A5;e A5;
+mysql> DROP PROCEDURE IF EXISTS setFine;
+
+mysql> create database A5;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use A5;
+Database changed
+mysql> DROP PROCEDURE IF EXISTS setFine;
+
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> 
+mysql> create table Customer(
+    ->                     Cust_id int not null,
+    ->                     Name varchar(30),
+    ->                     DateOfPayment date,
+    ->                     NameOfScheme varchar(20),
+    ->                     Status varchar(10),
+    ->                     primary key(Cust_id)
+    ->                     );
+
+mysql> 
+mysql> create table Fine(
+    ->                     Cust_id int not null,
+    ->                     Date date,
+    ->                     Amt int,
+    ->                     foreign key(Cust_id) references Customer(Cust_id) on delete cascade
+    ->                     );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> 
+mysql> insert into Customer VALUES(1, "Prathamesh", "2020-04-8", "High-return", "N" );
+
+mysql> insert into Customer VALUES(2, "Aditya", "2020-03-15", "Low-return", "N" );
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Customer VALUES(3, "Sourav", "2020-03-12", "High-return", "N" );
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Customer VALUES(4, "Rajesh", "2020-03-1", "Low-return", "N" );
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Customer VALUES(5, "Suman", "2020-03-27", "Low-return", "N" );
+Query OK, 1 row affected (0.01 sec)
+
+mysql> 
+mysql> 
+mysql> delimiter @@
+mysql> select * from Customer@@
++---------+------------+---------------+--------------+--------+
+| Cust_id | Name       | DateOfPayment | NameOfScheme | Status |
++---------+------------+---------------+--------------+--------+
+|       1 | Prathamesh | 2020-04-08    | High-return  | N      |
+|       2 | Aditya     | 2020-03-15    | Low-return   | N      |
+|       3 | Sourav     | 2020-03-12    | High-return  | N      |
+|       4 | Rajesh     | 2020-03-01    | Low-return   | N      |
+|       5 | Suman      | 2020-03-27    | Low-return   | N      |
++---------+------------+---------------+--------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> create PROCEDURE setFine(IN id int, IN NameOfScheme varchar(20))
+    -> BEGIN
+    ->     declare myFine INT;
+    ->     declare myDate date;
+    ->     declare myStatus VARCHAR(10);
+    ->     declare days int;
+    ->     declare diff int;
+    ->     declare exit handler for 1062
+    ->     select 'Error : Duplicate' as message;
+    ->     declare exit handler for not found
+    ->     select 'Error :  Record not found' as message;
+    ->     select DateOfPayment into myDate FROM Customer where Cust_id = id;
+    ->     SELECT Status into myStatus FROM Customer where Cust_id = id;
+    ->     select DATEDIFF(CURDATE() , myDate) into diff;
+    -> 
+    ->     IF myStatus="N" THEN
+    ->         IF diff>15 AND diff<=30 THEN
+    ->             set myFine = 5*diff;
+    ->         END IF;
+    ->         IF diff>30 THEN
+    ->             set myFine = 50*(diff-30) + 75;
+    ->         END IF;
+    -> 
+    ->         INSERT INTO Fine VALUES(id, myDate, myFine);
+    ->         UPDATE Customer set Status="P" where Cust_id = id;
+    -> 
+    ->     END IF;
+    -> END @@
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> 
+mysql> 
+
+mysql> call setFine(1, "High-return");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from Fine;
++---------+------------+------+
+| Cust_id | Date       | Amt  |
++---------+------------+------+
+|       1 | 2020-04-08 | 6525 |
++---------+------------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from Customer;
++---------+------------+---------------+--------------+--------+
+| Cust_id | Name       | DateOfPayment | NameOfScheme | Status |
++---------+------------+---------------+--------------+--------+
+|       1 | Prathamesh | 2020-04-08    | High-return  | P      |
+|       2 | Aditya     | 2020-03-15    | Low-return   | N      |
+|       3 | Sourav     | 2020-03-12    | High-return  | N      |
+|       4 | Rajesh     | 2020-03-01    | Low-return   | N      |
+|       5 | Suman      | 2020-03-27    | Low-return   | N      |
++---------+------------+---------------+--------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> call setFine(11, "High-return");
++---------------------------+
+| message                   |
++---------------------------+
+| Error :  Record not found |
++---------------------------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec
