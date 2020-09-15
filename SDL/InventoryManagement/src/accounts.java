@@ -26,7 +26,7 @@ public class accounts {
             System.out.print("\nUsername : ");
             user_name = in.nextLine();
         }while(username_already_exists(user_name));
-        username_already_exists(user_name);
+        //username_already_exists(user_name);
 
         do{
             System.out.print("Password          : ");
