@@ -25,7 +25,6 @@ insert into Customer VALUES(3, "Sourav", "2020-03-12", "High-return", "N" );
 insert into Customer VALUES(4, "Rajesh", "2020-03-1", "Low-return", "N" );
 insert into Customer VALUES(5, "Suman", "2020-03-27", "Low-return", "N" );
 
-
 delimiter @@
 select * from Customer@@
 create PROCEDURE setFine(IN id int, IN NameOfScheme varchar(20))
