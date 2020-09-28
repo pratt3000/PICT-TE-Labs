@@ -1,0 +1,147 @@
+(base) pratt3000@pratts-laptop:~/Documents/College/PICT_TE-Labs/DBMSL$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.21-0ubuntu0.20.04.4 (Ubuntu)
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> drop database if exists A6;
+Query OK, 2 rows affected (0.03 sec)
+
+mysql> create database A6;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use A6;
+Database changed
+mysql> 
+mysql> CREATE TABLE O_rollCall(
+    ->     roll_no INT NOT NULL,
+    ->     name VARCHAR(20)
+    -> );
+;Query OK, 0 rows affected (0.03 sec)
+
+mysql> 
+mysql> CREATE TABLE N_rollCall(
+    ->     roll_no INT NOT NULL,
+    ->     name VARCHAR(20)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO O_rollCall VALUES(1, 'Prathamesh');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO O_rollCall VALUES(2, 'Aditya');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO O_rollCall VALUES(3, 'Ram');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO O_rollCall VALUES(4, 'Sooraj');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO O_rollCall VALUES(5, 'Shreya');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> 
+mysql> INSERT INTO N_rollCall VALUES(1, 'Prathamesh');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO N_rollCall VALUES(3, 'Ram');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO N_rollCall VALUES(5, 'Shreya');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO N_rollCall VALUES(6, 'Swatej');
+NSERT INTO N_rollCall VALUES(7, 'Yuvraj');Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO N_rollCall VALUES(7, 'Yuvraj');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM O_rollCall;
++---------+------------+
+| roll_no | name       |
++---------+------------+
+|       1 | Prathamesh |
+|       2 | Aditya     |
+|       3 | Ram        |
+|       4 | Sooraj     |
+|       5 | Shreya     |
++---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM N_rollCall;
++---------+------------+
+| roll_no | name       |
++---------+------------+
+|       1 | Prathamesh |
+|       3 | Ram        |
+|       5 | Shreya     |
+|       6 | Swatej     |
+|       7 | Yuvraj     |
++---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> delimiter $$
+mysql> CREATE PROCEDURE MergeTables()
+    -> BEGIN
+    -> DECLARE roll INT;
+    -> DECLARE finished INT DEFAULT 0;
+    -> DECLARE cur1 cursor for select roll_no from O_rollCall;
+    -> DECLARE CONTINUE handler for NOT found set finished = 1;
+    -> OPEN cur1;
+    ->  
+    -> loop1: loop
+    -> IF finished = 1 THEN
+    -> close cur1; 
+    -> leave loop1;
+    -> END IF;
+    -> FETCH cur1 INTO roll;
+    -> IF NOT EXISTS(select roll_no from N_rollCall where roll_no = roll) THEN
+    -> INSERT INTO N_rollCall select * from O_rollCall where roll_no = roll;
+    -> END IF;
+    -> END loop loop1;
+    -> END
+    -> $$
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> delimiter ;
+mysql> call MergeTables();
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> 
+mysql> SELECT * FROM O_rollCall;
++---------+------------+
+| roll_no | name       |
++---------+------------+
+|       1 | Prathamesh |
+|       2 | Aditya     |
+|       3 | Ram        |
+|       4 | Sooraj     |
+|       5 | Shreya     |
++---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM N_rollCall;
++---------+------------+
+| roll_no | name       |
++---------+------------+
+|       1 | Prathamesh |
+|       3 | Ram        |
+|       5 | Shreya     |
+|       6 | Swatej     |
+|       7 | Yuvraj     |
+|       2 | Aditya     |
+|       4 | Sooraj     |
++---------+------------+
+7 rows in set (0.00 sec)
+
+mysql> 
