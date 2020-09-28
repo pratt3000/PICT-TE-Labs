@@ -1,0 +1,258 @@
+mysql> use professor_schema;
+Database changed
+mysql> table list;
+ERROR 1146 (42S02): Table 'professor_schema.list' doesn't exist
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> use professor_schema;
+Database changed
+mysql> create table department(dept_id int not null, dept_name varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc department;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dept_id   | int         | NO   |     | NULL    |       |
+| dept_name | varchar(20) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+
+mysql> drop table department;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> create table department(dept_id int not null,dept_name varchar(10),primary key(dept_id));
+Query OK, 0 rows affected (0.03 sec)
+
+
+mysql> create table professor(prof_id int not null,fname varchar(10),lname varchar(10),dept_id int,designation varchar(10),salary varchar(15),dob varchar(15),email varchar(20),phone varchar(20),city varchar(20),primary key(prof_id),foreign key(dept_id) references department(dept_id) on delete cascade);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc professor;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| prof_id     | int         | NO   | PRI | NULL    |       |
+| fname       | varchar(10) | YES  |     | NULL    |       |
+| lname       | varchar(10) | YES  |     | NULL    |       |
+| dept_id     | int         | YES  | MUL | NULL    |       |
+| designation | varchar(10) | YES  |     | NULL    |       |
+| salary      | varchar(15) | YES  |     | NULL    |       |
+| dob         | varchar(15) | YES  |     | NULL    |       |
+| email       | varchar(20) | YES  |     | NULL    |       |
+| phone       | varchar(20) | YES  |     | NULL    |       |
+| city        | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
+mysql> create table works(prof_id int,dept_id int,duration varchar(10),foreign key(prof_id) references professor(prof_id),foreign key(dept_id) references department(dept_id));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create table shift(prof_id int,shift varchar(20),working_hrs varchar(20),foreign key(prof_id) references professor(prof_id));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> drop table shift;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> drop table works;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table shift( prof_id int, shift varchar(20), working_hrs varchar(20), foreign key(prof_id) references professor(prof_id) on delete cascade );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table works( prof_id int, dept_id int, duration varchar(10), foreign key(prof_id) references professor(prof_id) on delete cascade, foreign key(dept_id) references department(dept_id) on delete cascade );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> show tables;
++----------------------------+
+| Tables_in_professor_schema |
++----------------------------+
+| department                 |
+| professor                  |
+| shift                      |
+| works                      |
++----------------------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table professor modify designation varchar(30);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>  alter table professor modify email varchar(30);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table professor modify fname varchar(30);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table professor modify lname varchar(30);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc professor;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| prof_id     | int         | NO   | PRI | NULL    |       |
+| fname       | varchar(30) | YES  |     | NULL    |       |
+| lname       | varchar(30) | YES  |     | NULL    |       |
+| dept_id     | int         | YES  | MUL | NULL    |       |
+| designation | varchar(30) | YES  |     | NULL    |       |
+| salary      | varchar(15) | YES  |     | NULL    |       |
+| dob         | varchar(15) | YES  |     | NULL    |       |
+| email       | varchar(30) | YES  |     | NULL    |       |
+| phone       | varchar(20) | YES  |     | NULL    |       |
+| city        | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
+mysql> insert into department values(1, "COMP");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into department values(2, "IT");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into department values(3, "ENTC");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into professor values( 1, "Sarang", "Joshi", 1, "Professor", "100000", "1976-02-12", "sajoshi@pict.edu", "3244334321", "Nashik");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into professor values( 2, "Rajesh", "Ingle", 1, "Professor", "100000", "1970-08-21", "ringle@pict.edu", "1814223456", "Pune");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into professor values( 102, "Girish", "Potdar", 1, "Associate Professor", "76000", "1974-09-16", "gpotdar@pict.edu", "7678223314", "Pune");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into professor values( 3, "Khatri", "Indraraj", 2, "Associate Professor", "73200", "1985-01-01", "khatri@pict.edu", "9999923231", "Pune");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from professor;
++---------+--------+----------+---------+---------------------+--------+------------+------------------+------------+--------+
+| prof_id | fname  | lname    | dept_id | designation         | salary | dob        | email            | phone      | city   |
++---------+--------+----------+---------+---------------------+--------+------------+------------------+------------+--------+
+|       1 | Sarang | Joshi    |       1 | Professor           | 100000 | 1976-02-12 | sajoshi@pict.edu | 3244334321 | Nashik |
+|       2 | Rajesh | Ingle    |       1 | Professor           | 100000 | 1970-08-21 | ringle@pict.edu  | 1814223456 | Pune   |
+|       3 | Khatri | Indraraj |       2 | Associate Professor | 73200  | 1985-01-01 | khatri@pict.edu  | 9999923231 | Pune   |
+|     102 | Girish | Potdar   |       1 | Associate Professor | 76000  | 1974-09-16 | gpotdar@pict.edu | 7678223314 | Pune   |
++---------+--------+----------+---------+---------------------+--------+------------+------------------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> show tables;
++----------------------------+
+| Tables_in_professor_schema |
++----------------------------+
+| department                 |
+| professor                  |
+| shift                      |
+| works                      |
++----------------------------+
+4 rows in set (0.00 sec)
+
+mysql> desc shift;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| prof_id     | int         | YES  | MUL | NULL    |       |
+| shift       | varchar(20) | YES  |     | NULL    |       |
+| working_hrs | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into shift values(1,"1","9-3" );
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into shift values(2,"2","9-3" );
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into shift values(102,"1","9-3" );
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into shift values(3,"2","9-3" );
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc works;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| prof_id  | int         | YES  | MUL | NULL    |       |
+| dept_id  | int         | YES  | MUL | NULL    |       |
+| duration | varchar(10) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into works values(1,1,"6");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into works values(3,2,"7");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into works values(2,1,"7");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into works values(102,2,"9");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show tables;
++----------------------------+
+| Tables_in_professor_schema |
++----------------------------+
+| department                 |
+| professor                  |
+| shift                      |
+| works                      |
++----------------------------+
+4 rows in set (0.00 sec)
+
+mysql> desc department;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dept_id   | int         | NO   | PRI | NULL    |       |
+| dept_name | varchar(10) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> desc professor;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| prof_id     | int         | NO   | PRI | NULL    |       |
+| fname       | varchar(30) | YES  |     | NULL    |       |
+| lname       | varchar(30) | YES  |     | NULL    |       |
+| dept_id     | int         | YES  | MUL | NULL    |       |
+| designation | varchar(30) | YES  |     | NULL    |       |
+| salary      | varchar(15) | YES  |     | NULL    |       |
+| dob         | varchar(15) | YES  |     | NULL    |       |
+| email       | varchar(30) | YES  |     | NULL    |       |
+| phone       | varchar(20) | YES  |     | NULL    |       |
+| city        | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+10 rows in set (0.01 sec)
+
+mysql> desc shift;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| prof_id     | int         | YES  | MUL | NULL    |       |
+| shift       | varchar(20) | YES  |     | NULL    |       |
+| working_hrs | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> desc works;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| prof_id  | int         | YES  | MUL | NULL    |       |
+| dept_id  | int         | YES  | MUL | NULL    |       |
+| duration | varchar(10) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+

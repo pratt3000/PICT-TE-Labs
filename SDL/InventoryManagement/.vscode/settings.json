@@ -1,6 +1,7 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "/home/pratt3000/Documents/College Codes/PICT_TE-Labs/SDL/InventoryManagement/**/*.jar"
+        "/home/pratt3000/Documents/College Codes/PICT_TE-Labs/SDL/InventoryManagement/**/*.jar",
+        "/home/pratt3000/Documents/College/PICT_TE-Labs/SDL/InventoryManagement/**/*.jar"
     ]
 }

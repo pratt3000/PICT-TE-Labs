@@ -1,10 +1,10 @@
-import java.util.*; 
-
+import java.sql.*;
+import java.util.*;
 
 public class general {
     static Scanner in = new Scanner(System.in);
 
-    static accounts acch = new accounts();      //change to account_handling for Database support
+    static account_handling acch = new account_handling();      //change to account for non Database support
     static HM_count qty = new HM_count();
     static HM_expDate exp = new HM_expDate();
     static ARR_names itmn = new ARR_names();  
