@@ -1,0 +1,201 @@
+import java.sql.*;
+import java.util.*;
+
+public class market_database_handling {
+
+    Scanner in = new Scanner(System.in);
+    
+    static account_handling acch = new account_handling();
+    static Client cli = new Client();
+
+    void get_market_status(){
+        String query = "SELECT * FROM Market";
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bb_accounts","root","Hello@123");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            System.out.println("\n\n**** WELCOME TO BIG-BASKET ****");
+            System.out.printf( "\n| %-15s| %10s   |%10s       | %10s |\n","Item Name", "QTY", "Expires in", "Cost" );
+            System.out.println("________________________________________________________________");
+            if(rs.next()){ 
+				do{
+                System.out.printf("| %-15s| %10s   |%10s days  | %10s |\n",
+                                rs.getString(1),
+                                rs.getString(2),
+                                rs.getString(3),
+                                rs.getString(4)
+                            );
+				}while(rs.next());
+			}
+			else{
+				System.out.println("Record Not Found...");
+            }
+            System.out.println("________________________________________________________________");
+            con.close();
+        }catch(Exception e){System.out.println(e);}
+    }
+    
+
+    void pass_day(){
+        String updt_expiry = "update Market set expiry = IF(expiry<=1, 0, expiry-1);";
+        String updt_quantity = "update Market set quantity = IF(expiry<1, 0, quantity)";
+        String updt_cost = "update Market set cost = IF(expiry<1, 0, cost)";
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bb_accounts","root","Hello@123");
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate(updt_expiry);
+            stmt.executeUpdate(updt_quantity);
+            stmt.executeUpdate(updt_cost);
+            System.out.println("A DAY HAS PASSED !!!");
+            con.close();
+        }catch(Exception e){System.out.println(e);}
+    }
+
+    void _login_(){
+        int fl=1;
+        while(fl==1){
+            System.out.println("1. Login");
+            System.out.println("2. Signup");
+            System.out.println("3. Help");
+
+
+            System.out.print("\nChoice : ");
+            int new_acc = Integer.parseInt(in.nextLine());
+            if(new_acc == 2){
+                acch.new_user_login();
+                customer_menu();
+                fl=0;
+            }
+            else if(new_acc == 1){
+                int opt = acch.old_user_login();
+
+                if(opt==0){ fl=1; }
+                if(opt==1){ fl=0; customer_menu(); }
+                if(opt==2){ fl=0; admin_menu(); }
+            }  
+            else if(new_acc == 3){
+                // add client server here
+                cli.call_client();
+            }          
+        }
+    }
+
+    void admin_menu(){
+
+        System.out.println("*** Admin Mode ***");
+        System.out.println("Re-stock per category :");
+
+        int repeat = 1;
+        while(repeat != 0){
+
+            Integer q, exp, c;        //quantity expiry cost
+            String item_name;
+
+            System.out.println("Item Name        : ");
+            item_name = in.nextLine();
+            System.out.println("Restock Quantity : ");
+            q = Integer.parseInt(in.nextLine());
+            System.out.println("New Expiry       : ");
+            exp = Integer.parseInt(in.nextLine());
+            System.out.println("New Cost         : ");
+            c = Integer.parseInt(in.nextLine());
+            
+            System.out.println("\nRestocking...");
+            
+            String updt = "update Market set quantity ='"+q+"', expiry = '"+exp+"', cost = '"+c+"' where name = '"+item_name+"';";
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bb_accounts","root","Hello@123");
+                Statement stmt = con.createStatement();
+                stmt.executeUpdate(updt);
+                System.out.println("Restocked !");
+                con.close();
+            }catch(Exception e){System.out.println(e);}
+
+            System.out.println("Restock another item ?(1/0) ");
+            repeat = Integer.parseInt(in.nextLine());
+        }
+    }
+
+    void customer_menu(){
+
+        Integer count;
+        System.out.print("\nNo. of items you want to BUY : ");
+        count = Integer.parseInt(in.nextLine());
+        int total_cost = 0;
+        for(int ct=0; ct<count; ct++){
+
+            String item_name;
+            Integer quan;
+            System.out.println("Item Name        : ");
+            item_name = in.nextLine();
+            System.out.println("Quantity : ");
+            quan = Integer.parseInt(in.nextLine());
+
+            total_cost = total_cost + buy_item(item_name, quan);
+        }
+
+        System.out.println("---------------------------------------------");
+        System.out.println("Proceed to checkout : ");
+        System.out.print("cost : ");
+        System.out.print(total_cost);
+        System.out.println("\nThanks for supporting us!");
+    }
+
+    int buy_item(String name, Integer quan){
+        String updt_quantity = "update Market set quantity = IF(quantity-'"+quan+"'<1, 0, quantity-'"+quan+"') where name='"+name+"';";
+        String updt_cost = "update Market set cost = IF(quantity<1, 0, cost) where name='"+name+"';";
+        String updt_exp = "update Market set expiry = IF(quantity<1, 0, expiry) where name='"+name+"';";
+        String query_cost = "select cost from Market where name='"+name+"';";
+        int cost=0;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bb_accounts","root","Hello@123");
+            Statement stmt = con.createStatement();
+
+            stmt.executeUpdate(updt_quantity);
+            stmt.executeUpdate(updt_cost);
+            stmt.executeUpdate(updt_exp);
+
+            ResultSet rs = stmt.executeQuery(query_cost);
+            rs.next();
+            cost = rs.getInt(1);
+
+            
+            con.close();
+        }catch(Exception e){System.out.println(e);}
+
+        return (cost*quan);
+    }
+
+
+    String contact(){
+        // System.out.println("---------CONTACT DETAILS--------");
+        // System.out.println("\nHelp Desk : 9899998230");
+        // System.out.println("Complaints : 9899998231");
+        // System.out.println("Email : bgbskt@gmail.bgbskt.com");
+        // System.out.println("Donate : <DONATION LINK>");
+
+        return("---------CONTACT DETAILS--------\nHelp Desk : 9899998230\nComplaints : 9899998231\nComplaints : 9899998231\nEmail : bgbskt@gmail.bgbskt.com\nDonate : <DONATION LINK>");
+    }
+
+    String about(){
+        // System.out.println("--------- ABOUT --------");
+        // System.out.println("\nBigbasket company was founded by V S Sudhakar, Hari Menon, Vipul Parekh, Abhinay Choudhari and V S Ramesh in 2011. Initially, in 1999, they started India's first e-commerce site FabMart and then went on to establish Fabmall-Trinethra chain of more than 200 grocery supermarket stores in southern India, the business was later sold to Aditya Birla Group. It is popularly known as 'More' retail chain.[6] In 2011 they launched bigbasket online grocery delivery service. On August 9, 2019, bigbasket partnered with a non-profit organisation Goonj and through their Rahat flood programme provided relief materials to people who were affected during the Kerala Flood");
+        return("--------- ABOUT --------\nBigbasket company was founded by V S Sudhakar, Hari Menon, Vipul Parekh, Abhinay Choudhari and V S Ramesh in 2011. Initially, in 1999, they started India's first e-commerce site FabMart and then went on to establish Fabmall-Trinethra chain of more than 200 grocery supermarket stores in southern India, the business was later sold to Aditya Birla Group. It is popularly known as 'More' retail chain.[6] In 2011 they launched bigbasket online grocery delivery service. On August 9, 2019, bigbasket partnered with a non-profit organisation Goonj and through their Rahat flood programme provided relief materials to people who were affected during the Kerala Flood");
+    }
+
+    String FAQ(){
+        // System.out.println("--------- FAQs --------");
+        // System.out.println("1. when was bigbasket founded?");
+        // System.out.println("2007");
+        // System.out.println("1. who founded big basket?");
+        // System.out.println("someone did");
+
+        return ("--------- FAQs --------\n1. when was bigbasket founded?\n2007\n2. who founded big basket?\nsomeone did");
+    }
+
+}

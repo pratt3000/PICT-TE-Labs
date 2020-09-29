@@ -11,21 +11,21 @@ public class Server {
         String msgin="",msgout="";
 
         while(true){
-            general gen = new general();
+            market_database_handling mdh = new market_database_handling();
             msgin = din.readUTF();
             System.out.println("USER ENTERED: " + msgin);
 
             if(msgin.equals("1")){
                 //contact
-                msgout = gen.contact();
+                msgout = mdh.contact();
             }
             else if(msgin.equals("2")){
                 // about
-                msgout = gen.about();
+                msgout = mdh.about();
             }
             else if(msgin.equals("3")){
                 //FAQ
-                msgout = gen.FAQ();
+                msgout = mdh.FAQ();
             }
             else{
                 break;
