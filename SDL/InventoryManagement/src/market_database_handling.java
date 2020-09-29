@@ -138,23 +138,31 @@ public class market_database_handling {
         System.out.print("\nNo. of items you want to BUY : ");
         count = Integer.parseInt(in.nextLine());
         int total_cost = 0;
+        String[] items = new String[20];
+        int[] quantities = new int[20];
+
         for(int ct=0; ct<count; ct++){
 
             String item_name;
             Integer quan;
             System.out.println("Item Name        : ");
             item_name = in.nextLine();
-            System.out.println("Quantity : ");
+            System.out.println("Quantity         : ");
             quan = Integer.parseInt(in.nextLine());
 
+            items[ct] = item_name;
+            quantities[ct]=quan;
             total_cost = total_cost + buy_item(item_name, quan);
         }
 
         System.out.println("---------------------------------------------");
-        System.out.println("Proceed to checkout : ");
-        System.out.print("cost : ");
-        System.out.print(total_cost);
-        System.out.println("\nThanks for supporting us!");
+        System.out.println("YOUR BASKET : \n");
+        for(int ct=0; ct<count; ct++){
+            System.out.println(items[ct] + " : " + quantities[ct] );
+        }
+        System.out.println("cost : " + total_cost);
+        System.out.println("\n\nThanks for supporting us!");
+        System.out.println("---------------------------------------------");
     }
 
     int buy_item(String name, Integer quan){
