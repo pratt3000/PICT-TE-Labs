@@ -200,7 +200,7 @@ public class market_database_handling {
             //Initialize the script runner
             ScriptRunner sr = new ScriptRunner(con);
             //Creating a reader object
-            Reader reader = new BufferedReader(new FileReader("/home/pratt3000/Documents/College/PICT_TE-Labs/SDL/InventoryManagement/mysql/create_table.sql"));
+            Reader reader = new BufferedReader(new FileReader("/home/pratt3000/Documents/College/PICT_TE-Labs/SDL/InventoryManagement/Database/create_table.sql"));
             //Running the script
             sr.runScript(reader);
         }catch(Exception e){System.out.println(e);}

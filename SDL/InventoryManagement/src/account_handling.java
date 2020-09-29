@@ -61,7 +61,7 @@ public class account_handling {
             System.out.print("\nUsername : ");
             user_name = in.nextLine();
         }while(!username_already_exists(user_name));
-
+    
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bb_accounts","root","Hello@123");
