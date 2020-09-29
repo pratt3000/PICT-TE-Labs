@@ -1,5 +1,9 @@
 import java.sql.*;
 import java.util.*;
+import org.apache.ibatis.jdbc.ScriptRunner;
+import java.io.FileReader;
+import java.io.Reader;
+import java.io.BufferedReader;
 
 public class market_database_handling {
 
@@ -84,40 +88,48 @@ public class market_database_handling {
     }
 
     void admin_menu(){
-
+        int choice;
         System.out.println("*** Admin Mode ***");
-        System.out.println("Re-stock per category :");
-
-        int repeat = 1;
-        while(repeat != 0){
-
-            Integer q, exp, c;        //quantity expiry cost
-            String item_name;
-
-            System.out.println("Item Name        : ");
-            item_name = in.nextLine();
-            System.out.println("Restock Quantity : ");
-            q = Integer.parseInt(in.nextLine());
-            System.out.println("New Expiry       : ");
-            exp = Integer.parseInt(in.nextLine());
-            System.out.println("New Cost         : ");
-            c = Integer.parseInt(in.nextLine());
-            
-            System.out.println("\nRestocking...");
-            
-            String updt = "update Market set quantity ='"+q+"', expiry = '"+exp+"', cost = '"+c+"' where name = '"+item_name+"';";
-            try{
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bb_accounts","root","Hello@123");
-                Statement stmt = con.createStatement();
-                stmt.executeUpdate(updt);
-                System.out.println("Restocked !");
-                con.close();
-            }catch(Exception e){System.out.println(e);}
-
-            System.out.println("Restock another item ?(1/0) ");
-            repeat = Integer.parseInt(in.nextLine());
+        System.out.println("Order default/ Order Specific ? (1/0)");
+        choice = Integer.parseInt(in.nextLine());
+        if(choice == 1){
+            run_default_market();
         }
+        else{
+            System.out.println("Re-stock per category :");
+
+            int repeat = 1;
+            while(repeat != 0){
+
+                Integer q, exp, c;        //quantity expiry cost
+                String item_name;
+
+                System.out.println("Item Name        : ");
+                item_name = in.nextLine();
+                System.out.println("Restock Quantity : ");
+                q = Integer.parseInt(in.nextLine());
+                System.out.println("New Expiry       : ");
+                exp = Integer.parseInt(in.nextLine());
+                System.out.println("New Cost         : ");
+                c = Integer.parseInt(in.nextLine());
+                
+                System.out.println("\nRestocking...");
+                
+                String updt = "update Market set quantity ='"+q+"', expiry = '"+exp+"', cost = '"+c+"' where name = '"+item_name+"';";
+                try{
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bb_accounts","root","Hello@123");
+                    Statement stmt = con.createStatement();
+                    stmt.executeUpdate(updt);
+                    System.out.println("Restocked !");
+                    con.close();
+                }catch(Exception e){System.out.println(e);}
+
+                System.out.println("Restock another item ?(1/0) ");
+                repeat = Integer.parseInt(in.nextLine());
+            }
+        }
+        
     }
 
     void customer_menu(){
@@ -171,7 +183,20 @@ public class market_database_handling {
         return (cost*quan);
     }
 
-
+    void run_default_market(){
+        //Getting the connection
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bb_accounts","root","Hello@123");
+            System.out.println("Connection established......");
+            //Initialize the script runner
+            ScriptRunner sr = new ScriptRunner(con);
+            //Creating a reader object
+            Reader reader = new BufferedReader(new FileReader("/home/pratt3000/Documents/College/PICT_TE-Labs/SDL/InventoryManagement/mysql/create_table.sql"));
+            //Running the script
+            sr.runScript(reader);
+        }catch(Exception e){System.out.println(e);}
+    }
     String contact(){
         // System.out.println("---------CONTACT DETAILS--------");
         // System.out.println("\nHelp Desk : 9899998230");

@@ -31,9 +31,4 @@ INSERT INTO Market VALUES("Chicken", 8, 7, 250);
 INSERT INTO Market VALUES("Fish", 7, 7, 400);
 INSERT INTO Market VALUES("Crabs", 13, 9, 300);
 
-SELECT * FROM Market;
-SELECT * FROM users;
-
-
-#-- source /home/pratt3000/Documents/College/PICT_TE-Labs/SDL/InventoryManagement/mysql/create_table.sql
 
