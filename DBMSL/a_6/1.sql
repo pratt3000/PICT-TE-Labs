@@ -1,6 +1,6 @@
-drop database if exists A6;
-create database A6;
-use A6;
+DROP DATABASE IF EXISTS A6;
+CREATE DATABASE A6;
+USE A6;
 
 CREATE TABLE O_rollCall(
     roll_no INT NOT NULL,

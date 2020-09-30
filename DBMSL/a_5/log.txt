@@ -1,4 +1,4 @@
-mysql> drop database if exists A5;e A5;
+mysql> drop database if exists A5;
 mysql> DROP PROCEDURE IF EXISTS setFine;
 
 mysql> create database A5;
@@ -124,4 +124,5 @@ mysql> call setFine(11, "High-return");
 +---------------------------+
 1 row in set (0.01 sec)
 
-Query OK, 0 rows affected (0.01 sec
+Query OK, 0 rows affected (0.01 sec)
+

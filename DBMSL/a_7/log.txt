@@ -1,0 +1,126 @@
+mysql> drop database if exists A7;
+mysql> create database A7;
+mysql> use A7;
+Database changed
+mysql> 
+mysql> CREATE TABLE customer(
+    ->     id INT,
+    ->     cust_name VARCHAR(20),
+    ->     total_purchase INT, 
+    ->     PRIMARY KEY(id)
+    ->     );
+Query OK, 0 rows affected (0.05 sec)
+mysql> CREATE TABLE category(
+    ->     cust_id INT,
+    ->     name VARCHAR(20),
+    ->     class VARCHAR(20), 
+    ->     FOREIGN KEY(cust_id) REFERENCES customer(id) ON DELETE CASCADE
+    ->     );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> 
+mysql> INSERT INTO customer VALUES(1,"Prathamesh",9000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO customer VALUES(2,"Aditya",15000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO customer VALUES(3,"Varun",3000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO customer VALUES(4,"Prachi",2000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO customer VALUES(5,"Utkarsh",11000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> delimiter //
+mysql> CREATE PROCEDURE decideCategory(IN total_purchase INT, OUT class VARCHAR(20))
+    -> BEGIN
+    -> IF total_purchase<= 20000 AND total_purchase>=10000 THEN SET class="PLATINUM";
+    -> END IF;
+    -> IF total_purchase<10000 AND total_purchase >= 5000 THEN SET class="GOLD";
+    -> END IF;
+    -> IF total_purchase<5000 AND total_purchase >=2000 THEN SET class="SILVER";
+    -> END IF;
+    -> END;
+    -> //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> 
+mysql> CREATE PROCEDURE proc_category()
+    -> BEGIN
+    ->     DECLARE cust_name VARCHAR(20);
+    ->     DECLARE b INT default 0;
+    ->     DECLARE cust_id  INT;
+    ->     DECLARE total_purchase INT;
+    ->     DECLARE class INT;
+    ->     DECLARE c1 cursor for SELECT * FROM customer;
+    ->     DECLARE CONTINUE handler for NOT found SET b=1;
+    ->     OPEN c1;
+    ->     repeat
+    ->     FETCH c1 INTO cust_id,cust_name,total_purchase;
+    ->     IF NOT b THEN
+    ->         CALL decideCategory(total_purchase,@class);
+    ->         INSERT INTO category VALUES(cust_id,cust_name,@class);
+    ->     END IF;
+    ->     until b END repeat;
+    -> END;
+    -> //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> SELECT * FROM category;
+Empty set (0.00 sec)
+
+mysql> 
+mysql> CALL proc_category();
+mysql> SELECT * FROM category;
++---------+------------+----------+
+| cust_id | name       | class    |
++---------+------------+----------+
+|       1 | Prathamesh | GOLD     |
+|       2 | Aditya     | PLATINUM |
+|       3 | Varun      | SILVER   |
+|       4 | Prachi     | SILVER   |
+|       5 | Utkarsh    | PLATINUM |
++---------+------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> 
+mysql> delimiter //
+mysql> CREATE FUNCTION insertCategory(cust_id INT) RETURNS VARCHAR(20) deterministic
+    -> BEGIN
+    -> DECLARE total_purchase INT;
+    -> DECLARE class VARCHAR(20);
+    -> DECLARE cust_name VARCHAR(20);
+    -> SELECT customer.cust_name,customer.total_purchase INTO cust_name,total_purchase FROM customer WHERE customer.id=cust_id;
+    -> CALL decideCategory(total_purchase,@class);
+    -> INSERT INTO category VALUES(cust_id,cust_name,@class);
+    -> RETURN @class;
+    -> END;
+    -> //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> delimiter ;
+mysql> DELETE FROM category;
+Query OK, 5 rows affected (0.02 sec)
+
+mysql> 
+mysql> SELECT insertCategory(1);
++-------------------+
+| insertCategory(1) |
++-------------------+
+| GOLD              |
++-------------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT * FROM category;
++---------+------------+-------+
+| cust_id | name       | class |
++---------+------------+-------+
+|       1 | Prathamesh | GOLD  |
++---------+------------+-------+
+1 row in set (0.00 sec)
+
+mysql> 
