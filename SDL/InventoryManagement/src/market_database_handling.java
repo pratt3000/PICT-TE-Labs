@@ -82,7 +82,7 @@ public class market_database_handling {
             }  
             else if(new_acc == 3){
                 // add client server here
-                cli.call_client();
+                //cli.call_client();
             }          
         }
     }

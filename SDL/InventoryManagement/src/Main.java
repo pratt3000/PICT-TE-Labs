@@ -5,11 +5,8 @@ public class Main extends Thread {
     static Scanner in = new Scanner(System.in);
     static market_database_handling mdh = new market_database_handling();
     public static void main(String[] args) throws Exception {
-
         Main thread = new Main();
         thread.start();
-
-        
     }
 
     public void run() {
