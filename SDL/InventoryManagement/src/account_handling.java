@@ -3,7 +3,7 @@ import java.util.*;
 
 
 public class account_handling {
-
+    static market_database_handling mdh = new market_database_handling();
     Scanner in = new Scanner(System.in);
 
     boolean username_already_exists(String user_name){
@@ -27,7 +27,7 @@ public class account_handling {
 
         return true;
     }
-    void new_user_login(){
+    int new_user_login(){
         String pass1, pass2,user_name;
         do{
             System.out.print("\nUsername : ");
@@ -50,7 +50,9 @@ public class account_handling {
             stmt.executeUpdate(updt);
             con.close();
             System.out.println("*** account created ***");
-        }catch(Exception e){System.out.println(e);}      
+        }catch(Exception e){System.out.println(e);} 
+        mdh.customer_menu();
+        return 0;     
     }
 
     int old_user_login(){

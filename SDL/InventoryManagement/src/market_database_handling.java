@@ -4,9 +4,10 @@ import org.apache.ibatis.jdbc.ScriptRunner;
 import java.io.FileReader;
 import java.io.Reader;
 import java.io.BufferedReader;
+ 
+
 
 public class market_database_handling {
-
     Scanner in = new Scanner(System.in);
     
     static account_handling acch = new account_handling();
@@ -58,33 +59,26 @@ public class market_database_handling {
         }catch(Exception e){System.out.println(e);}
     }
 
-    void _login_(){
-        int fl=1;
-        while(fl==1){
-            System.out.println("1. Login");
-            System.out.println("2. Signup");
-            System.out.println("3. Help");
+    int continue_shopping(){
+        System.out.println("login/leave shop? (1/0) : ");
+        int repeat = Integer.parseInt(in.nextLine());
+        return repeat;
+    }
 
+    int choose_login_options(){
+        get_market_status();    
+        System.out.println("1. Login");
+        System.out.println("2. Signup");
+        System.out.print("\nChoice : ");
+        int new_acc = Integer.parseInt(in.nextLine());
+        return new_acc;
+    }
 
-            System.out.print("\nChoice : ");
-            int new_acc = Integer.parseInt(in.nextLine());
-            if(new_acc == 2){
-                acch.new_user_login();
-                customer_menu();
-                fl=0;
-            }
-            else if(new_acc == 1){
-                int opt = acch.old_user_login();
-
-                if(opt==0){ fl=1; }
-                if(opt==1){ fl=0; customer_menu(); }
-                if(opt==2){ fl=0; admin_menu(); }
-            }  
-            else if(new_acc == 3){
-                // add client server here
-                //cli.call_client();
-            }          
-        }
+    int display_respective_menu(int opt){
+        if(opt==0){ return 1; }
+        if(opt==1){ customer_menu(); }
+        if(opt==2){ admin_menu(); }
+        return 0;
     }
 
     void admin_menu(){

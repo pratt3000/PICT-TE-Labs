@@ -4,6 +4,8 @@ public class Main extends Thread {
 
     static Scanner in = new Scanner(System.in);
     static market_database_handling mdh = new market_database_handling();
+    static account_handling acch = new account_handling();
+
     public static void main(String[] args) throws Exception {
         Main thread = new Main();
         thread.start();
@@ -13,12 +15,22 @@ public class Main extends Thread {
         int repeat =1;
         while(repeat==1){
 
-            mdh.get_market_status();
-            mdh._login_();
+            int fl=1;
+            while(fl==1){
+                int new_acc = mdh.choose_login_options();
+
+                if(new_acc == 1){
+                    int opt = acch.old_user_login();
+                    fl = mdh.display_respective_menu(opt);                
+                }
+                else if(new_acc == 2){
+                    fl = acch.new_user_login();
+                }          
+            }
+
             mdh.pass_day();
 
-            System.out.println("login/leave shop? (1/0) : ");
-            repeat = Integer.parseInt(in.nextLine());
+            repeat = mdh.continue_shopping();
         }        
       }
 }
