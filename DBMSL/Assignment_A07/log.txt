@@ -101,7 +101,7 @@ mysql> CREATE FUNCTION insertCategory(cust_id INT) RETURNS VARCHAR(20) determini
     -> END;
     -> //
 Query OK, 0 rows affected (0.02 sec)
-
+    
 mysql> delimiter ;
 mysql> DELETE FROM category;
 Query OK, 5 rows affected (0.02 sec)
