@@ -1,6 +1,5 @@
 import java.io.*; 
 import java.text.*; 
-import java.util.*; 
 import java.net.*; 
   
 // Server class 
@@ -38,7 +37,7 @@ public class Server
                   
             } 
             catch (Exception e){ 
-                s.close(); 
+                ss.close(); 
                 e.printStackTrace(); 
             } 
         } 
@@ -53,7 +52,8 @@ class ClientHandler extends Thread
     final DataInputStream dis; 
     final DataOutputStream dos; 
     final Socket s; 
-      
+    market_database_handling mdh = new market_database_handling();
+    account_handling acch = new account_handling();
   
     // Constructor 
     public ClientHandler(Socket s, DataInputStream dis, DataOutputStream dos)  
@@ -67,48 +67,36 @@ class ClientHandler extends Thread
     public void run()  
     { 
         String received; 
-        String toreturn; 
         while (true)  
         { 
             try { 
-  
-                // Ask user what he wants 
-                dos.writeUTF("What do you want?[Date | Time]..\n"+ 
-                            "Type Exit to terminate connection."); 
-                  
-                // receive the answer from client 
-                received = dis.readUTF(); 
-                  
-                if(received.equals("Exit")) 
-                {  
-                    System.out.println("Client " + this.s + " sends exit..."); 
-                    System.out.println("Closing this connection."); 
-                    this.s.close(); 
-                    System.out.println("Connection closed"); 
-                    break; 
-                } 
-                  
-                // creating Date object 
-                Date date = new Date(); 
-                  
-                // write on output stream based on the 
-                // answer from the client 
+                
+                String user_name, password, status;
+                received = dis.readUTF();
+
                 switch (received) { 
-                  
-                    case "Date" : 
-                        toreturn = fordate.format(date); 
-                        dos.writeUTF(toreturn); 
+                    case "old_user_login" : 
+                        user_name = dis.readUTF();
+                        password = dis.readUTF();
+                        status = acch.old_user_login(user_name, password);
+                        dos.writeUTF(status);
                         break; 
                           
-                    case "Time" : 
-                        toreturn = fortime.format(date); 
-                        dos.writeUTF(toreturn); 
+                    case "new_user_login" : 
+                        user_name = dis.readUTF();
+                        password = dis.readUTF();
+                        status = acch.new_user_login(user_name, password);
+                        dos.writeUTF(status);
                         break; 
                           
                     default: 
-                        dos.writeUTF("Invalid input"); 
+                        dos.writeUTF("Breaking"); 
                         break; 
                 } 
+                if(received.equals("terminate")){
+                    break;
+                }
+                mdh.pass_day();
             } catch (IOException e) { 
                 e.printStackTrace(); 
             } 
@@ -124,4 +112,5 @@ class ClientHandler extends Thread
             e.printStackTrace(); 
         } 
     } 
+    
 } 

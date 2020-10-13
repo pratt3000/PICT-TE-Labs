@@ -65,8 +65,7 @@ public class market_database_handling {
         return repeat;
     }
 
-    int choose_login_options(){
-        get_market_status();    
+    int choose_login_options(){    
         System.out.println("1. Login");
         System.out.println("2. Signup");
         System.out.print("\nChoice : ");
@@ -74,11 +73,9 @@ public class market_database_handling {
         return new_acc;
     }
 
-    int display_respective_menu(int opt){
-        if(opt==0){ return 1; }
-        if(opt==1){ customer_menu(); }
-        if(opt==2){ admin_menu(); }
-        return 0;
+    void display_respective_menu(String status){
+        if(status.equals("customer")){ customer_menu(); }
+        if(status.equals("admin")){ admin_menu(); }
     }
 
     void admin_menu(){

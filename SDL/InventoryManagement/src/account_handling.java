@@ -19,7 +19,7 @@ public class account_handling {
                 return false;
                 }
             else{
-                System.out.println(" **username exists");
+                System.out.println("** username exists **");
                 con.close();
                 return true;
             }
@@ -27,42 +27,45 @@ public class account_handling {
 
         return true;
     }
-    int new_user_login(){
-        String pass1, pass2,user_name;
-        do{
-            System.out.print("\nUsername : ");
-            user_name = in.nextLine();
-        }while(username_already_exists(user_name));
-        username_already_exists(user_name);
 
-        do{
-        System.out.print("Password          : ");
-        pass1 = in.nextLine();
-        System.out.print("Re-enter Password : ");
-        pass2 = in.nextLine();
-        }while(!pass1.equals(pass2));
+
+    String new_user_login(String user_name, String password){
+        if(username_already_exists(user_name)){
+            return "err:usernameExists";
+        }
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bb_accounts","root","Hello@123");
             Statement stmt = con.createStatement();
-            String updt = "insert into users values('"+user_name+ "','"+ pass1 +"')";
+            String updt = "insert into users values('"+user_name+ "','"+ password +"')";
             stmt.executeUpdate(updt);
             con.close();
             System.out.println("*** account created ***");
         }catch(Exception e){System.out.println(e);} 
-        mdh.customer_menu();
-        return 0;     
+        return "success";     
     }
 
-    int old_user_login(){
+
+    String take_username(){
+        String user_name;
+        System.out.println("Enter Username : ");
+        user_name = in.nextLine();
+        return user_name;
+    }
+    String take_password(){
+        String password;
+        System.out.println("Enter Password : ");
+        password = in.nextLine();
+        return password;
+    }
+    
+    String old_user_login(String user_name,String password){
         
-        String pass1, user_name;
         String retrieved="";
-        do{
-            System.out.print("\nUsername : ");
-            user_name = in.nextLine();
-        }while(!username_already_exists(user_name));
+        if(!username_already_exists(user_name)){
+            return "err:username";
+        }
     
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -70,41 +73,21 @@ public class account_handling {
             Statement stmt = con.createStatement();
             String query = "select password from users where user_name='"+user_name+ "'";
             ResultSet rs = stmt.executeQuery(query);
-
             rs.next();
             retrieved = rs.getString(1);
-            //System.out.println("test : ");
-            //System.out.println(retrieved);
             con.close();
 
-            
         }catch(Exception e){System.out.println(e);}
-        String backup = retrieved;
-        do{
-            retrieved=backup;
-            pass1="";
-            System.out.print("\nPassword : ");
-            pass1 = in.nextLine();
-            //in.nextLine();
-            if( !pass1.equals(retrieved)){
-                System.out.println("wrong pass");
-                System.out.println("Try again? (1/0) : ");
-                int opt = Integer.parseInt(in.nextLine());
 
-                if(opt==0){
-                    return 0;
-                }
-                //System.out.println("pass1 = "+pass1);
-                //System.out.println("r = "+retrieved);
-            }
-        }while(!pass1.equals(retrieved));
-
+        if( !password.equals(retrieved) ){
+            return "err:password";
+        }
+        
         System.out.println("** Successful login ***");
         if(user_name.equals("admin")){
-            //System.out.println("admin 1");
-            return 2;
+            return "admin";
         }
-        return 1;
+        return "customer";
     }
 
 }
