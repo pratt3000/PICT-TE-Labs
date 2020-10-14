@@ -1,0 +1,229 @@
+NAME : Prathamesh Sonawane
+ROLL NO. : 31164
+BATCH : N1 [TE 1]
+
+PROBLEM STATEMENT : Assignment 5
+PLSQL stored procedure: 
+
+Consider the following schema and write a stored procedure to find those customers who have taken a loan. 
+Categorize these loan borrowers as critical, moderate and nominal based on their loan amount. 
+Insert all the details of borrowers along with the category in borrower_category table. 
+
+Customer(Cust_name, AccNo, Balance, city) 
+Loan(Loan_no, branch_name, Amount) 
+Borrower(Cust_name, Loan_no) 
+borrowr_category(Cust_name,AccNo,Loan_no,branch_name,amount,category) 
+
+CODE EXECUTION:
+
+mysql> drop database if exists DBMS_mock;
+Query OK, 4 rows affected (0.07 sec)
+
+mysql> create database DBMS_mock;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use DBMS_mock;
+Database changed
+
+mysql> DROP PROCEDURE IF EXISTS setBorrowerCategory;
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> CREATE TABLE Customer(
+    ->     cust_name VARCHAR(20),
+    ->     acc_no INT,
+    ->     balance INT,
+    ->     city VARCHAR(20),
+    ->     PRIMARY KEY(cust_name)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> CREATE TABLE Loan(
+    ->     loan_no INT,
+    ->     branch_name VARCHAR(20),
+    ->     amount INT,
+    ->     PRIMARY KEY(loan_no)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> CREATE TABLE Borrower(
+    ->     cust_name VARCHAR(20),
+    ->     loan_no INT,
+    ->     foreign key(loan_no) references Loan(loan_no) on delete cascade,
+    ->     foreign key(cust_name) references Customer(cust_name) on delete cascade
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> CREATE TABLE Borrower_category(
+    ->     cust_name VARCHAR(20),
+    ->     acc_no INT,
+    ->     loan_no INT,
+    ->     branch_name VARCHAR(20),
+    ->     amount INT,
+    ->     category VARCHAR(20),
+    ->     foreign key(loan_no) references Loan(loan_no) on delete cascade,
+    ->     foreign key(cust_name) references Customer(cust_name) on delete cascade
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> INSERT INTO Customer VALUES("Prathamesh", 1, 100000, "Pune");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Customer VALUES("Aditya", 2, 100, "Mumbai");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Customer VALUES("Sooraj", 3, 52000, "Nashik");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Customer VALUES("Swatej", 4, 30000, "Nagpur");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Customer VALUES("Utkarsh", 5, 24000, "Mumbai");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Loan VALUES(101, "Mumbai Dept.", 50000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Loan VALUES(102, "Mumbai Dept.", 70000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Loan VALUES(103, "Pune Dept.", 10000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Loan VALUES(104, "Pune Dept.", 10);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Loan VALUES(105, "Delhi Dept.", 10000000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Borrower VALUES("Prathamesh", 101);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Borrower VALUES("Aditya", 102);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Borrower VALUES("Sooraj", 103);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Borrower VALUES("Swatej", 104);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Borrower VALUES("Utkarsh", 105);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM Customer;
++------------+--------+---------+--------+
+| cust_name  | acc_no | balance | city   |
++------------+--------+---------+--------+
+| Aditya     |      2 |     100 | Mumbai |
+| Prathamesh |      1 |  100000 | Pune   |
+| Sooraj     |      3 |   52000 | Nashik |
+| Swatej     |      4 |   30000 | Nagpur |
+| Utkarsh    |      5 |   24000 | Mumbai |
++------------+--------+---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Loan;
++---------+--------------+----------+
+| loan_no | branch_name  | amount   |
++---------+--------------+----------+
+|     101 | Mumbai Dept. |    50000 |
+|     102 | Mumbai Dept. |    70000 |
+|     103 | Pune Dept.   |    10000 |
+|     104 | Pune Dept.   |       10 |
+|     105 | Delhi Dept.  | 10000000 |
++---------+--------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Borrower;
++------------+---------+
+| cust_name  | loan_no |
++------------+---------+
+| Prathamesh |     101 |
+| Aditya     |     102 |
+| Sooraj     |     103 |
+| Swatej     |     104 |
+| Utkarsh    |     105 |
++------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> 
+mysql> delimiter @@
+mysql> create PROCEDURE setBorrowerCategory(IN cust_name_new VARCHAR(20))
+    -> BEGIN
+    -> 
+    ->     DECLARE acc_no_new INT;
+    ->     DECLARE loan_no_new INT;
+    ->     DECLARE branch_name_new VARCHAR(20);
+    ->     DECLARE category VARCHAR(20);
+    ->     DECLARE loan_amount_new INT;
+    -> 
+    ->     DECLARE exit handler for 1062
+    ->     SELECT 'Error : Duplicate' AS MESSAGE;
+    ->     DECLARE exit handler for NOT found
+    ->     SELECT 'Error :  Record not found' AS MESSAGE;
+    -> 
+    ->     SELECT acc_no INTO acc_no_new FROM Customer WHERE STRCMP(cust_name,cust_name_new)=0;
+    ->     SELECT loan_no INTO loan_no_new FROM Borrower WHERE STRCMP(cust_name,cust_name_new)=0;
+    ->     SELECT branch_name INTO branch_name_new FROM Loan WHERE loan_no=loan_no_new;
+    ->     SELECT amount INTO loan_amount_new FROM Loan WHERE loan_no=loan_no_new;
+    -> 
+    ->     IF loan_amount_new>=100000 THEN
+    ->         SET category="Critical";
+    ->     END IF;
+    ->     IF loan_amount_new<100000 AND loan_amount_new>=30000 THEN
+    ->         SET category="Moderate";
+    ->     END IF;
+    ->     IF loan_amount_new<30000 THEN
+    ->         SET category="Nominal";
+    ->     END IF;
+    -> 
+    ->     INSERT INTO Borrower_category VALUES(
+    ->         cust_name_new,
+    ->         acc_no_new,
+    ->         loan_no_new,
+    ->         branch_name_new,
+    ->         loan_amount_new,
+    ->         category
+    ->     );
+    ->     
+    -> END@@
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> 
+mysql> CALL setBorrowerCategory("Prathamesh");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> CALL setBorrowerCategory("Aditya");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> CALL setBorrowerCategory("Sooraj");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> CALL setBorrowerCategory("Swatej");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> CALL setBorrowerCategory("Utkarsh");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM Borrower_category;
++------------+--------+---------+--------------+----------+----------+
+| cust_name  | acc_no | loan_no | branch_name  | amount   | category |
++------------+--------+---------+--------------+----------+----------+
+| Prathamesh |      1 |     101 | Mumbai Dept. |    50000 | Moderate |
+| Aditya     |      2 |     102 | Mumbai Dept. |    70000 | Moderate |
+| Sooraj     |      3 |     103 | Pune Dept.   |    10000 | Nominal  |
+| Swatej     |      4 |     104 | Pune Dept.   |       10 | Nominal  |
+| Utkarsh    |      5 |     105 | Delhi Dept.  | 10000000 | Critical |
++------------+--------+---------+--------------+----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> CALL setBorrowerCategory("Ram");
++---------------------------+
+| MESSAGE                   |
++---------------------------+
+| Error :  Record not found |
++---------------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
