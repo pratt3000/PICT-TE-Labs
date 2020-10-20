@@ -4,7 +4,7 @@ import org.apache.ibatis.jdbc.ScriptRunner;
 import java.io.FileReader;
 import java.io.Reader;
 import java.io.BufferedReader;
- 
+
 
 
 public class market_database_handling {
@@ -58,7 +58,7 @@ public class market_database_handling {
             con.close();
         }catch(Exception e){System.out.println(e);}
     }
-
+    
     int continue_shopping(){
         System.out.println("login/leave shop? (1/0) : ");
         int repeat = Integer.parseInt(in.nextLine());

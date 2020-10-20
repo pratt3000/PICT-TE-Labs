@@ -1,7 +1,8 @@
 import java.io.*; 
 import java.net.*; 
 import java.util.Scanner; 
-  
+import javax.swing.*;
+
 // Client class 
 public class Client  
 { 
@@ -18,11 +19,13 @@ public class Client
       
             // establish the connection with server port 5056 
             Socket s = new Socket(ip, 5056); 
-      
+            
             // obtaining input and out streams 
             DataInputStream dis = new DataInputStream(s.getInputStream()); 
             DataOutputStream dos = new DataOutputStream(s.getOutputStream()); 
 
+            //gui.login_signup_page();
+            reg_form f = new reg_form(); 
             int repeat =1;
             while(repeat==1){
 
