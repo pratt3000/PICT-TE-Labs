@@ -22,12 +22,12 @@ class reg_form extends JFrame implements ActionListener {
     private JLabel mno; 
     private JTextField tmno;
     private JLabel add; 
-    private JTextArea tadd; 
+    private JTextArea tadd;
+    private JTextArea tnc;
     private JCheckBox term; 
     private JButton sub; 
     private JButton reset; 
     private JLabel res; 
-    private JTextArea resadd; 
   
     // constructor, to initialize the components 
     // with default values. 
@@ -102,13 +102,13 @@ class reg_form extends JFrame implements ActionListener {
         term.setLocation(100, 350); 
         c.add(term);
         
-        tadd = new JTextArea(); 
-        tadd.setFont(new Font("Arial", Font.PLAIN, 15)); 
-        tadd.setSize(350, 75); 
-        tadd.setLocation(100, 375); 
-        tadd.setLineWrap(true); 
-        tadd.setText("1. Above 18 years of age ? ");
-        c.add(tadd);
+        tnc = new JTextArea(); 
+        tnc.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        tnc.setSize(350, 75); 
+        tnc.setLocation(100, 375); 
+        tnc.setLineWrap(true); 
+        tnc.setText("1. Above 18 years of age ? ");
+        c.add(tnc);
   
         sub = new JButton("Submit"); 
         sub.setFont(new Font("Arial", Font.PLAIN, 15)); 
@@ -166,7 +166,6 @@ class reg_form extends JFrame implements ActionListener {
             tmno.setText(def); 
             res.setText(def); 
             term.setSelected(false); 
-            resadd.setText(def); 
         } 
     } 
 } 
@@ -302,7 +301,6 @@ class Registration {
   
     public static void main(String[] args) throws Exception 
     { 
-        //reg_form f = new reg_form(); 
         login_reg_choose_form f = new login_reg_choose_form();
     } 
 } 
