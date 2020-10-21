@@ -1,0 +1,663 @@
+(base)  pratt3000@pratts-laptop  ~/Documents/College/PICT_TE-Labs/DBMSL   master  mongo
+MongoDB shell version v4.4.1
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("f216ea26-b34d-4bc9-a9f0-447e1ff1d76d") }
+MongoDB server version: 4.4.1
+---
+The server generated these startup warnings when booting: 
+        2020-10-21T09:09:54.450+05:30: ***** SERVER RESTARTED *****
+        2020-10-21T09:09:54.578+05:30: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+        2020-10-21T09:09:55.419+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> show dbs
+A10     0.000GB
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> use A10;
+switched to db A10
+> db.dropDatabase();
+{ "dropped" : "A10", "ok" : 1 }
+> use A10;
+switched to db A10
+> 
+> db.createCollection("Aadhar");
+{ "ok" : 1 }
+> show collections;  
+Aadhar
+> 
+b.Aadhar.insert({
+    Aadharno : 123456,
+  db.Aadhar.insert({
+...     Aadharno : 123456,
+...     Name : "Prathamesh KS",
+...     MobileNo : 7755922895,
+...     Gender : "Male",
+...     Citizenship : "Indian",
+...     Age : 20,
+...     Address : "Pune",
+...     Voted : {"2020" : 1, "2019" : 0, "2018" : 0 }
+... });
+WriteResult({ "nInserted" : 1 })
+> 
+> db.Aadhar.insert({
+...     Aadharno : 123459,
+...     Name : "Sooraj VS",
+...     MobileNo : 7755922894,
+...     Gender : "Male",
+...     Citizenship : "Indian",
+...     Age : 21,
+...     Address : "Mumbai",
+...     Voted : {"2020" : 1, "2019" : 0, "2018" : 1 }
+... });
+WriteResult({ "nInserted" : 1 })
+> db.Aadhar.insert({
+...     Aadharno : 133455,
+...     Name : "Aditya Somani",
+...     MobileNo : 7755922893,
+...     Gender : "Male",
+...     Citizenship : "Indian",
+...     Age : 31,
+...     Address : "Mumbai",
+...     Voted : {"2020" : 1, "2019" : 1, "2018" : 1 }
+... });
+WriteResult({ "nInserted" : 1 })
+> db.Aadhar.insert({
+...     Aadharno : 125455,
+...     Name : "Utkarsh Gurav",
+...     MobileNo : 7755922892,
+...     Gender : "Male",
+...     Citizenship : "Indian",
+...     Age : 98,
+...     Address : "Nashik",
+...     Voted : {"2020" : 0, "2019" : 0, "2018" : 0 }
+... });
+WriteResult({ "nInserted" : 1 })
+> db.Aadhar.insert({
+...     Aadharno : 126451,
+...     Name : "Henry VS",
+...     MobileNo : 7755922824,
+...     Gender : "Male",
+...     Citizenship : "US",
+...     Age : 21,
+...     Address : "Mumbai",
+...     Voted : {"2020" : 1, "2019" : 0, "2018" : 1 }
+... });
+WriteResult({ "nInserted" : 1 })
+> db.Aadhar.insert({
+...     Aadharno : 123465,
+...     Name : "Tanvi MD",
+...     MobileNo : 7755922214,
+...     Gender : "Female",
+...     Citizenship : "US",
+...     Age : 43,
+...     Address : "Newyork",
+...     Voted : {"2020" : 1, "2019" : 0, "2018" : 0 }
+... });
+WriteResult({ "nInserted" : 1 })
+> 
+> 
+> db.Aadhar.find().pretty();
+{
+        "_id" : ObjectId("5f8fdbe7a5587d389b57b614"),
+        "Aadharno" : 123456,
+        "Name" : "Prathamesh KS",
+        "MobileNo" : 7755922895,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 20,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b615"),
+        "Aadharno" : 123459,
+        "Name" : "Sooraj VS",
+        "MobileNo" : 7755922894,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 21,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b616"),
+        "Aadharno" : 133455,
+        "Name" : "Aditya Somani",
+        "MobileNo" : 7755922893,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 31,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        }
+({Address :}
+ "Pune"}).pretty();
+db.Aadhar.find({Nam{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b617"),
+        "Aadharno" : 125455,
+        "Name" : "Utkarsh Gurav",
+        "MobileNo" : 7755922892,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 98,
+        "Address" : "Nashik",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 0
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b618"),
+        "Aadharno" : 126451,
+        "Name" : "Henry VS",
+        "MobileNo" : 7755922824,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 21,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b619"),
+        "Aadharno" : 123465,
+        "Name" : "Tanvi MD",
+        "MobileNo" : 7755922214,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 43,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+> db.Aadhar.find({Address : "Pune"}).pretty();
+{
+        "_id" : ObjectId("5f8fdbe7a5587d389b57b614"),
+        "Aadharno" : 123456,
+        "Name" : "Prathamesh KS",
+        "MobileNo" : 7755922895,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 20,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+> db.Aadhar.find({Name:{$in:["Prathamesh KS","Tanvi MD"]}}).pretty();
+{
+        "_id" : ObjectId("5f8fdbe7a5587d389b57b614"),
+        "Aadharno" : 123456,
+        "Name" : "Prathamesh KS",
+        "MobileNo" : 7755922895,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 20,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b619"),
+        "Aadharno" : 123465,
+        "Name" : "Tanvi MD",
+        "MobileNo" : 7755922214,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 43,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+> db.Aadhar.find({$and : [{Address : "Mumbai"},{Age : 21} ] }).pretty();
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b615"),
+        "Aadharno" : 123459,
+        "Name" : "Sooraj VS",
+        "MobileNo" : 7755922894,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 21,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b618"),
+        "Aadharno" : 126451,
+        "Name" : "Henry VS",
+        "MobileNo" : 7755922824,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 21,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+> db.Aadhar.find({"Voted.2018":{$lt:1}}).pretty();
+{
+        "_id" : ObjectId("5f8fdbe7a5587d389b57b614"),
+        "Aadharno" : 123456,
+        "Name" : "Prathamesh KS",
+        "MobileNo" : 7755922895,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 20,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b617"),
+        "Aadharno" : 125455,
+        "Name" : "Utkarsh Gurav",
+        "MobileNo" : 7755922892,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 98,
+        "Address" : "Nashik",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 0
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b619"),
+        "Aadharno" : 123465,
+        "Name" : "Tanvi MD",
+        "MobileNo" : 7755922214,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 43,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+> db.Aadhar.find({Gender:{$all:["Female"]}}).pretty();
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b619"),
+        "Aadharno" : 123465,
+        "Name" : "Tanvi MD",
+        "MobileNo" : 7755922214,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 43,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+> db.Aadhar.find({$and:[{Age:{$gt:25}},{Aadharno:{$gt:123456}}]}).pretty();
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b616"),
+        "Aadharno" : 133455,
+        "Name" : "Aditya Somani",
+        "MobileNo" : 7755922893,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 31,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b617"),
+        "Aadharno" : 125455,
+        "Name" : "Utkarsh Gurav",
+        "MobileNo" : 7755922892,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 98,
+        "Address" : "Nashik",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 0
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b619"),
+        "Aadharno" : 123465,
+        "Name" : "Tanvi MD",
+        "MobileNo" : 7755922214,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 43,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+> 
+> db.Aadhar.find({Name : "Prathamesh KS"}).pretty();
+{
+        "_id" : ObjectId("5f8fdbe7a5587d389b57b614"),
+        "Aadharno" : 123456,
+        "Name" : "Prathamesh KS",
+        "MobileNo" : 7755922895,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 20,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+> db.Aadhar.updateOne({Name:"Prathamesh KS"},{$set:{Age:21}});
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.Aadhar.find({Name : "Prathamesh KS"}).pretty();
+{
+        "_id" : ObjectId("5f8fdbe7a5587d389b57b614"),
+        "Aadharno" : 123456,
+        "Name" : "Prathamesh KS",
+        "MobileNo" : 7755922895,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 21,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+> 
+> db.Aadhar.update(
+...     {
+...         Aadharno : 123459,
+...         Name : "Ram VS",
+...         MobileNo : 7755922894,
+...         Gender : "Male",
+...         Citizenship : "Indian",
+...         Address : "Pune",
+...         Voted : {"2020" : 1, "2019" : 1, "2018" : 1 }
+...     },
+...     {$set:{Age:23}},
+...     {upsert:true}
+... );
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 1,
+        "nModified" : 0,
+        "_id" : ObjectId("5f8fdbe892b2bdeb1d652983")
+})
+> 
+> db.Aadhar.find().pretty();
+{
+        "_id" : ObjectId("5f8fdbe7a5587d389b57b614"),
+        "Aadharno" : 123456,
+        "Name" : "Prathamesh KS",
+        "MobileNo" : 7755922895,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 21,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b615"),
+        "Aadharno" : 123459,
+        "Name" : "Sooraj VS",
+        "MobileNo" : 7755922894,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 21,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b616"),
+        "Aadharno" : 133455,
+        "Name" : "Aditya Somani",
+        "MobileNo" : 7755922893,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 31,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b617"),
+        "Aadharno" : 125455,
+        "Name" : "Utkarsh Gurav",
+        "MobileNo" : 7755922892,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 98,
+        "Address" : "Nashik",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 0
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b618"),
+        "Aadharno" : 126451,
+        "Name" : "Henry VS",
+        "MobileNo" : 7755922824,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 21,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b619"),
+        "Aadharno" : 123465,
+        "Name" : "Tanvi MD",
+        "MobileNo" : 7755922214,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 43,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe892b2bdeb1d652983"),
+        "Aadharno" : 123459,
+        "Address" : "Pune",
+        "Citizenship" : "Indian",
+        "Gender" : "Male",
+        "MobileNo" : 7755922894,
+        "Name" : "Ram VS",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "Age" : 23
+}
+> 
+> db.Aadhar.deleteMany({"Voted.2018":0});
+{ "acknowledged" : true, "deletedCount" : 3 }
+> db.Aadhar.find().pretty();
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b615"),
+        "Aadharno" : 123459,
+        "Name" : "Sooraj VS",
+        "MobileNo" : 7755922894,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 21,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b616"),
+        "Aadharno" : 133455,
+        "Name" : "Aditya Somani",
+        "MobileNo" : 7755922893,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 31,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b618"),
+        "Aadharno" : 126451,
+        "Name" : "Henry VS",
+        "MobileNo" : 7755922824,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 21,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe892b2bdeb1d652983"),
+        "Aadharno" : 123459,
+        "Address" : "Pune",
+        "Citizenship" : "Indian",
+        "Gender" : "Male",
+        "MobileNo" : 7755922894,
+        "Name" : "Ram VS",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "Age" : 23
+}
+> 
+> db.Aadhar.remove({"Voted.2018":1},{justOne:true});
+WriteResult({ "nRemoved" : 1 })
+> db.Aadhar.find().pretty();
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b616"),
+        "Aadharno" : 133455,
+        "Name" : "Aditya Somani",
+        "MobileNo" : 7755922893,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 31,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe8a5587d389b57b618"),
+        "Aadharno" : 126451,
+        "Name" : "Henry VS",
+        "MobileNo" : 7755922824,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 21,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        }
+}
+{
+        "_id" : ObjectId("5f8fdbe892b2bdeb1d652983"),
+        "Aadharno" : 123459,
+        "Address" : "Pune",
+        "Citizenship" : "Indian",
+        "Gender" : "Male",
+        "MobileNo" : 7755922894,
+        "Name" : "Ram VS",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "Age" : 23
+}
