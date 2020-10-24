@@ -7,7 +7,7 @@ class Registrationform {
     public static void main(String[] args)
                           throws Exception
     {
-        reg_form f = new reg_form();
+        home_page f = new home_page();
     }
 }
 
@@ -26,6 +26,7 @@ class reg_form extends JFrame implements ActionListener {
     private JTextArea tnc;
     private JCheckBox term; 
     private JButton sub; 
+    private JButton back; 
     private JButton reset; 
     private JLabel res; 
   
@@ -113,16 +114,23 @@ class reg_form extends JFrame implements ActionListener {
         sub = new JButton("Submit"); 
         sub.setFont(new Font("Arial", Font.PLAIN, 15)); 
         sub.setSize(100, 20); 
-        sub.setLocation(150, 475); 
+        sub.setLocation(340, 475); 
         sub.addActionListener(this); 
         c.add(sub); 
   
         reset = new JButton("Reset"); 
         reset.setFont(new Font("Arial", Font.PLAIN, 15)); 
         reset.setSize(100, 20); 
-        reset.setLocation(270, 475); 
+        reset.setLocation(220, 475); 
         reset.addActionListener(this); 
         c.add(reset); 
+
+        back = new JButton("Back"); 
+        back.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        back.setSize(100, 20); 
+        back.setLocation(100, 475); 
+        back.addActionListener(this); 
+        c.add(back);
   
         res = new JLabel(""); 
         res.setFont(new Font("Arial", Font.PLAIN, 20)); 
@@ -150,9 +158,14 @@ class reg_form extends JFrame implements ActionListener {
                 mobile = tmno.getText();
                 address = tadd.getText();
 
-                res.setText("Registration Successfully.."); 
+                res.setText("Registration Successfully..");
+                
+                home_page f = new home_page();
+                JComponent comp = (JComponent) e.getSource();
+                Window win = SwingUtilities.getWindowAncestor(comp);
+                win.dispose();
             } 
-            else { 
+            else {  
                 res.setText("Please accept the"
                             + " terms & conditions.."); 
             } 
@@ -167,6 +180,12 @@ class reg_form extends JFrame implements ActionListener {
             res.setText(def); 
             term.setSelected(false); 
         } 
+        else if (e.getSource() == back) { 
+            login_reg_choose_form f = new login_reg_choose_form(); 
+            JComponent comp = (JComponent) e.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
+        } 
     } 
 } 
  
@@ -180,6 +199,7 @@ class login_form extends JFrame implements ActionListener{
     private JTextField tname; 
     private JTextField tpass;
     private JButton sub;
+    private JButton back;
 
     public login_form(){
         setTitle("User Login"); 
@@ -222,10 +242,17 @@ class login_form extends JFrame implements ActionListener{
 
         sub = new JButton("Submit"); 
         sub.setFont(new Font("Arial", Font.PLAIN, 15)); 
-        sub.setSize(300, 60); 
-        sub.setLocation(125, 350); 
+        sub.setSize(150, 60); 
+        sub.setLocation(280, 350); 
         sub.addActionListener(this); 
         c.add(sub);
+
+        back = new JButton("Back"); 
+        back.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        back.setSize(150, 60); 
+        back.setLocation(125, 350); 
+        back.addActionListener(this); 
+        c.add(back);
 
         setVisible(true);
     }
@@ -238,6 +265,16 @@ class login_form extends JFrame implements ActionListener{
         if (e.getSource() == sub){
             username = tname.getText();
             password = tpass.getText();
+            home_page f = new home_page();
+            JComponent comp = (JComponent) e.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
+        }
+        else if (e.getSource() == back) {
+            login_reg_choose_form f = new login_reg_choose_form(); 
+            JComponent comp = (JComponent) e.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
         }
     }
 
@@ -294,14 +331,133 @@ class login_reg_choose_form extends JFrame implements ActionListener{
             Window win = SwingUtilities.getWindowAncestor(comp);
             win.dispose();
         }
+        
     }
 }
+
+class home_page extends JFrame implements ActionListener{
+    private JButton market;
+    private JButton checkout;
+    private JButton logout;
+    private JButton feedback;
+    private JButton back;
+    private JButton about;
+    private Container c;
+    private JLabel title;
+
+    public home_page(){
+        setTitle("BIG BASKET"); 
+        setBounds(300, 250, 1000, 850); 
+        setDefaultCloseOperation(EXIT_ON_CLOSE); 
+        setResizable(false); 
+  
+        c = getContentPane(); 
+        c.setLayout(null);
+
+        title = new JLabel("BIG BASKET"); 
+        title.setFont(new Font("Arial", Font.PLAIN, 60)); 
+        title.setSize(500, 100); 
+        title.setLocation(300, 150); 
+        c.add(title);
+
+        market = new JButton("MARKET"); 
+        market.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        market.setSize(300, 100); 
+        market.setLocation(125, 350); 
+        market.addActionListener(this); 
+        c.add(market);
+
+        checkout = new JButton("CHECKOUT"); 
+        checkout.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        checkout.setSize(300, 100); 
+        checkout.setLocation(525, 350); 
+        checkout.addActionListener(this); 
+        c.add(checkout);
+
+        logout = new JButton("LOGOUT"); 
+        logout.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        logout.setSize(300, 100); 
+        logout.setLocation(125, 500); 
+        logout.addActionListener(this); 
+        c.add(logout);
+
+        feedback = new JButton("FEEDBACK"); 
+        feedback.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        feedback.setSize(300, 100); 
+        feedback.setLocation(525, 500); 
+        feedback.addActionListener(this); 
+        c.add(feedback);
+
+        back = new JButton("BACK"); 
+        back.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        back.setSize(300, 100); 
+        back.setLocation(125, 650); 
+        back.addActionListener(this); 
+        c.add(back);
+
+        about = new JButton("ABOUT"); 
+        about.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        about.setSize(300, 100); 
+        about.setLocation(525, 650); 
+        about.addActionListener(this); 
+        c.add(about);
+
+        setVisible(true); 
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == back) {
+            login_reg_choose_form f = new login_reg_choose_form();  
+            JComponent comp = (JComponent) e.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
+
+        }
+        else if (e.getSource() == feedback){
+            
+            
+            JComponent comp = (JComponent) e.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
+        }
+        else if (e.getSource() == logout){
+            login_reg_choose_form f = new login_reg_choose_form();  
+            JComponent comp = (JComponent) e.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
+        }
+        else if (e.getSource() == about){
+            
+            
+            JComponent comp = (JComponent) e.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
+        }
+        else if (e.getSource() == checkout){
+            
+            
+            JComponent comp = (JComponent) e.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
+        }
+        else if (e.getSource() == market){
+            
+            
+            JComponent comp = (JComponent) e.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
+        }
+        
+    }
+}
+
 // Driver Code 
 class Registration { 
   
     public static void main(String[] args) throws Exception 
     { 
         login_reg_choose_form f = new login_reg_choose_form();
+        
     } 
 } 
 
