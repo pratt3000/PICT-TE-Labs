@@ -1,7 +1,6 @@
 import java.io.*; 
 import java.net.*; 
 import java.util.Scanner; 
-import javax.swing.*;
 
 // Client class 
 public class Client  
@@ -25,7 +24,7 @@ public class Client
             DataOutputStream dos = new DataOutputStream(s.getOutputStream()); 
 
             //gui.login_signup_page();
-            reg_form f = new reg_form(); 
+            //reg_form f = new reg_form(); 
             int repeat =1;
             while(repeat==1){
 

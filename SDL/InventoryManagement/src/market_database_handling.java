@@ -42,6 +42,47 @@ public class market_database_handling {
         }catch(Exception e){System.out.println(e);}
     }
     
+    int get_quantity(String item_name){
+        String query = "select quantity from Market where name='"+item_name+"';";
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bb_accounts","root","Hello@123");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            rs.next();
+            int quan = rs.getInt(1);
+            con.close();
+            return quan;
+        }catch(Exception e){System.out.println(e);return -1;}
+    }
+
+    int get_expiry(String item_name){
+        String query = "select expiry from Market where name='"+item_name+"';";
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bb_accounts","root","Hello@123");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            rs.next();
+            int exp = rs.getInt(1);
+            con.close();
+            return exp;
+        }catch(Exception e){System.out.println(e);return -1;}
+    }
+
+    int get_cost(String item_name){
+        String query = "select cost from Market where name='"+item_name+"';";
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bb_accounts","root","Hello@123");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            rs.next();
+            int cost = rs.getInt(1);
+            con.close();
+            return cost;
+        }catch(Exception e){System.out.println(e);return -1;}
+    }
 
     void pass_day(){
         String updt_expiry = "update Market set expiry = IF(expiry<=1, 0, expiry-1);";
