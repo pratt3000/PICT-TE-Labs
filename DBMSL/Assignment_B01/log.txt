@@ -36,10 +36,7 @@ switched to db A10
 { "ok" : 1 }
 > show collections;  
 Aadhar
-> 
-b.Aadhar.insert({
-    Aadharno : 123456,
-  db.Aadhar.insert({
+> db.Aadhar.insert({
 ...     Aadharno : 123456,
 ...     Name : "Prathamesh KS",
 ...     MobileNo : 7755922895,
@@ -661,3 +658,4 @@ WriteResult({ "nRemoved" : 1 })
         },
         "Age" : 23
 }
+

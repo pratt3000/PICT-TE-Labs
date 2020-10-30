@@ -678,9 +678,9 @@ public class market_form extends JFrame implements ActionListener{
         }
     }
 
-    public static void main(String[] args) throws Exception 
-    { 
-        market_form F = new market_form();
-        F.form();
-    } 
+    // public static void main(String[] args) throws Exception 
+    // { 
+    //     market_form F = new market_form();
+    //     F.form();
+    // } 
 }

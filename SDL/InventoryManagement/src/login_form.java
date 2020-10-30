@@ -1,6 +1,9 @@
 import javax.swing.*; 
 import java.awt.*; 
 import java.awt.event.*; 
+import java.io.*; 
+import java.net.*; 
+import java.util.Scanner; 
 
 @SuppressWarnings("serial")
 public class login_form extends JFrame implements ActionListener{
@@ -8,11 +11,32 @@ public class login_form extends JFrame implements ActionListener{
     private Container c; 
     private JLabel title;
 
-    private JLabel name; 
+    private JLabel name;
+    private JLabel res; 
     private JTextField tname; 
     private JTextField tpass;
     private JButton sub;
     private JButton back;
+
+    // Scanner scn = new Scanner(System.in); 
+    // DataOutputStream dos;
+    // DataInputStream dis;
+    // Socket s;
+    // InetAddress ip;
+    
+    // public login_form(){
+    //     try{
+    //         ip = InetAddress.getByName("localhost"); 
+    //         // establish the connection with server port 5056 
+    //         s = new Socket(ip, 5056); 
+    //         // obtaining input and out streams 
+    //         dis = new DataInputStream(s.getInputStream()); 
+    //         dos = new DataOutputStream(s.getOutputStream());
+
+    //     }catch(Exception e){e.printStackTrace();} 
+
+    // }
+    
 
     public void form(){
         setTitle("User Login"); 
@@ -67,31 +91,64 @@ public class login_form extends JFrame implements ActionListener{
         back.addActionListener(this); 
         c.add(back);
 
+        res = new JLabel(""); 
+        res.setFont(new Font("Arial", Font.PLAIN, 20)); 
+        res.setSize(500, 25); 
+        res.setLocation(125, 400); 
+        c.add(res);
+
         setVisible(true);
     }
 
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent eve){
+        try{
+            
 
-        String username;
-        String password;
-        login_reg_choose_form login_signup = new login_reg_choose_form(); 
-        home_page home = new home_page();
-        
-        if (e.getSource() == sub){
-            username = tname.getText();
-            password = tpass.getText();
-
-            home.form();    // if login success
-            JComponent comp = (JComponent) e.getSource();
-            Window win = SwingUtilities.getWindowAncestor(comp);
-            win.dispose();
-        }
-        else if (e.getSource() == back) {
-            login_signup.form();
-            JComponent comp = (JComponent) e.getSource();
-            Window win = SwingUtilities.getWindowAncestor(comp);
-            win.dispose();
-        }
+            String username;
+            String password;
+            login_reg_choose_form login_signup = new login_reg_choose_form(); 
+            home_page home = new home_page();
+            
+            if (eve.getSource() == sub){
+                
+                String status="";
+                //String status = acch.old_user_login(username,password);
+                
+                username = tname.getText();
+                password = tpass.getText();
+                
+                // dos.writeUTF("old_user_login");
+                // dos.writeUTF(username);
+                // dos.writeUTF(password);
+                // status = dis.readUTF();
+                System.out.println(status);
+                
+                // if(status.equals("err:password") || status.equals("err:username") || status.equals("")){
+                //     res.setText(status);
+                // }
+                // else{
+                    //dos.writeUTF("terminate");
+                    
+                    home.form();    // if login success
+                    // scn.close(); 
+                    // dis.close(); 
+                    // dos.close(); 
+                    // s.close();
+                    JComponent comp = (JComponent) eve.getSource();
+                    Window win = SwingUtilities.getWindowAncestor(comp);
+                    win.dispose();
+                // }
+                
+                
+            }
+            else if (eve.getSource() == back) {
+                login_signup.form();
+                JComponent comp = (JComponent) eve.getSource();
+                Window win = SwingUtilities.getWindowAncestor(comp);
+                win.dispose();
+            }
+        }catch(Exception e){e.printStackTrace();} 
+    
     }
 
 }
