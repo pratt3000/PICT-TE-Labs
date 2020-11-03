@@ -78,6 +78,7 @@ public class login_form extends JFrame implements ActionListener{
         home_page home = new home_page();
         
         if (e.getSource() == sub){
+            System.out.print("hm");
             username = tname.getText();
             password = tpass.getText();
 
