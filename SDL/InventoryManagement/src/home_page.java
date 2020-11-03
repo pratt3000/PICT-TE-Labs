@@ -50,22 +50,23 @@ public class home_page extends JFrame implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e) {
-        market_form market = new market_form();
+        market_form mark = new market_form();
+
         if (e.getSource() == feedback) {
 
             JComponent comp = (JComponent) e.getSource();
             Window win = SwingUtilities.getWindowAncestor(comp);
             win.dispose();
         }
-        else if (e.getSource() == about){
-            
+        if (e.getSource() == about){
             
             JComponent comp = (JComponent) e.getSource();
             Window win = SwingUtilities.getWindowAncestor(comp);
             win.dispose();
         }
-        else if (e.getSource() == market){
-            market.form();
+        if (e.getSource() == market){
+            mark.form();
+
             JComponent comp = (JComponent) e.getSource();
             Window win = SwingUtilities.getWindowAncestor(comp);
             win.dispose();

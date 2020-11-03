@@ -100,6 +100,7 @@ public class login_form extends JFrame implements ActionListener{
         setVisible(true);
     }
 
+<<<<<<< HEAD
     public void actionPerformed(ActionEvent eve){
         try{
             
@@ -149,6 +150,31 @@ public class login_form extends JFrame implements ActionListener{
             }
         }catch(Exception e){e.printStackTrace();} 
     
+=======
+    public void actionPerformed(ActionEvent e){
+
+        String username;
+        String password;
+        login_reg_choose_form login_signup = new login_reg_choose_form(); 
+        home_page home = new home_page();
+        
+        if (e.getSource() == sub){
+            System.out.print("hm");
+            username = tname.getText();
+            password = tpass.getText();
+
+            home.form();    // if login success
+            JComponent comp = (JComponent) e.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
+        }
+        else if (e.getSource() == back) {
+            login_signup.form();
+            JComponent comp = (JComponent) e.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
+        }
+>>>>>>> old-project-state
     }
 
 }
