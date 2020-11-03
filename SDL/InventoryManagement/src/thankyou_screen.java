@@ -9,8 +9,12 @@ public class thankyou_screen extends JFrame implements ActionListener{
     private JLabel title;
     private JButton home;
     private JButton logout;
+    String username;
 
-    public void form(){
+    public void form(String username){
+        username = "null";
+        this.username = username;
+
         setTitle("THANK YOU"); 
         setBounds(300, 90, 550, 600); 
         setDefaultCloseOperation(EXIT_ON_CLOSE); 
@@ -47,7 +51,7 @@ public class thankyou_screen extends JFrame implements ActionListener{
         home_page hom = new home_page();
 
         if (e.getSource() == home){
-            hom.form();    
+            hom.form(username);    
             JComponent comp = (JComponent) e.getSource();
             Window win = SwingUtilities.getWindowAncestor(comp);
             win.dispose();

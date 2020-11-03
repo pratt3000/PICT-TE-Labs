@@ -223,6 +223,24 @@ public class market_database_handling {
         return (cost*quan);
     }
 
+    void update_item(String name, Integer quan, Integer cost, Integer Expiry){
+        String updt_quantity = "update Market set quantity ='"+quan+"' where name='"+name+"';";
+        String updt_cost = "update Market set cost = '"+cost+"' where name='"+name+"';";
+        String updt_exp = "update Market set expiry = '"+Expiry+"' where name='"+name+"';";
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bb_accounts","root","Hello@123");
+            Statement stmt = con.createStatement();
+
+            stmt.executeUpdate(updt_quantity);
+            stmt.executeUpdate(updt_cost);
+            stmt.executeUpdate(updt_exp);
+
+            con.close();
+        }catch(Exception e){System.out.println(e);}
+
+    }
+
     void run_default_market(){
         //Getting the connection
         try{

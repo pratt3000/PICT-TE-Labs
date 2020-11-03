@@ -9,8 +9,12 @@ public class home_page extends JFrame implements ActionListener{
     private JButton about;
     private Container c;
     private JLabel title;
+    String username;
 
-    public void form(){
+    public void form(String username){
+        username = "null";
+        this.username = username;
+
         setTitle("BIG BASKET"); 
         setBounds(100, 100, 1000, 850);
         setDefaultCloseOperation(EXIT_ON_CLOSE); 
@@ -51,6 +55,7 @@ public class home_page extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e) {
         market_form mark = new market_form();
+        about abt = new about();
 
         if (e.getSource() == feedback) {
 
@@ -59,13 +64,13 @@ public class home_page extends JFrame implements ActionListener{
             win.dispose();
         }
         if (e.getSource() == about){
-            
+            abt.form(username);
             JComponent comp = (JComponent) e.getSource();
             Window win = SwingUtilities.getWindowAncestor(comp);
             win.dispose();
         }
         if (e.getSource() == market){
-            mark.form();
+            mark.form(username);
 
             JComponent comp = (JComponent) e.getSource();
             Window win = SwingUtilities.getWindowAncestor(comp);

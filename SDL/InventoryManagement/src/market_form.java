@@ -96,10 +96,12 @@ public class market_form extends JFrame implements ActionListener{
     int exp;
     int quan;
     int y_coor;
+    String username;
     
-    public void form(){
+    public void form(String username){
+        username = "null";
+        this.username = username;
         
-
         setTitle("Market"); 
         setBounds(100, 100, 1000, 850);
         setDefaultCloseOperation(EXIT_ON_CLOSE); 
@@ -643,7 +645,7 @@ public class market_form extends JFrame implements ActionListener{
             total_cost += mdh.buy_item("Crabs", quan);
             System.out.print(total_cost);
             if(res.getText()!=""){
-                ty.form();
+                ty.form(username);
                 JComponent comp = (JComponent) e.getSource();
                 Window win = SwingUtilities.getWindowAncestor(comp);
                 win.dispose();
@@ -655,7 +657,7 @@ public class market_form extends JFrame implements ActionListener{
         }
         else if (e.getSource() == back){
             
-            home.form();
+            home.form(username);
             JComponent comp = (JComponent) e.getSource();
             Window win = SwingUtilities.getWindowAncestor(comp);
             win.dispose();

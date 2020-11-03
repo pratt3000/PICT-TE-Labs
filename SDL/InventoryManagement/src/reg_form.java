@@ -143,6 +143,7 @@ public class reg_form extends JFrame implements ActionListener {
         String address;
         home_page home = new home_page();
         login_reg_choose_form login_signup = new login_reg_choose_form();
+        account_handling acch = new account_handling();
 
         if (e.getSource() == sub) { 
             if (term.isSelected() ) {        // to check if terms and conditions accepted  
@@ -150,13 +151,16 @@ public class reg_form extends JFrame implements ActionListener {
                 password = tpass.getText();
                 mobile = tmno.getText();
                 address = tadd.getText();
+                String status = acch.new_user_login(username,password);
 
-                res.setText("Registration Successfully..");
-                
-                home.form(); //if reg done successfully
-                JComponent comp = (JComponent) e.getSource();
-                Window win = SwingUtilities.getWindowAncestor(comp);
-                win.dispose();
+                res.setText(status);
+                if(status.equals("success")){
+                    
+                    home.form(username); //if reg done successfully
+                    JComponent comp = (JComponent) e.getSource();
+                    Window win = SwingUtilities.getWindowAncestor(comp);
+                    win.dispose();
+                }
             } 
             else {  
                 res.setText("Please accept the"
