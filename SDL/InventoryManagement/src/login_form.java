@@ -111,7 +111,7 @@ public class login_form extends JFrame implements ActionListener{
             
             if (eve.getSource() == sub){
                 
-                String status="";
+                // String status="";
                 //String status = acch.old_user_login(username,password);
                 
                 username = tname.getText();
@@ -121,7 +121,7 @@ public class login_form extends JFrame implements ActionListener{
                 // dos.writeUTF(username);
                 // dos.writeUTF(password);
                 // status = dis.readUTF();
-                System.out.println(status);
+                // System.out.println(status);
                 
                 // if(status.equals("err:password") || status.equals("err:username") || status.equals("")){
                 //     res.setText(status);
