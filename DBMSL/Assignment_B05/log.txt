@@ -1,0 +1,1443 @@
+
+> use B04;
+switched to db B04
+> db.dropDatabase();
+createCollection("Aadhar");
+show collections;  
+
+d{ "dropped" : "B04", "ok" : 1 }
+> use B04;
+switched to db B04
+
+> db.Aadhar.update({},{$push:{"results":{"declared":"Yes"}}},{multi:true})
+WriteResult({ "nMatched" : 20, "nUpserted" : 0, "nModified" : 20 })
+> 
+> db.Aadhar.update({Aadharno:123513},{$push:{"results.$[].Voted":{"2018":1,"2019":0}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.Aadhar.update({Aadharno:123512},{$push:{"results.$[].Voted":{"2018":0,"2019":0}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.Aadhar.update({Aadharno:123511},{$push:{"results.$[].Voted":{"2018":1,"2019":1}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.Aadhar.update({Aadharno:123510},{$push:{"results.$[].Voted":{"2018":0,"2019":0}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.Aadhar.update({Aadharno:123509},{$push:{"results.$[].Voted":{"2019":1,"2020":1}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.Aadhar.update({Aadharno:123508},{$push:{"results.$[].Voted":{"2018":1,"2020":0}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> 
+> db.Aadhar.find().pretty();
+{
+        "_id" : ObjectId("5fbdecc663e242e7827e7d26"),
+        "Aadharno" : 123456,
+        "Name" : "Prathamesh KS",
+        "MobileNo" : 7755922895,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 20,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d27"),
+        "Aadharno" : 123459,
+        "Name" : "Sooraj VS",
+        "MobileNo" : 7755922894,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 21,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d28"),
+        "Aadharno" : 133455,
+        "Name" : "Aditya Somani",
+        "MobileNo" : 7755922893,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 31,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d29"),
+        "Aadharno" : 125455,
+        "Name" : "Utkarsh Gurav",
+        "MobileNo" : 7755922892,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 98,
+        "Address" : "Nashik",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 0
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d2a"),
+        "Aadharno" : 126451,
+        "Name" : "Henry VS",
+        "MobileNo" : 7755922824,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 21,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d2b"),
+        "Aadharno" : 123465,
+        "Name" : "Tanvi MD",
+        "MobileNo" : 7755922214,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 43,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d2c"),
+        "Aadharno" : 123500,
+        "Name" : "Aakash MD",
+        "MobileNo" : 7722922214,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 34,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d2d"),
+        "Aadharno" : 123501,
+        "Name" : "Rajas S",
+        "MobileNo" : 775592215,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 23,
+        "Address" : "London",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d2e"),
+        "Aadharno" : 123502,
+        "Name" : "Shreyas MD",
+        "MobileNo" : 2255922216,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 12,
+        "Address" : "Indian",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d2f"),
+        "Aadharno" : 123503,
+        "Name" : "Chetan LK",
+        "MobileNo" : 7755922219,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 22,
+        "Address" : "Indian",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d30"),
+        "Aadharno" : 123504,
+        "Name" : "Hritik S",
+        "MobileNo" : 7755922405,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 22,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d31"),
+        "Aadharno" : 123505,
+        "Name" : "Shreya LM",
+        "MobileNo" : 7755922404,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 15,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 0
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d32"),
+        "Aadharno" : 123506,
+        "Name" : "Sparsh D",
+        "MobileNo" : 7755922406,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 20,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d33"),
+        "Aadharno" : 123507,
+        "Name" : "Harshita A",
+        "MobileNo" : 7755922407,
+        "Gender" : "Female",
+        "Citizenship" : "Mexican",
+        "Age" : 19,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d34"),
+        "Aadharno" : 123508,
+        "Name" : "Bhavika RC",
+        "MobileNo" : 7755922408,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 38,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2018" : 1,
+                                        "2020" : 0
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d35"),
+        "Aadharno" : 123509,
+        "Name" : "Ronak M",
+        "MobileNo" : 7755922409,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 35,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 0
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2019" : 1,
+                                        "2020" : 1
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d36"),
+        "Aadharno" : 123510,
+        "Name" : "Aditi LL",
+        "MobileNo" : 7755922410,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 48,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2018" : 0,
+                                        "2019" : 0
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d37"),
+        "Aadharno" : 123511,
+        "Name" : "Ayush Shah",
+        "MobileNo" : 7755922411,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 41,
+        "Address" : "India",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2018" : 1,
+                                        "2019" : 1
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d38"),
+        "Aadharno" : 123512,
+        "Name" : "Karandeep H",
+        "MobileNo" : 7755922412,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 63,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 0
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2018" : 0,
+                                        "2019" : 0
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdecc763e242e7827e7d39"),
+        "Aadharno" : 123513,
+        "Name" : "Bhumika VC",
+        "MobileNo" : 7755922413,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 65,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2018" : 1,
+                                        "2019" : 0
+                                }
+                        ]
+                }
+        ]
+}
+> 
+
+
+> -- ALL QUERY
+uncaught exception: SyntaxError: unexpected token: identifier :
+@(shell):1:7
+> db.Aadhar.find({"results.Voted":{$all:[{"$elemMatch":{2018:1}}]}}).pretty()
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a534"),
+        "Aadharno" : 123508,
+        "Name" : "Bhavika RC",
+        "MobileNo" : 7755922408,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 38,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2018" : 1,
+                                        "2020" : 0
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a537"),
+        "Aadharno" : 123511,
+        "Name" : "Ayush Shah",
+        "MobileNo" : 7755922411,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 41,
+        "Address" : "India",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2018" : 1,
+                                        "2019" : 1
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a539"),
+        "Aadharno" : 123513,
+        "Name" : "Bhumika VC",
+        "MobileNo" : 7755922413,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 65,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2018" : 1,
+                                        "2019" : 0
+                                }
+                        ]
+                }
+        ]
+}
+> ### USING SLICE
+uncaught exception: SyntaxError: illegal character :
+@(shell):1:0
+> db.Aadhar.find({},{name:1,"results.Voted":{$slice:1}}).pretty()
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a526"),
+        "results" : [
+                {
+
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a527"),
+        "results" : [
+                {
+
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a528"),
+        "results" : [
+                {
+
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a529"),
+        "results" : [
+                {
+
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a52a"),
+        "results" : [
+                {
+
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a52b"),
+        "results" : [
+                {
+
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a52c"),
+        "results" : [
+                {
+
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a52d"),
+        "results" : [
+                {
+
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a52e"),
+        "results" : [
+                {
+
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a52f"),
+        "results" : [
+                {
+
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a530"),
+        "results" : [
+                {
+
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a531"),
+        "results" : [
+                {
+
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a532"),
+        "results" : [
+                {
+
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a533"),
+        "results" : [
+                {
+
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a534"),
+        "results" : [
+                {
+                        "Voted" : [
+                                {
+                                        "2018" : 1,
+                                        "2020" : 0
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a535"),
+        "results" : [
+                {
+                        "Voted" : [
+                                {
+                                        "2019" : 1,
+                                        "2020" : 1
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a536"),
+        "results" : [
+                {
+                        "Voted" : [
+                                {
+                                        "2018" : 0,
+                                        "2019" : 0
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a537"),
+        "results" : [
+                {
+                        "Voted" : [
+                                {
+                                        "2018" : 1,
+                                        "2019" : 1
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a538"),
+        "results" : [
+                {
+                        "Voted" : [
+                                {
+                                        "2018" : 0,
+                                        "2019" : 0
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a539"),
+        "results" : [
+                {
+                        "Voted" : [
+                                {
+                                        "2018" : 1,
+                                        "2019" : 0
+                                }
+                        ]
+                }
+        ]
+}
+> db.Aadhar.find({"results.Voted":{$size:2}}).pretty()
+> db.Aadhar.find({"results.Voted":{$size:1}}).pretty()
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a534"),
+        "Aadharno" : 123508,
+        "Name" : "Bhavika RC",
+        "MobileNo" : 7755922408,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 38,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2018" : 1,
+                                        "2020" : 0
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a535"),
+        "Aadharno" : 123509,
+        "Name" : "Ronak M",
+        "MobileNo" : 7755922409,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 35,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 0
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2019" : 1,
+                                        "2020" : 1
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a536"),
+        "Aadharno" : 123510,
+        "Name" : "Aditi LL",
+        "MobileNo" : 7755922410,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 48,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2018" : 0,
+                                        "2019" : 0
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a537"),
+        "Aadharno" : 123511,
+        "Name" : "Ayush Shah",
+        "MobileNo" : 7755922411,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 41,
+        "Address" : "India",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2018" : 1,
+                                        "2019" : 1
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a538"),
+        "Aadharno" : 123512,
+        "Name" : "Karandeep H",
+        "MobileNo" : 7755922412,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 63,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 0
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2018" : 0,
+                                        "2019" : 0
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a539"),
+        "Aadharno" : 123513,
+        "Name" : "Bhumika VC",
+        "MobileNo" : 7755922413,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 65,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2018" : 1,
+                                        "2019" : 0
+                                }
+                        ]
+                }
+        ]
+}
+> #### USING LOGICAL OPERATOR
+uncaught exception: SyntaxError: illegal character :
+@(shell):1:0
+> db.Aadhar.find({$or:[{name:"Bhumika VC"},{Gender:"Female"}]}).pretty()
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a52b"),
+        "Aadharno" : 123465,
+        "Name" : "Tanvi MD",
+        "MobileNo" : 7755922214,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 43,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a531"),
+        "Aadharno" : 123505,
+        "Name" : "Shreya LM",
+        "MobileNo" : 7755922404,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 15,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 0
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a533"),
+        "Aadharno" : 123507,
+        "Name" : "Harshita A",
+        "MobileNo" : 7755922407,
+        "Gender" : "Female",
+        "Citizenship" : "Mexican",
+        "Age" : 19,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes"
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a534"),
+        "Aadharno" : 123508,
+        "Name" : "Bhavika RC",
+        "MobileNo" : 7755922408,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 38,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2018" : 1,
+                                        "2020" : 0
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a536"),
+        "Aadharno" : 123510,
+        "Name" : "Aditi LL",
+        "MobileNo" : 7755922410,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 48,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2018" : 0,
+                                        "2019" : 0
+                                }
+                        ]
+                }
+        ]
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a539"),
+        "Aadharno" : 123513,
+        "Name" : "Bhumika VC",
+        "MobileNo" : 7755922413,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 65,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : [
+                {
+                        "declared" : "Yes",
+                        "Voted" : [
+                                {
+                                        "2018" : 1,
+                                        "2019" : 0
+                                }
+                        ]
+                }
+        ]
+}
+> ### USING UNWIND
+uncaught exception: SyntaxError: illegal character :
+@(shell):1:0
+> db.Aadhar.aggregate({$unwind:"$results"}).pretty()
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a526"),
+        "Aadharno" : 123456,
+        "Name" : "Prathamesh KS",
+        "MobileNo" : 7755922895,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 20,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : {
+                "declared" : "Yes"
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a527"),
+        "Aadharno" : 123459,
+        "Name" : "Sooraj VS",
+        "MobileNo" : 7755922894,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 21,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : {
+                "declared" : "Yes"
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a528"),
+        "Aadharno" : 133455,
+        "Name" : "Aditya Somani",
+        "MobileNo" : 7755922893,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 31,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : {
+                "declared" : "Yes"
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a529"),
+        "Aadharno" : 125455,
+        "Name" : "Utkarsh Gurav",
+        "MobileNo" : 7755922892,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 98,
+        "Address" : "Nashik",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 0
+        },
+        "results" : {
+                "declared" : "Yes"
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a52a"),
+        "Aadharno" : 126451,
+        "Name" : "Henry VS",
+        "MobileNo" : 7755922824,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 21,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : {
+                "declared" : "Yes"
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a52b"),
+        "Aadharno" : 123465,
+        "Name" : "Tanvi MD",
+        "MobileNo" : 7755922214,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 43,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : {
+                "declared" : "Yes"
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a52c"),
+        "Aadharno" : 123500,
+        "Name" : "Aakash MD",
+        "MobileNo" : 7722922214,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 34,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : {
+                "declared" : "Yes"
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a52d"),
+        "Aadharno" : 123501,
+        "Name" : "Rajas S",
+        "MobileNo" : 775592215,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 23,
+        "Address" : "London",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : {
+                "declared" : "Yes"
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a52e"),
+        "Aadharno" : 123502,
+        "Name" : "Shreyas MD",
+        "MobileNo" : 2255922216,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 12,
+        "Address" : "Indian",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : {
+                "declared" : "Yes"
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a52f"),
+        "Aadharno" : 123503,
+        "Name" : "Chetan LK",
+        "MobileNo" : 7755922219,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 22,
+        "Address" : "Indian",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : {
+                "declared" : "Yes"
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a530"),
+        "Aadharno" : 123504,
+        "Name" : "Hritik S",
+        "MobileNo" : 7755922405,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 22,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : {
+                "declared" : "Yes"
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a531"),
+        "Aadharno" : 123505,
+        "Name" : "Shreya LM",
+        "MobileNo" : 7755922404,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 15,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 0
+        },
+        "results" : {
+                "declared" : "Yes"
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a532"),
+        "Aadharno" : 123506,
+        "Name" : "Sparsh D",
+        "MobileNo" : 7755922406,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 20,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : {
+                "declared" : "Yes"
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a533"),
+        "Aadharno" : 123507,
+        "Name" : "Harshita A",
+        "MobileNo" : 7755922407,
+        "Gender" : "Female",
+        "Citizenship" : "Mexican",
+        "Age" : 19,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : {
+                "declared" : "Yes"
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a534"),
+        "Aadharno" : 123508,
+        "Name" : "Bhavika RC",
+        "MobileNo" : 7755922408,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 38,
+        "Address" : "Newyork",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : {
+                "declared" : "Yes",
+                "Voted" : [
+                        {
+                                "2018" : 1,
+                                "2020" : 0
+                        }
+                ]
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a535"),
+        "Aadharno" : 123509,
+        "Name" : "Ronak M",
+        "MobileNo" : 7755922409,
+        "Gender" : "Male",
+        "Citizenship" : "Indian",
+        "Age" : 35,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 0
+        },
+        "results" : {
+                "declared" : "Yes",
+                "Voted" : [
+                        {
+                                "2019" : 1,
+                                "2020" : 1
+                        }
+                ]
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a536"),
+        "Aadharno" : 123510,
+        "Name" : "Aditi LL",
+        "MobileNo" : 7755922410,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 48,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : {
+                "declared" : "Yes",
+                "Voted" : [
+                        {
+                                "2018" : 0,
+                                "2019" : 0
+                        }
+                ]
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a537"),
+        "Aadharno" : 123511,
+        "Name" : "Ayush Shah",
+        "MobileNo" : 7755922411,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 41,
+        "Address" : "India",
+        "Voted" : {
+                "2018" : 1,
+                "2019" : 0,
+                "2020" : 1
+        },
+        "results" : {
+                "declared" : "Yes",
+                "Voted" : [
+                        {
+                                "2018" : 1,
+                                "2019" : 1
+                        }
+                ]
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a538"),
+        "Aadharno" : 123512,
+        "Name" : "Karandeep H",
+        "MobileNo" : 7755922412,
+        "Gender" : "Male",
+        "Citizenship" : "US",
+        "Age" : 63,
+        "Address" : "Mumbai",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 0,
+                "2020" : 0
+        },
+        "results" : {
+                "declared" : "Yes",
+                "Voted" : [
+                        {
+                                "2018" : 0,
+                                "2019" : 0
+                        }
+                ]
+        }
+}
+{
+        "_id" : ObjectId("5fbdeb350832a5230031a539"),
+        "Aadharno" : 123513,
+        "Name" : "Bhumika VC",
+        "MobileNo" : 7755922413,
+        "Gender" : "Female",
+        "Citizenship" : "US",
+        "Age" : 65,
+        "Address" : "Pune",
+        "Voted" : {
+                "2018" : 0,
+                "2019" : 1,
+                "2020" : 1
+        },
+        "results" : {
+                "declared" : "Yes",
+                "Voted" : [
+                        {
+                                "2018" : 1,
+                                "2019" : 0
+                        }
+                ]
+        }
+}

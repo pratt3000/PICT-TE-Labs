@@ -1,0 +1,25 @@
+use B04;
+
+db.createCollection("Aadhar");
+show collections;
+
+db.Aadhar.update({},{$push:{"results":{"declared":"Yes"}}},{multi:true})
+
+db.Aadhar.update({Aadharno:123513},{$push:{"results.$[].Voted":{"2018":1,"2019":0}}})
+db.Aadhar.update({Aadharno:123512},{$push:{"results.$[].Voted":{"2018":0,"2019":0}}})
+db.Aadhar.update({Aadharno:123511},{$push:{"results.$[].Voted":{"2018":1,"2019":1}}})
+db.Aadhar.update({Aadharno:123510},{$push:{"results.$[].Voted":{"2018":0,"2019":0}}})
+db.Aadhar.update({Aadharno:123509},{$push:{"results.$[].Voted":{"2019":1,"2020":1}}})
+db.Aadhar.update({Aadharno:123508},{$push:{"results.$[].Voted":{"2018":1,"2020":0}}})
+
+db.Aadhar.find().pretty();
+
+db.Aadhar.find({"results.Voted":{$all:[{"$elemMatch":{2018:1}}]}}).pretty()
+
+db.Aadhar.find({},{name:1,"results.Voted":{$slice:1}}).pretty()
+
+db.Aadhar.find({"results.Voted":{$size:1}}).pretty()
+
+db.Aadhar.find({$or:[{name:"Bhumika VC"},{Gender:"Female"}]}).pretty()
+
+db.Aadhar.aggregate({$unwind:"$results"}).pretty()
