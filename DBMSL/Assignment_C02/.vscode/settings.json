@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/home/pratt3000/Documents/College/PICT_TE-Labs/DBMSL/Assignment_C02/**/*.jar"
+    ]
+}
