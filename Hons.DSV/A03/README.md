@@ -1,0 +1,1 @@
+Build training and testing dataset of assignment 2 to predict the probability of a survival of a person based on gender, age and passenger-class. Use Naive Bayes classification algorithm to predict the class of passanger.
