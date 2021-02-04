@@ -1,4 +1,3 @@
-package Assignment_C02;
 import java.util.*;
 
 class Banker
@@ -43,9 +42,41 @@ class Banker
 				maxMatrix[i][j] = sc.nextInt();
 				needMatrix[i][j] = maxMatrix[i][j]-allocationMatrix[i][j];
 			}
-		}
+        }
+        System.out.println("\nMAX MATRIX : ");
+        for(int i=0;i<numProcess;i++)
+		{
+			for(int j=0;j<numResources;j++)
+			{
+				System.out.print(maxMatrix[i][j]+"  ");
+            }
+            System.out.print("\n");
+        }
+
+        System.out.println("ALLOCATION MATRIX : ");
+        for(int i=0;i<numProcess;i++)
+		{
+			for(int j=0;j<numResources;j++)
+			{
+				System.out.print(allocationMatrix[i][j]+"  ");
+            }
+            System.out.print("\n");
+        }
+        
+        System.out.println("WORK MATRIX : ");
+        for(int j=0;j<numResources;j++)
+		{
+            int temp=0;
+			for(int i=0;i<numProcess;i++)
+			{
+				temp += allocationMatrix[i][j];
+            }
+            System.out.print((maxResources[j]-temp)+"  ");
+        }   
+        System.out.print("\n");     
 	}
-	
+    
+    // check if process doesnt req. more than max avaliable resources
 	boolean checkmaxMatrix()
 	{
 		for(int i=0;i<numProcess;i++)
@@ -60,7 +91,8 @@ class Banker
 		}
 		return false;
 	}
-	
+    
+    // check same as checkmaxmatrix()
 	boolean checkNeed()
 	{
 		for(int i=0;i<numProcess;i++)
