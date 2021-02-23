@@ -1,3 +1,5 @@
+package Assignment_C02.src;
+
 import java.util.*;
 
 class Banker

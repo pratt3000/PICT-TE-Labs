@@ -1,3 +1,5 @@
+package Assignment_C01;
+
 import java.util.*;
 
 class Process
@@ -80,7 +82,6 @@ class RR
 			}
 		}
 	}
-	
 	void cal()
 	{
 		setArrival();
@@ -153,6 +154,7 @@ class RR
 	{
 		RR r = new RR();
 		r.cal();
-		r.display(); 	
+		r.display(); 
+		
 	}
 }
