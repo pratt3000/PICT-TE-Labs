@@ -21,25 +21,25 @@ public class Main {
         try {
             assembler.passOne();
 
-            bufferedReader = new BufferedReader(new FileReader("INTERMEDIATE_CODE.txt"));
+            bufferedReader = new BufferedReader(new FileReader("Assignment_A01/lib/INTERMEDIATE_CODE.txt"));
             System.out.println("\nIntermediate Code:");
             while ((line=bufferedReader.readLine())!=null)
                 System.out.println(line);
             bufferedReader.close();
 
-            bufferedReader = new BufferedReader(new FileReader("SYMBOL_TABLE.txt"));
+            bufferedReader = new BufferedReader(new FileReader("Assignment_A01/lib/SYMBOL_TABLE.txt"));
             System.out.println("\nSymbol Table:");
             while ((line=bufferedReader.readLine())!=null)
                 System.out.println(line);
             bufferedReader.close();
 
-            bufferedReader = new BufferedReader(new FileReader("LITERAL_TABLE.txt"));
+            bufferedReader = new BufferedReader(new FileReader("Assignment_A01/lib/LITERAL_TABLE.txt"));
             System.out.println("\nLiteral Table:");
             while ((line=bufferedReader.readLine())!=null)
                 System.out.println(line);
             bufferedReader.close();
 
-            bufferedReader = new BufferedReader(new FileReader("POOL_TABLE.txt"));
+            bufferedReader = new BufferedReader(new FileReader("Assignment_A01/lib/POOL_TABLE.txt"));
             System.out.println("\nPool Table:");
             while ((line=bufferedReader.readLine())!=null)
                 System.out.println(line);
