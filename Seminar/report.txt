@@ -349,64 +349,71 @@ The Following table shows the literature survey by comparing techniques propose 
 \end{center}
 \subsection{Bootstrap Your Own Latent A New Approach to Self-Supervised Learning}
 \hspace{1cm}
-BYOL method helps in learning useful representations for a variety of downstream computer vision tasks such as object recognition, object detection, semantic segmentation, etc. Once these representations are learned in BYOL way, they could be used with any standard object classification model such as Resnet, VGGnet, or any semantic segmentation network such as FCN8s, deeplabv3, etc or any other task-specific network and it gets to a better result than training these networks from scratch. This is the major reason behind the popularity of BYOL. The below graph shows that the BYOL representations learned using Imagenet images beats all previous unsupervised learning methods and achieves classification accuracy of 74.1 percent with Resnet50 under linear evaluation protocol.\\
+BYOL method helps in learning important representations for a variety of downstream computer vision tasks such as object recognition, object detection, semantic segmentation, etc. Once these representations are learned in BYOL way, they could be used with any standard object classification model like as Resnet, VGGnet, or any semantic segmentation network such as FCN8s, deeplabv3, etc or any other task-specific network and it gets to a better result than training these networks from scratch. This is the major reason behind the popularity of BYOL. The below graph shows that the BYOL representations learned using Imagenet images beats all previous unsupervised learning methods and achieves classification accuracy of 74.1 percent with Resnet50 under linear evaluation protocol.\\
 \\
 Another interesting fact is, although a collapsed solution exists for the task curated for BYOL, the model avoids it safely and the actual reason for it is unknown. Collapsed solution means, the model might get away by learning a constant vector for any view of any image and gets to zero loss, but it does not happen\\
 \\
 The authors of the original paper, conjecture that it might be due to the complex network(Deep Resnet with skip connections) used in the backbone, the model never gets to the straightforward collapsed solution. But in another recent paper SimSiam Chen, Xineli and He, found out it is not the complex network architecture but the “stop-gradient” operation that makes the model to avoid the collapsed representations. “stop-gradient” means that the network never gets to update the weights of the target network directly through gradients and hence never gets to the collapsed solution. They also show that there isn’t any need for a momentum target network to avoid collapsed representation but it certainly gives better representations for downstream tasks if used.
 
 
-\subsection{CIDS: A framework for intrusion detection
-in cloud systems}
+
+
+\subsection{On mutual information maximization for  representation learning}
 \hspace{1cm}  
-Each node has two IDSs detectors, CIDS and HIDS. In this way, the node can cooperatively participate in intrusion detection by identifying the local events that could represent security violations and by exchanging its audit data with other nodes.
-the sharing of information among the following CIDS components:
-\textbf{Cloud nodes}: contains the resources homogeneously accessed through the cloud middleware.
-\textbf{Guest task}: it is a sequence of actions and commands submitted by a user to an instance of VM.
-\textbf{Logs and audit collector}: it acts as a sensor for both CIDS and HIDS detectors and collects logs, audit data, and sequence of user actions and commands.
-\textbf{VM}: it encapsulates the system to be monitored using VMM. The detection mechanisms are implemented outside the VM, i.e. out of reach of intruders. A single instance of a VM monitors can observe several VMs.
+The paper revolves around discussing if maximising Mutual Information (MI) between vectors yeilds 
+good results. Take an image split it into half, pass the half images through independent encoders 
+(CNN, MLP layers), get 2 vectors and now calculate the MI between these 2 vectors using a
+ particular estimator (InfoNCE/InfoMAX, etc). The task is to maximise this MI. In the paper we discuss
+ if maximising MI is usfficient. It is said that recently MI has beat many cutting edge scores but 
+is that enough? The authors go on to prove that that alone is not sufficient and that encoder 
+architecture, estimator funtion, critics etc play an equallly important role.\\
+\\
+This paper is to prove that maximization mutual information solely is not a necessity condition for the improvance of previous papers. It suggested to use triplet technique in which we use representation of images and we reduce difference between similar images and increasing difference between different images where difference can be called as mutual information. It also suggest to invent better formula for mutual information because current formula although good is not enough.
 
 
-\subsection{Performance Metric Selection for Autonomic
-Anomaly Detection on Cloud Computing Systems}
+\subsection{Self-labelling via simultaneous clustering and representation learning }
 \hspace{1cm} 
-To make the anomaly detection tractable and yield high
-accuracy, the paper apply dimensionality reduction, which transforms
-the collected health data to a new metric space with only
-the more relevant attributes preserved. We apply two
-approaches to reducing dimensionality: metric selection using
-mutual information and metric extraction by principal component
-analysis.\\
+In this we try to assign labels to random images by clustering. But we use a better method that traditional K-means. Sinkhorn-Knopp optmization for obtaining pseudo-labels is always better than K-means on all metrics. After this we train the netwrk on a simple downstream task for classification of images.\\
+\\
+The method is obtained by maximizing the information between
+labels and input data indices. We show that this criterion extends standard crossentropy minimization to an optimal transport problem, which we solve efficiently
+for millions of input images and thousands of labels using a fast variant of the
+Sinkhorn-Knopp algorithm. 
 
 
-\subsection{A SVM Model based on Network Traffic Prediction for Detecting Anomalies}
-\hspace{1cm} The purpose of our Anomaly Detection Mechanism is to provide an efficient
-method to detect anomalies in the cloud-based network traffic. Figure
-1 depicts the basis of our mechanism, by highlighting the application
-scenario and the main conceptual components.\\
-The cloud provider offers several services by the Internet, such as infrastructure,
-software and platform to the clients. Real-time cloud traffic
-data (Flow 1) is continuously being gathered from the cloud environment
-by the Cloud Monitoring module. This information is subsequently processed
-by the Poisson-based Predictor that performs prediction based on
-information such as the protocol type, the number of network packets and
-timestamp.\\
-After that, the SVM Model is fed with features extracted from the
-predicted data. Then, the SVM Model triggers a warning to the
-Event Auditor when an anomalous behaviour is detected. In
-the meantime, the Repository of Outcomes component stores a detailed
-output regarding the historic of the Virtual Machine (VM) operation. Furthermore, the Event Auditor represents an agent placed in the VM
-that is able to communicate collaboratively with agents in the other VMs.
-This agent receives any anomalous event from the SVM Model and builds
-a message with information of all components for sending alerts
-to other agents.
-Having presented an overview of the anomaly detection mechanism,
-in the following subsections there will be a more detailed description of
-the forecasting approach for estimating network traffic on the basis of
-a Poisson process and the Support Vector Machine model for detecting
-anomalies in the cloud-based environment.
 
+\subsection{Unsupervised Visual Representation Learning by Context Prediction}
+\hspace{1cm}
 
+Suppose you get two patches A and B from
+the same image can you tell where B
+should go relative to a we argue that
+doing this often requires recognizing
+object semantics hence given unlabeled
+images we create a supervised task by
+randomly sampling one patch then a
+second patch and then training a deep
+network to predict the relative
+positions we find that the features this
+network extracts can be used to match
+patches semantically surprisingly what
+is learned from this within image tasks
+captures similarity across images we
+showed that for Pascal object detection
+pre-training on unlabeled images gets a
+significant boost over training on
+Pascal alone which amounts to more than
+a third of the benefit from training on
+a million image netlabels.\\
+\\
+Jigsaw puzzle - From each image 4 random patches are selected. Each patch is then divided into 9 subpatches in a 3x3 grid. 2 sub patches out of these 9 are selected and our self supervised task is to feed those 2 patches into the model and train it to figure out their relative positions to each other.
+
+\subsection{A critical analysis of self-supervision,or what we can learn from a single image}
+\hspace{1cm}
+It is mentioned that initial layer features can be trained by just training on one image and its augmentations. We do not need a huge dataset. They noted that even if we train on a single image(and its augmentations) we can get 2/3rd the accuracy meaning big datasets only provide small increments in self supervised learning and goes on to prove that augmentaions are very important. in the end they discovered that one image is enough to train the first 3 layers and produces similar results but for deeper layer where more intricate features are recognised we need bigger datasets. Our main conclusion is that these methods succeed perfectly in capturing the simplest image statistics, but that for deeper layers a gap exist with strong
+supervision which is compensated only in limited manner by using large datasets. This novel finding
+motivates a renewed focus on the role of augmentations in self-supervised learning and critical
+rethinking of how to better leverage the available data
 
 
 \newpage
@@ -416,124 +423,175 @@ anomalies in the cloud-based environment.
 
 \subsection{Problem Definition}
 
-\hspace{1.5cm} To design a system to extract the meaningful features from large dataset to increase the efficiency of anomaly detection.
+\hspace{1.5cm} To come up with a technique to extract the meaningful features to increase the efficiency of any particular model architecture that we choose.
 
 \subsection{Scope}
 
-\hspace{1.5cm} The successful attacks causing damages have a high level of effect on the result. Hence to lower down this effect countermeasure play an important role which surpasses the damage done. These countermeasure are responsible for maintaining the effectiveness of results in machine learning \\
+\hspace{1.5cm}The topic of self-supervised
+learning what is self supervised
+learning it is a twist
+on unsupervised learning where we
+exploit unlabeled data to obtain
+labels there is no explicit annotation
+or class labels associated with the data
+we exploit unlabeled data itself to get
+some kind of labels and induce a
+supervised
+learning model on unlabeled data
+specifically we design supervised tasks
+which are called pretext or auxiliary
+tasks
+which can learn meaningful
+representations
+through which the model becomes more
+ready.\\
+\\
+to then be able to solve a downstream
+task
+such as a classification or semantic
+segmentation
+or any other supervised learning task a
+sample task in this context
+could be to predict a certain part of
+the input
+from another part somewhat like fill in
+the blanks
+of of a given input
+so so what part of an input can you then
+predict or what can you learn
+you can predict any part of the input
+from any other part
+between images and videos you could
+predict
+the future from the past you could
+predict the future from the recent
+past you could try predicting the past
+from the present
+the top from the bottom in case of an
+image
+in a more broader sense you could
+predict the occluded
+from the visible in general you pretend
+there is a part of the input that you
+don't know
+and try to predict that that's
+those are the different tasks or pretext
+tasks that you can use
+in self-supervised learning.
 
-\hspace{1.5cm} For the above purpose selection of labels from data set is most important task, whole functioning depends on selection of labels. As if wrong features or labels get selected then it will have adverse effect on system performance.
-\hspace{1.5cm} Result of anomaly detection will purely depend on how we select the labels to go ahead for other operations.
 \newpage
 \begin{center}
-\section{DIFFERENT MACHINE LEARNING ALGORITHM}
+\section{Some more Self-supervised techniques}
 \end{center}
-\subsection{Support Vector Machine (SVM)}
+\subsection{Rotation}
 \par
 \hspace{1cm}
-It is mostly used in classification problems. In this algorithm, we plot each data item as a point in n-dimensional space (where n is number of features you have) with the value of each feature being the value of a particular coordinate. It has high prediction
-accuracy and performance rate but is limited to two classified classes only.
+
+In this they propose to produce 4 copies of
+a single image by rotating it by {0°, 90°, 180°, 270°} and let
+a single network predict the rotation which was applied—a
+4-class classification task. Intuitively, a good model should
+learn to recognize canonical orientations of objects in natural images.
 %\\
 %\\
-\subsection{Decision Tree classifiers}
+\subsection{Exemplar}
 \par
 \hspace{1cm}
-It repetitively divides
-the working area(plot)
-into sub part
-by identifying
-lines.Operations are
-carried with
-optimization.Effciency reduces
-with increase
-in dataset.
+ In this technique, every individual image corresponds to its own class, and multiple examples of it
+are generated by heavy random data augmentation such as
+translation, scaling, rotation, and contrast and color shifts.
+We use data augmentation mechanism from. proposes to use the triplet loss [40, 18] in order to scale this
+pretext task to a large number of images (hence, classes)
+present in the ImageNet dataset. The triplet loss avoids explicit class labels and, instead, encourages examples of the
+same image to have representations that are close in the Euclidean space while also being far from the representations
+of different images. Example representations are given by a
+1000-dimensional logits layer.
+
 \\
 \\
 
 
-\subsection{KNN}
+\subsection{Relative Patch Location}
 \par 
 %\hspace
-A simple algorithm
-that stores
-all available
-cases and classifies
-new cases
-based on
-a similarity
-measure (e.g.,
-distance functions)
-Based on optimal
-solution
-time complexity
-is quite
-high.
-\newpage
-\begin{center}
-\section{METHODOLOGY}
+The pretext task consists of
+predicting the relative location of two given patches of an
+image. The model is similar to the Jigsaw one, but in this
+case the 8 possible relative spatial relations between two
+patches need to be predicted, e.g. “below” or “on the right
+and above”. We use the same patch prepossessing as in the
+Jigsaw model and also extract final image representations
+by averaging representations of 9 cropped patches.
 
-\end{center}
-\subsection{Workflow}
-\includegraphics[width=\linewidth]{pict}
-\captionof{figure}{This is placeholder image: Workflow}
-\newpage
-\subsection{Mathematical model}
-\par
-S = \{s, e, X, Y, $f_{main}$, $f_f$, DD, NDD, $mem_{sh}$ $\vert$  $\phi$ \}\\\\
- s: start state.\\
- e: end state.\\
 
-Let X be the input set consisting of:-  X = $L_i$\\
-where L is the collected Log from monitoring cloud \\
-Let Y be the output set consisting of:-\\
-Y = {C,P} where C $\in$ Cl is class defined as anomaly. \\\\
+% \newpage
+% \begin{center}
+% \section{METHODOLOGY}
 
-\par
-\textbf{Functions}\\\\
-$f_{main}$ - Let ’k’ be the function to detect the anomaly  such  that:-\\
-\\
-k : log dataset $\rightarrow$  {P}\\
-\\
-$f_{f}$ : { $f_{1}$, $f_{2}$ }\\
-\\
-$f_{1}$= Cloud Monitoring functions for collecting data\\
-\\
-$f_{2}$= Anomaly detection function\\
-\\
-\textbf{Success- Failure Rate}\\
+% \end{center}
+% \subsection{Workflow}
+% \includegraphics[width=\linewidth]{pict}
+% \captionof{figure}{This is placeholder image: Workflow}
+% \newpage
+% \subsection{Mathematical model}
+% \par
+% S = \{s, e, X, Y, $f_{main}$, $f_f$, DD, NDD, $mem_{sh}$ $\vert$  $\phi$ \}\\\\
+%  s: start state.\\
+%  e: end state.\\
 
-$\#$ P = normal\\
-$P = {\phi}$ \\or\\ \# P $\neq$ normal
+% Let X be the input set consisting of:-  X = $L_i$\\
+% where L is the collected Log from monitoring cloud \\
+% Let Y be the output set consisting of:-\\
+% Y = {C,P} where C $\in$ Cl is class defined as anomaly. \\\\
+
+% \par
+% \textbf{Functions}\\\\
+% $f_{main}$ - Let ’k’ be the function to detect the anomaly  such  that:-\\
+% \\
+% k : log dataset $\rightarrow$  {P}\\
+% \\
+% $f_{f}$ : { $f_{1}$, $f_{2}$ }\\
+% \\
+% $f_{1}$= Cloud Monitoring functions for collecting data\\
+% \\
+% $f_{2}$= Anomaly detection function\\
+% \\
+% \textbf{Success- Failure Rate}\\
+
+% $\#$ P = normal\\
+% $P = {\phi}$ \\or\\ \# P $\neq$ normal
 
 			
 		
 
-\newpage
-\section{Results}
-\subsection{Data}
-\begin{table}[h!]
-\centering
-\caption{Data Table}
-\begin{tabular}{|l|l|l|}
-\hline
-S.No &Data set  &size  \\ \hline
-1 &KDD1998  &43.5 MB  \\ \hline
- 2& KDD 1999 &75.3 MB  \\ \hline
-\end{tabular}
-%\caption{Data Table}
-\label{my-label}
-\end{table}
-\subsection{Implementation Results}
-\includegraphics[scale=0.5]{pict}
-\captionof{figure}{This is placeholder image: Result of KDD 1998 dataset}
-\includegraphics[scale=0.5]{pict}
-\captionof{figure}{This is placeholder image: Result of KDD 1999 dataset}
+% \newpage
+% \section{Results}
+% \subsection{Data}
+% \begin{table}[h!]
+% \centering
+% \caption{Data Table}
+% \begin{tabular}{|l|l|l|}
+% \hline
+% S.No &Data set  &size  \\ \hline
+% 1 &KDD1998  &43.5 MB  \\ \hline
+%  2& KDD 1999 &75.3 MB  \\ \hline
+% \end{tabular}
+% %\caption{Data Table}
+% \label{my-label}
+% \end{table}
+% \subsection{Implementation Results}
+% \includegraphics[scale=0.5]{pict}
+% \captionof{figure}{This is placeholder image: Result of KDD 1998 dataset}
+% \includegraphics[scale=0.5]{pict}
+% \captionof{figure}{This is placeholder image: Result of KDD 1999 dataset}
+
 \newpage
 \begin{center}
 \section{CONCLUSION}
 \end{center}
 \par
-Feature extraction process can affect the system in both ways if the process is not carried out carefully. As features in machine learning is among the important factors which affects the system performance. Feature extraction along with supervised learning algorithm can improve the performance of anomaly detection system to an extent. Reducing the dataset through feature extraction make easy for learning algorithm to focus on important feature and get the work done  
+In conclusion we can see that many techniques have been employed in order to make networks learn features of an image. Self-supervised learning isn't restricted to only images, similarly people are conducting research for videos, audio, 3D images, text and reinforcement learning too. The ultimate aim to find a perfect task that includes all the characteristics in the surrounding, and get appropriate outputs as we, as humans do in out daily life, and progress is being made in that direction everyday.
+
 \\
 
 \newpage
@@ -543,21 +601,34 @@ Feature extraction process can affect the system in both ways if the process is 
 \bibliographystyle{plain}
 
 \begin{thebibliography}{21}
-\bibitem{paper1} Dalmazo, Bruno L., et al. "Expedite feature extraction for enhanced 	cloud anomaly detection." Network Operations and Management 	Symposium (NOMS), 2016 " \textit{IEEE/IFIP. IEEE, 2016}.
 
-\bibitem{paper2} T. Shon and J. Moon, “A hybrid machine learning approach to 	network anomaly detection,” Information Sciences, vol. 177, no. 18, 	pp. 3799 – 3821, 2007. [Online]. Available.
+\bibitem{paper1}Jean-Bastien Grill ,1 Florian Strub,1 Florent Altché, Corentin Tallec, Pierre H. Richemond, Elena Buchatskaya1, Carl Doersch1, Bernardo Avila Pires1, Zhaohan Daniel Guo1, Mohammad Gheshlaghi Azar1, Bilal Piot1, Koray Kavukcuoglu1, Rémi Munos1, Michal Valko1. Bootstrap Your Own Latent A New Approach to Self-Supervised Learning. In NeurIPS, 2020.
 
-\bibitem{paper3} H. Kholidy and F. Baiardi, “CIDS: A framework for intrusion 	detection in cloud systems,” in Ninth International Conference on 	InformationTechnology: New Generations (ITNG), 2012, April 2012, 	pp. 379–385.
+\bibitem{paper2}Yuki M. Asano, Christian Rupprecht, Andrea Vedaldi. A critical analysis of self-supervision, or what we can learn from a single image. International Conference on Learning Representations (ICLR) 2020
 
-\bibitem{paper4} Fu, Song. "Performance metric selection for autonomic anomaly 	detection on cloud computing systems." Global Telecommunications 	Conference (GLOBECOM 2011), 2011 IEEE. IEEE, 2011.
+\bibitem{paper3}Yuki Markus Asano, Christian Rupprecht, Andrea Vedaldi. Self-labelling via simultaneous clustering and representation learning.
+International Conference on Learning Representations (ICLR) 2020.
 
-\bibitem{paper5} S.-J. Horng, M.-Y. Su, Y.-H. Chen, T.-W. Kao, R.-J. Chen, J.-L. Lai,	and C. D. Perkasa, “A novel intrusion detection system based on 	hierarchical clustering and support vector machines,” Expert Systems 	with Applications, vol. 38, no. 1, pp. 306 – 313, 2011.
+\bibitem{paper4}Michael Tschannen, Josip Djolonga, Paul K. Rubenstein, Sylvain Gelly, Mario Lucic. On Mutual Information Maximization for Representation Learning. 	ICLR 2020.
+
+\bibitem{paper7} C. Doersch, A. Gupta, and A. A. Efros. Unsupervised visual representation learning by context prediction. In International Conference on Computer Vision (ICCV), 2015.
 
 
-\bibitem{paper6} P. Ganeshkumar and N. Pandeeswari, “Adaptive neuro-fuzzy-based 	anomaly detection system in cloud,” International Journal of Fuzzy 	Systems, pp. 1–12, 2015.
+% after this extra papers
+
+\bibitem{paper5}S. Gidaris, P. Singh, and N. Komodakis. Unsupervised representation learning by predicting image rotations. In International Conference on Learning Representations (ICLR),
+2018.
+
+\bibitem{paper6} M. Noroozi and P. Favaro. Unsupervised learning of visual
+representations by solving jigsaw puzzles. In European Conference on Computer Vision (ECCV), 2016.
 
 
-\bibitem{paper7}B. L. Dalmazo, J. P. Vilela, and M. Curado, “Online traffic prediction 	in the cloud: A dynamic window approach,” in The 2nd International 	Conference on Future Internet of Things and Cloud (FiCloud’2014), 	Aug 2014, pp. 9–14.
+\bibitem{paper8} A. Dosovitskiy, J. T. Springenberg, M. Riedmiller, and
+T. Brox. Discriminative unsupervised feature learning with
+convolutional neural networks. In Advances in Neural Information Processing Systems (NIPS), 2014.
+
+
+
 
 
 
@@ -569,7 +640,13 @@ attach your review and visit log here......
 
 \newpage
 
-attach  plagiarism report here.....
+attach plagiarism report here.....
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{plagiarism.jpeg}
+
+\end{figure}
 
 \end{document}
+
 

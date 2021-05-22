@@ -1,3 +1,6 @@
+-- mysql -u root -p
+-- Hello@123
+
 use A1_professor_schema;
 
 select * from professor;

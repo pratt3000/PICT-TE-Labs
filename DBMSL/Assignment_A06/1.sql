@@ -49,11 +49,9 @@ END loop loop1;
 END
 $$
 
-
 delimiter ;
 
 call MergeTables();
-
 
 SELECT * FROM O_rollCall;
 SELECT * FROM N_rollCall;

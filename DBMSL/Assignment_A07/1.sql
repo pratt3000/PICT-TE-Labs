@@ -25,14 +25,14 @@ INSERT INTO customer VALUES(5,"Utkarsh",11000);
 
 delimiter //
 CREATE PROCEDURE decideCategory(IN total_purchase INT, OUT class VARCHAR(20))
-BEGIN
-IF total_purchase<= 20000 AND total_purchase>=10000 THEN SET class="PLATINUM";
-END IF;
-IF total_purchase<10000 AND total_purchase >= 5000 THEN SET class="GOLD";
-END IF;
-IF total_purchase<5000 AND total_purchase >=2000 THEN SET class="SILVER";
-END IF;
-END;
+    BEGIN
+        IF total_purchase<= 20000 AND total_purchase>=10000 THEN SET class="PLATINUM";
+        END IF;
+        IF total_purchase<10000 AND total_purchase >= 5000 THEN SET class="GOLD";
+        END IF;
+        IF total_purchase<5000 AND total_purchase >=2000 THEN SET class="SILVER";
+        END IF;
+    END;
 //
 
 CREATE PROCEDURE proc_category()
