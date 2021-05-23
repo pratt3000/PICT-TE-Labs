@@ -163,17 +163,16 @@ Self-supervised learning, Unsupervised representation, Mutual Information, InfoM
 \section{INTRODUCTION}
 \end{center}
 \par
-Self supervised learning these days has become essential, considering the amount of data that is needed to train models it is highly effective to create labels empirically rather than by manual effort. Since the in many cases the amount of data may determine the output quality of our predictors, investing millions into creating sub par labelled data sets isn't feasible anymore. The amount of unlabelled data out numbers labelled data 1:1 million, and considering there is no way to label all of the data self supervised learning comes in handy.
+Self supervised learning these days has become essential, considering the amount of data that is needed to train models it is highly effective to create labels empirically rather than by manual effort. Since in many cases the amount of data may determine the output quality of our predictors, investing millions into creating sub par labelled data sets isn't feasible anymore. The amount of unlabelled data out-numbers labelled data in the ratio 1:1 million, and considering there is no way to label all of the data self-supervised learning comes in handy.
  \\ 
 \par
 Learning good image representations is a key challenge
 in computer vision as it allows for efficient
-training on downstream tasks. Many different training approaches have been proposed to learn
-such representations, usually relying on visual pretext
+training on downstream tasks. Many different training approaches have been proposed to learn such representations, usually relying on visual pretext
 tasks.\\
 
 \par
-Self supervised learning is a relatively new area of research and requires more than average amount of compute while experimenting because of the sheer scale of things. Training times can vary from 2 days to 2 months and this makes it quite inapproachable` to lay persons. But with the resent onset of online cloud computing it has become somewhat accessible and as we get better hardware the training times are being reduced to. The reason they require such high compute is because the weights are always randomly initialized and due to the absence of transfer learning the model takes longer to converge to a minimum.\\
+Self supervised learning is a relatively new area of research and requires more than average amount of compute while experimenting because of the sheer scale of things. Training times can vary from 2 days to 2 months and this makes it quite inapproachable to lay persons. But with the resent onset of online cloud computing it has become somewhat accessible and as we get better hardware the training times are being reduced too. The reason they require such high compute is because the weights are always randomly initialized and due to the absence of transfer learning the model takes longer to converge to a minimum.\\
 
 \\
 
@@ -183,7 +182,7 @@ BYOL introduces a novel method for self supervised learning in image representat
 \\
 
 \par
-Similarly there are various other techniques used over the years. Jigsaw++ divides the images into parts like a jigsaw puzzle and the aim is for the network to predict the relative positions of the patches of the image. Another one is ROTNET in which the net tries to predict the angle to which the image is rotated. Colorful image colorization aims to convert black and white images to colored one using U-net architectures. As we can concur Self supervised learning involves a lot of imagination and coming up with a novel technique which may help the feature extractors understand images in a better way is the crux of it
+Similarly there are various other techniques used over the years. Jigsaw++[5] divides the images into parts like a jigsaw puzzle and the aim is for the network to predict the relative positions of the patches of the image. Another one is ROTNET[6] in which the network tries to predict the angle to which the image is rotated. Colorful image colorization[9] aims to convert black and white images to colored ones using U-net style architectures. As we can concur Self supervised learning involves a lot of imagination and coming up with a novel technique which may help the feature extractors understand images in a better way.
 \\
 
 \par
@@ -196,11 +195,11 @@ Similarly there are various other techniques used over the years. Jigsaw++ divid
 
 \end{center}
 \hspace{1cm} 
-Given a task and enough labels, supervised learning can solve it really well. Good performance usually requires a decent amount of labels, but collecting manual labels is expensive (i.e. ImageNet) and hard to be scaled up. Considering the amount of unlabelled data (e.g. free text, all the images on the Internet) is substantially more than a limited number of human curated labelled datasets, it is kinda wasteful not to use them. However, unsupervised learning is not easy and usually works much less efficiently than supervised learning.
+Given a task and enough labels, supervised learning can solve it really well. Good performance usually requires a decent amount of labels, but collecting manual labels is expensive (i.e. ImageNet) and hard to scale up. Considering the amount of unlabelled data is substantially more than human curated labelled datasets, it is kinda wasteful not to use them. However, unsupervised learning is not easy and usually works much less efficiently than supervised learning atleast with the current methods that we are employing.
 \\
 
 \hspace{1cm}
-In recent times we invest a lot of time and capital in labelling individual images to build a network around them. A decade ago the solution would have been transfer learning but for transfer learning we need pre-trained weights, pre-trained weights need to be trained in the first place. Now we could say that they could be trained on another data set, bt that defeats the purpose since creating that data set did take time at some point. This is where self supervised learning came into place. The idea that we don't really need labelled data sets in order to build a good feature extractor is really fascinating.
+In recent times we invest a lot of time and capital in labelling individual images to build a network around them. A decade ago the solution would have been transfer learning but for transfer learning we need pre-trained weights, pre-trained weights need to be trained in the first place. Now we could say that they could be trained on another data set, but that somewhat defeats the purpose since creating that data set did take time at some point. This is where self supervised learning comes into place. The idea that we don't need labelled data sets in order to build a good feature extractor is really fascinating and that is the reason I decided to get into this field of study for my report.
 \\
 
   
@@ -213,7 +212,67 @@ This doesn't mean that self supervised learning doesn't need labels, many tasks 
 
 
 \hspace{1cm}\\
-Many ideas have been proposed for self-supervised representation learning on images. A common workflow is to train a model on one or multiple pretext tasks with unlabelled images and then use one intermediate feature layer of this model to feed a multinomial logistic regression classifier on ImageNet classification. The final classification accuracy quantifies how good the learned representation is.
+Many ideas have been proposed for self-supervised representation learning on images. A common workflow is to train a model on one or multiple pretext tasks with unlabelled images and then use one intermediate feature layer of this model to feed a classifier on Image-Net classification. The final classification accuracy quantifies how good the learned representation is.
+\newpage
+\begin{center}
+\section{PROBLEM DEFINITION AND SCOPE}
+\end{center}
+
+\subsection{Problem Definition}
+
+\hspace{1.5cm} To come up with a technique to extract the meaningful features to increase the efficiency of any particular model architecture that we choose.
+
+\subsection{Scope}
+
+\hspace{1.5cm}
+Self supervised
+learning is a twist
+on unsupervised learning where we
+exploit unlabeled data to obtain
+labels where there is no explicit annotation
+or class labels associated with the data
+we exploit unlabeled data itself to get
+some kind of labels and induce a
+supervised
+learning model on unlabeled data.
+Specifically we design supervised tasks
+which are called pretext or auxiliary
+tasks
+which can learn meaningful
+representations
+through which the model becomes more
+ready.
+To then be able to solve a downstream
+task
+such as a classification or semantic
+segmentation
+or any other supervised learning task a
+sample task in this context
+could be to predict a certain part of
+the input
+from another part, somewhat like fill in
+the blanks
+of of a given input.\\
+\\
+You can predict any part of the input
+from any other part.
+Between images and videos you could
+predict
+the future from the past you could
+predict the future from the recent
+past you could try predicting the past
+from the present.
+The top from the bottom in case of an
+image.
+In a more broader sense you could
+predict the occluded
+from the visible in general, you pretend
+there is a part of the input that you
+don't know
+and try to predict that,
+those are the different tasks or pretext
+tasks that you can use
+in self-supervised learning.
 
 \newpage
 \begin{center}
@@ -240,7 +299,7 @@ The Following table shows the literature survey by comparing techniques propose 
  \hline
  
  1 &\begin{tabular}[c]{@{}l@{}}
-        Bootstrap\\ Your Own\\ Latent A New\\ Approach to \\Self-Supervised\\ Learning  
+        Bootstrap\\ Your Own\\ Latent A New\\ Approach to \\Self-Supervised\\ Learning[1]
     \end{tabular} 
  &  \begin{tabular}[c]{@{}l@{}}
         imagenet\\
@@ -258,7 +317,7 @@ The Following table shows the literature survey by comparing techniques propose 
     \hline
     
  2 &\begin{tabular}[c]{@{}l@{}}
-        On mutual\\ information \\maximization \\for \\representation\\ learning  
+        On mutual\\ information \\maximization \\for \\representation\\ learning[4] 
     \end{tabular} 
  &  \begin{tabular}[c]{@{}l@{}}
         MNIST\\
@@ -276,7 +335,7 @@ The Following table shows the literature survey by comparing techniques propose 
     \hline
     
  3 &\begin{tabular}[c]{@{}l@{}}
-    Self-labelling\\ via \\simultaneous\\ clustering \\and\\ representation\\ learning 
+    Self-labelling\\ via \\simultaneous\\ clustering \\and\\ representation\\ learning[3]
     \end{tabular} 
  &  \begin{tabular}[c]{@{}l@{}}
         SVHN\\
@@ -296,7 +355,7 @@ The Following table shows the literature survey by comparing techniques propose 
     \hline
     
 4 &\begin{tabular}[c]{@{}l@{}}
-    Unsupervised\\ Visual \\Representation\\ Learning \\by Context\\ Prediction 
+    Unsupervised\\ Visual \\Representation\\ Learning \\by Context\\ Prediction[5]
     \end{tabular} 
  &  \begin{tabular}[c]{@{}l@{}}
         ImageNet 
@@ -313,7 +372,7 @@ The Following table shows the literature survey by comparing techniques propose 
     \hline
     
 5 &\begin{tabular}[c]{@{}l@{}}
-    A critical\\ analysis of \\self-supervision, \\or what we\\ can learn from \\a single image
+    A critical\\ analysis of \\self-supervision, \\or what we\\ can learn from \\a single image[2]
     \end{tabular} 
  &  \begin{tabular}[c]{@{}l@{}}
         ImageNet 
@@ -347,36 +406,38 @@ The Following table shows the literature survey by comparing techniques propose 
 \begin{center}
 \section{A SURVEY ON PAPERS}
 \end{center}
-\subsection{Bootstrap Your Own Latent A New Approach to Self-Supervised Learning}
+\subsection{Bootstrap Your Own Latent A New Approach to Self-Supervised Learning[1]}
 \hspace{1cm}
-BYOL method helps in learning important representations for a variety of downstream computer vision tasks such as object recognition, object detection, semantic segmentation, etc. Once these representations are learned in BYOL way, they could be used with any standard object classification model like as Resnet, VGGnet, or any semantic segmentation network such as FCN8s, deeplabv3, etc or any other task-specific network and it gets to a better result than training these networks from scratch. This is the major reason behind the popularity of BYOL. The below graph shows that the BYOL representations learned using Imagenet images beats all previous unsupervised learning methods and achieves classification accuracy of 74.1 percent with Resnet50 under linear evaluation protocol.\\
+BYOL[1] method helps in learning important representations for a variety of downstream computer vision tasks such as object recognition, object detection and semantic segmentation. Once these representations are learned, they could be used with any standard object classification model like as Resnet, VGGnet, or any semantic segmentation network such as FCN8s, deeplabv3, etc or any other task-specific network and it gets to a better result than training these networks from scratch. This is the major reason behind the popularity of BYOL. The below graph shows that the BYOL representations learned using Imagenet images beats all previous unsupervised learning methods and achieves classification accuracy of 74.1 percent with Resnet50 under linear evaluation protocol.\\
 \\
 Another interesting fact is, although a collapsed solution exists for the task curated for BYOL, the model avoids it safely and the actual reason for it is unknown. Collapsed solution means, the model might get away by learning a constant vector for any view of any image and gets to zero loss, but it does not happen\\
 \\
 The authors of the original paper, conjecture that it might be due to the complex network(Deep Resnet with skip connections) used in the backbone, the model never gets to the straightforward collapsed solution. But in another recent paper SimSiam Chen, Xineli and He, found out it is not the complex network architecture but the “stop-gradient” operation that makes the model to avoid the collapsed representations. “stop-gradient” means that the network never gets to update the weights of the target network directly through gradients and hence never gets to the collapsed solution. They also show that there isn’t any need for a momentum target network to avoid collapsed representation but it certainly gives better representations for downstream tasks if used.
 
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=14cm]{byol_arch.png}
 
+\end{figure}
 
 
 \subsection{On mutual information maximization for  representation learning}
 \hspace{1cm}  
-The paper revolves around discussing if maximising Mutual Information (MI) between vectors yeilds 
-good results. Take an image split it into half, pass the half images through independent encoders 
-(CNN, MLP layers), get 2 vectors and now calculate the MI between these 2 vectors using a
- particular estimator (InfoNCE/InfoMAX, etc). The task is to maximise this MI. In the paper we discuss
- if maximising MI is usfficient. It is said that recently MI has beat many cutting edge scores but 
-is that enough? The authors go on to prove that that alone is not sufficient and that encoder 
-architecture, estimator funtion, critics etc play an equallly important role.\\
+The paper revolves around discussing if maximising Mutual Information (MI) between vectors yields good results. Take an image split it into half, pass the half images through independent encoders(CNN, MLP layers), get 2 vectors and now calculate the MI between these 2 vectors using a particular estimator (InfoNCE/InfoMAX, etc). The task is to maximise this MI. In the paper we discuss if maximising MI is sufficient. It is said that recently MI has beat many cutting edge scores but is that enough? The authors go on to prove that that alone is not sufficient and that encoder architecture, estimator function, critics etc play an equally important role.\\
 \\
-This paper is to prove that maximization mutual information solely is not a necessity condition for the improvance of previous papers. It suggested to use triplet technique in which we use representation of images and we reduce difference between similar images and increasing difference between different images where difference can be called as mutual information. It also suggest to invent better formula for mutual information because current formula although good is not enough.
+This paper is to prove that maximization mutual information solely is not a necessity condition for the improvement of previous papers. It suggested to use triplet technique in which we use representation of images and we reduce difference between similar images and increasing difference between different images where difference can be called as mutual information. It also suggest to invent better formula for mutual information because current formula although good is not enough.
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=14cm]{infonce.png}
 
+\end{figure}
 
 \subsection{Self-labelling via simultaneous clustering and representation learning }
 \hspace{1cm} 
-In this we try to assign labels to random images by clustering. But we use a better method that traditional K-means. Sinkhorn-Knopp optmization for obtaining pseudo-labels is always better than K-means on all metrics. After this we train the netwrk on a simple downstream task for classification of images.\\
+In this we try to assign labels to random images by clustering. But we use a better method that traditional K-means. Sinkhorn-Knopp optimization for obtaining pseudo-labels is always better than K-means on all metrics. After this we train the network on a simple downstream task for classification of images.\\
 \\
 The method is obtained by maximizing the information between
-labels and input data indices. We show that this criterion extends standard crossentropy minimization to an optimal transport problem, which we solve efficiently
+labels and input data indices. We show that this criterion extends standard cross entropy minimization to an optimal transport problem, which we solve efficiently
 for millions of input images and thousands of labels using a fast variant of the
 Sinkhorn-Knopp algorithm. 
 
@@ -384,7 +445,8 @@ Sinkhorn-Knopp algorithm.
 
 \subsection{Unsupervised Visual Representation Learning by Context Prediction}
 \hspace{1cm}
-
+Jigsaw puzzle - From each image 4 random patches are selected. Each patch is then divided into 9 sub-patches in a 3x3 grid. 2 sub patches out of these 9 are selected and our self supervised task is to feed those 2 patches into the model and train it to figure out their relative positions to each other.\\
+\\
 Suppose you get two patches A and B from
 the same image can you tell where B
 should go relative to a we argue that
@@ -404,86 +466,29 @@ pre-training on unlabeled images gets a
 significant boost over training on
 Pascal alone which amounts to more than
 a third of the benefit from training on
-a million image netlabels.\\
-\\
-Jigsaw puzzle - From each image 4 random patches are selected. Each patch is then divided into 9 subpatches in a 3x3 grid. 2 sub patches out of these 9 are selected and our self supervised task is to feed those 2 patches into the model and train it to figure out their relative positions to each other.
+a million image-net labels.\\
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=6cm]{j_arch.png}
+    \includegraphics[width=6cm]{j_cat.png}
+    
+\end{figure}
+
 
 \subsection{A critical analysis of self-supervision,or what we can learn from a single image}
 \hspace{1cm}
-It is mentioned that initial layer features can be trained by just training on one image and its augmentations. We do not need a huge dataset. They noted that even if we train on a single image(and its augmentations) we can get 2/3rd the accuracy meaning big datasets only provide small increments in self supervised learning and goes on to prove that augmentaions are very important. in the end they discovered that one image is enough to train the first 3 layers and produces similar results but for deeper layer where more intricate features are recognised we need bigger datasets. Our main conclusion is that these methods succeed perfectly in capturing the simplest image statistics, but that for deeper layers a gap exist with strong
-supervision which is compensated only in limited manner by using large datasets. This novel finding
+It is mentioned that initial layer features can be trained by just training on one image and its augmentations. We do not need a huge data set. They noted that even if we train on a single image(and its augmentations) we can get 2/3rd the accuracy meaning big data sets only provide small increments in self supervised learning and goes on to prove that augmentations are very important. in the end they discovered that one image is enough to train the first 3 layers and produces similar results but for deeper layer where more intricate features are recognised we need bigger data sets. Our main conclusion is that these methods succeed perfectly in capturing the simplest image statistics, but that for deeper layers a gap exist with strong
+supervision which is compensated only in limited manner by using large data sets. This novel finding
 motivates a renewed focus on the role of augmentations in self-supervised learning and critical
 rethinking of how to better leverage the available data
 
 
 \newpage
 \begin{center}
-\section{PROBLEM DEFINITION AND SCOPE}
+\section{Some highly cited Self-supervised techniques}
 \end{center}
-
-\subsection{Problem Definition}
-
-\hspace{1.5cm} To come up with a technique to extract the meaningful features to increase the efficiency of any particular model architecture that we choose.
-
-\subsection{Scope}
-
-\hspace{1.5cm}The topic of self-supervised
-learning what is self supervised
-learning it is a twist
-on unsupervised learning where we
-exploit unlabeled data to obtain
-labels there is no explicit annotation
-or class labels associated with the data
-we exploit unlabeled data itself to get
-some kind of labels and induce a
-supervised
-learning model on unlabeled data
-specifically we design supervised tasks
-which are called pretext or auxiliary
-tasks
-which can learn meaningful
-representations
-through which the model becomes more
-ready.\\
-\\
-to then be able to solve a downstream
-task
-such as a classification or semantic
-segmentation
-or any other supervised learning task a
-sample task in this context
-could be to predict a certain part of
-the input
-from another part somewhat like fill in
-the blanks
-of of a given input
-so so what part of an input can you then
-predict or what can you learn
-you can predict any part of the input
-from any other part
-between images and videos you could
-predict
-the future from the past you could
-predict the future from the recent
-past you could try predicting the past
-from the present
-the top from the bottom in case of an
-image
-in a more broader sense you could
-predict the occluded
-from the visible in general you pretend
-there is a part of the input that you
-don't know
-and try to predict that that's
-those are the different tasks or pretext
-tasks that you can use
-in self-supervised learning.
-
-\newpage
-\begin{center}
-\section{Some more Self-supervised techniques}
-\end{center}
-\subsection{Rotation}
+\subsection{Rotation[6]}
 \par
 \hspace{1cm}
 
@@ -492,9 +497,15 @@ a single image by rotating it by {0°, 90°, 180°, 270°} and let
 a single network predict the rotation which was applied—a
 4-class classification task. Intuitively, a good model should
 learn to recognize canonical orientations of objects in natural images.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=14cm]{rotnet.png}
+
+\end{figure}
 %\\
 %\\
-\subsection{Exemplar}
+\subsection{Exemplar[10]}
 \par
 \hspace{1cm}
  In this technique, every individual image corresponds to its own class, and multiple examples of it
@@ -506,22 +517,12 @@ present in the ImageNet dataset. The triplet loss avoids explicit class labels a
 same image to have representations that are close in the Euclidean space while also being far from the representations
 of different images. Example representations are given by a
 1000-dimensional logits layer.
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=5cm]{exemplar.png}
 
-\\
-\\
+\end{figure}
 
-
-\subsection{Relative Patch Location}
-\par 
-%\hspace
-The pretext task consists of
-predicting the relative location of two given patches of an
-image. The model is similar to the Jigsaw one, but in this
-case the 8 possible relative spatial relations between two
-patches need to be predicted, e.g. “below” or “on the right
-and above”. We use the same patch prepossessing as in the
-Jigsaw model and also extract final image representations
-by averaging representations of 9 cropped patches.
 
 
 % \newpage
@@ -627,8 +628,9 @@ representations by solving jigsaw puzzles. In European Conference on Computer Vi
 T. Brox. Discriminative unsupervised feature learning with
 convolutional neural networks. In Advances in Neural Information Processing Systems (NIPS), 2014.
 
+\bibitem{paper8} Richard Zhang, Phillip Isola, Alexei A. Efros. Colorful Image Colorization. arxiv.com
 
-
+\bibitem{paper8} Eric Arazo, Noel E. O'Connor, Kevin McGuinness. Improving Unsupervised Learning With Exemplar CNNS. IMVIP, 2019
 
 
 
@@ -639,8 +641,7 @@ convolutional neural networks. In Advances in Neural Information Processing Syst
 attach your review and visit log here......
 
 \newpage
-
-attach plagiarism report here.....
+temporary plagiarism report
 \begin{figure}[htp]
     \centering
     \includegraphics[width=15cm]{plagiarism.jpeg}
