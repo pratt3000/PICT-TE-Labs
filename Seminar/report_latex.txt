@@ -58,7 +58,7 @@
 		        
         \textbf{\large{Under the guidance of}}
 		\linebreak
-	    Prof. Rujuta Kulkarni
+	    Prof. Rutuja Kulkarni
 		\linebreak
       %  \vfill
         
@@ -106,7 +106,7 @@
 		\linebreak
 		Prathamesh Sonawane \hspace{10mm}   Roll No. 31164 \linebreak
 		\linebreak
-		has satisfactorily completed a seminar report under the guidance of Prof. Rujuta Kulkarni towards the partial fulfillment of third year Computer Engineering Semester II, Academic Year 2019-20 of Savitribai Phule Pune University. 
+		has satisfactorily completed a seminar report under the guidance of Prof. Rujuta Kulkarni towards the partial fulfillment of third year Computer Engineering Semester II, Academic Year 2021-22 of Savitribai Phule Pune University. 
 		\linebreak
 		\linebreak
 		\linebreak
@@ -114,7 +114,7 @@
 		\linebreak
 		\begin{table}[h]
 		\begin{tabular}{ccc}
-		Dr. A. R. Deshpande    &                        &  \hspace{52mm} Prof. M.S.Takalikar\\
+		Prof. Rutuja Kulkarni    & &  \hspace{52mm} Prof. M.S.Takalikar\\
 		Internal Guide      &                     &    \hspace{52mm} Head \\
 		          &                         &       \hspace{47mm} Department of Computer Engineering \\
                     &                       & \hspace{52mm} 
@@ -122,7 +122,7 @@
 		\end{table}
 		\end{center}
 Place: Pune\\
-Date: 29/05/21
+Date: 25/05/21
 
 \end{titlepage} 
 
@@ -421,7 +421,7 @@ The authors of the original paper, conjecture that it might be due to the comple
 \end{figure}
 
 
-\subsection{On mutual information maximization for  representation learning}
+\subsection{On mutual information maximization for  representation learning[4]}
 \hspace{1cm}  
 The paper revolves around discussing if maximising Mutual Information (MI) between vectors yields good results. Take an image split it into half, pass the half images through independent encoders(CNN, MLP layers), get 2 vectors and now calculate the MI between these 2 vectors using a particular estimator (InfoNCE/InfoMAX, etc). The task is to maximise this MI. In the paper we discuss if maximising MI is sufficient. It is said that recently MI has beat many cutting edge scores but is that enough? The authors go on to prove that that alone is not sufficient and that encoder architecture, estimator function, critics etc play an equally important role.\\
 \\
@@ -432,7 +432,7 @@ This paper is to prove that maximization mutual information solely is not a nece
 
 \end{figure}
 
-\subsection{Self-labelling via simultaneous clustering and representation learning }
+\subsection{Self-labelling via simultaneous clustering and representation learning[3] }
 \hspace{1cm} 
 In this we try to assign labels to random images by clustering. But we use a better method that traditional K-means. Sinkhorn-Knopp optimization for obtaining pseudo-labels is always better than K-means on all metrics. After this we train the network on a simple downstream task for classification of images.\\
 \\
@@ -443,7 +443,7 @@ Sinkhorn-Knopp algorithm.
 
 
 
-\subsection{Unsupervised Visual Representation Learning by Context Prediction}
+\subsection{Unsupervised Visual Representation Learning by Context Prediction[5]}
 \hspace{1cm}
 Jigsaw puzzle - From each image 4 random patches are selected. Each patch is then divided into 9 sub-patches in a 3x3 grid. 2 sub patches out of these 9 are selected and our self supervised task is to feed those 2 patches into the model and train it to figure out their relative positions to each other.\\
 \\
@@ -476,7 +476,7 @@ a million image-net labels.\\
 \end{figure}
 
 
-\subsection{A critical analysis of self-supervision,or what we can learn from a single image}
+\subsection{A critical analysis of self-supervision,or what we can learn from a single image[2]}
 \hspace{1cm}
 It is mentioned that initial layer features can be trained by just training on one image and its augmentations. We do not need a huge data set. They noted that even if we train on a single image(and its augmentations) we can get 2/3rd the accuracy meaning big data sets only provide small increments in self supervised learning and goes on to prove that augmentations are very important. in the end they discovered that one image is enough to train the first 3 layers and produces similar results but for deeper layer where more intricate features are recognised we need bigger data sets. Our main conclusion is that these methods succeed perfectly in capturing the simplest image statistics, but that for deeper layers a gap exist with strong
 supervision which is compensated only in limited manner by using large data sets. This novel finding
