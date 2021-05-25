@@ -1,6 +1,7 @@
 <!DOCTYPE html>    
 <html>    
-<head>    
+<head>   
+    
     <title>Register Form</title>    
     <link rel="stylesheet" type="text/css" href="css/style.css">    
 </head>    
@@ -11,7 +12,7 @@
     <form id="login" method="get">  
 
         <label><b>Full Name</b></label>    
-        <input type="text" name="full_name" id="full_name" placeholder="Full Name">    
+        <input type="text" name="full_name" id="full_name" placeholder="Full Name" oninput="ckName()">    
         <br><br>
 
         <label><b>Department  </b></label> 
@@ -23,22 +24,22 @@
         <br><br>
 
         <label><b>Email ID</b></label>   <br> 
-        <input type="text" name="mailid" id="mailid" placeholder="Mail ID">    
+        <input type="text" name="mailid" id="mailid" placeholder="MailID" oninput="ckMail()">    
         <br><br>   
 
         <label><b>Password</b></label>    
-        <input type="Password" name="Pass" id="Pass" placeholder="Password">    
+        <input type="Password" name="Pass" id="Pass" placeholder="Password" oninput="ckPass()">    
         <br><br> 
         
         <label><b>Re-enter Password</b></label>    
-        <input type="Password" name="Pass" id="Pass" placeholder="Confirm Password">    
+        <input type="Password" name="Pass" id="Pass" placeholder="ConfirmPassword" oninput="ckPass()">    
         <br><br>
 
         <input type="checkbox" id="check">    
         <span>Remember me</span>   
         <br><br>  
 
-        <input type="button" name="log" id="log" value="Get Started">       
+        <input type="button" name="log" id="log" value="GetStarted" onclick="validate()">       
         <br><br>    
 
         <a href="login.html">LOGIN</a>   
@@ -46,5 +47,50 @@
 
     </form>     
 </div>    
+<script>
+    function validate() {
+      var result = "";
+      result += validateName();
+      result += validateEmail();
+      result += validatePassword();
+  result += validatePSW();
+      if (result == "") {
+        alert("Registered Successfully");
+
+        return true;
+      } else {
+        alert("\n" + result);
+        return false;
+      }
+    }
+    function validateName() {
+      var name = document.getElementById("full_name").value;
+      name = name.length;
+      if (name <= 1) return "Name not inserted\n";
+      return "";
+    }
+    function validatePassword() {
+      var password = document.getElementById("Pass").value;
+
+      if (password.length <= 8)
+        return "Password should be at least 8 characters\n";
+      return "";
+    }
+    function validatePSW() {
+      var password = document.getElementById("Pass").value;
+  var psw = document.getElementById("Pass").value;
+
+      if (password != psw)
+        return "Passwords do not match\n";
+      return "";
+    }
+    function validateEmail() {
+      var email = document.getElementById("mailid").value;
+
+      if (email.indexOf("@") == -1)
+        return "Invalid email address\n";
+      return "";
+    }
+  </script>
 </body>    
 </html>    

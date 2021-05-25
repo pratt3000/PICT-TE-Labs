@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<head>
+  <title>Register</title>
+  <style>
+
+    input {
+      border-radius: 5px;
+      padding: 5px;
+      margin-left: 10px;
+      margin-top: 5px;
+    }
+    .sub_part {
+      margin: auto;
+      max-width: 800px;
+      width: calc(100% - 20px);
+      height: 606px;
+      font-family: sans-serif;
+      letter-spacing: 0.5px;
+      background: #f8f9fb;
+      padding: 2 !important;
+      box-shadow: 0 0 50px rgb(0 0 0 / 20%);
+      border-radius: 7px;
+      box-sizing: border-box;
+      border: 1px solid #bfcdd8;
+      padding: 25px;
+      text-align: center;
+    }
+    .main {
+      flex: 1;
+      padding-top: 20px;
+      padding-bottom : 20px;
+      background-color: #696969;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      width: 100%;
+    }
+    .button {
+      margin-top: 50px;
+      text-align: left;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    .left {
+      float: left;
+      text-align: right;
+      margin-left: 25%;
+    }
+    .right {
+      float: right;
+      text-align: center;
+      margin-right: 25%;
+    }
+    .block {
+      text-align: center;
+      width: 100%;
+    }
+
+  </style>
+</head>
+
+<html>
+  <body>
+  <form action="insert.php" method="POST">
+    <div class="main">
+      <div class="sub_part">
+        <h1>Create Account</h1>
+        	
+        <div class="block">
+          <div class="left">
+	    <br/><br/>
+            Name <br /><br />
+ 	    Roll No. <br /><br />
+            Email <br /><br />
+            Domain <br /><br />
+            Password <br /><br />
+	    Confirm Password <br /><br />
+          </div>
+
+         <div class="right">
+	    <br/><br/>
+            <input type="text" name="name" id="name" required/><br />
+	    <input type="number" name="roll" id="roll" required/><br />
+            <input type="text" name="email" id="email" required/><br />
+            <input type="text" name="domain" id="domain" required/><br />
+            <input type="password" name="password" id="password" required/><br />
+	    <input type="password" name="psw" id="psw" required/><br />
+          </div>
+        </div>
+
+        <div class="button">
+          <button type="submit" class="button" name="submit" onclick="validate()">
+            Create
+          </button>
+        </div>
+	<a href="./index2.html">
+          <h6>Already have an account?</h6>
+        </a>
+      </div>
+    </div>
+</form>
+
+    <script>
+      function validate() {
+        var result = "";
+        result += validateName();
+        result += validateEmail();
+        result += validatePassword();
+	result += validatePSW();
+        if (result == "") {
+          alert("Registered Successfully");
+
+          return true;
+        } else {
+          alert("\n" + result);
+          return false;
+        }
+      }
+      function validateName() {
+        var name = document.getElementById("name").value;
+        name = name.length;
+        if (name <= 1) return "Name not inserted\n";
+        return "";
+      }
+      function validatePassword() {
+        var password = document.getElementById("password").value;
+
+        if (password.length <= 8)
+          return "Password should be at least 8 characters\n";
+        return "";
+      }
+      function validatePSW() {
+        var password = document.getElementById("password").value;
+	var psw = document.getElementById("psw").value;
+
+        if (password != psw)
+          return "Passwords do not match\n";
+        return "";
+      }
+      function validateEmail() {
+        var email = document.getElementById("email").value;
+
+        if (email.indexOf("@") == -1)
+          return "Invalid email address\n";
+        return "";
+      }
+    </script>
+
+  </body>
+</html>
