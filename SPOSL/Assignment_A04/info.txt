@@ -1,0 +1,23 @@
+mnt macro name table - 4 column wala
+mdt macro definition table - op of pass 1
+pnt parameter name table - names of variable
+kpdt key parameter definition table - 
+apt actual parameter table  - ala something dhoond lo
+
+
+
+    1. What is macro and macro processor?
+    2. What is MDT, MNT?
+    3. What is nested macro?
+    4. What are the tasks done in pass I of macro processor?
+    5. How macro call definitions are handled in pass I?
+    6. How formal and actual parameters are linked?
+    7. What are the steps to implement pass I of macro processor?
+
+    1. What is macro and macro processor?
+    2. What is macro call nested within macro definition? [early/late expansion]
+    3. What are the tasks done in pass II of macro processor? 
+    4. How macro call statements are expanded in pass II? 
+    5. How formal and actual parameters are linked?
+    6. What are the steps to implement pass II of macro processor?
+

@@ -1,0 +1,16 @@
+declaration
+rules
+subroutines
+
+FAQs:
+    1. How are nested macros handled?
+    2. How macro call within macro definition is handled?
+    3. Which type of parameters handled?
+
+Oral/Review Questions:
+    1. What is macro and macro processor?
+    2. What is macro call nested within macro definition?
+    3. What are the tasks done in pass II of macro processor?
+    4. How macro call statements are expanded in pass II?
+    5. How formal and actual parameters are linked?
+    6. What are the steps to implement pass II of macro processor?

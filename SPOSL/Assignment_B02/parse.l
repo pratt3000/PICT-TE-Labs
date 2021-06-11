@@ -16,6 +16,7 @@
 	
 %}
 
+
 DIGIT [0-9]
 NUMBER {DIGIT}+
 REAL {DIGIT}*[.]{NUMBER}
@@ -34,7 +35,11 @@ LOGICAL_OP "&&"|"||"|"!"|"!="
 REL_OP "<"|">"|"<="|">="|"=="
 UNARY "++"|"--"
 ACCESS "public"|"private"|"protected"|""
+
+
 %%
+
+
 [\n\t]+ ;
 {PREPROCESSOR} {if(comment_open==0) printf("%s\t==> PREPROCESSOR\n",yytext);}
 {CONDITIONAL} {if(comment_open==0) printf("%s\t==> CONDITIONAL\n",yytext);}

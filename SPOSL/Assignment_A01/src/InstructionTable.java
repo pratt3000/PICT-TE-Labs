@@ -47,7 +47,8 @@ public class InstructionTable {
     }
 
     public static String getInstructionType(String instruction) {
-        instruction = instruction.toUpperCase();
+        instruction = instruction.toUpperCa            throw new FileNotFoundException("no input file");
+        se();
         if(AD.containsKey(instruction)) return "AD";
         if(RG.containsKey(instruction)) return "RG";
         if(IS.containsKey(instruction)) return "IS";

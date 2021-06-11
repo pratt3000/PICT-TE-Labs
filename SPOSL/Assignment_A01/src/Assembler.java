@@ -56,13 +56,14 @@ public class Assembler {
     }
 
     private void interpret(String line) throws Exception {
-        String[] tokens = line.split("\\s+");
-        String label = tokens[0];
-        String instruction = tokens[1].toUpperCase();
-        String instructionType = InstructionTable.getInstructionType(instruction);
+        String[] tokens = line.split("\\s+");   // split string in tokens for one or more spaces
+        String label = tokens[0];               // label empty most of the times
+        String instruction = tokens[1].toUpperCase();   // core instruction
+        String instructionType = InstructionTable.getInstructionType(instruction); // get AD, RG, IS, etc
 
-        if(!label.isBlank()){
-            symbolTable.put(label,locationCounter);
+        // if label present add to symbol table
+        if(!label.isBlank()){   
+            symbolTable.put(label,locationCounter); 
         }
 
         switch (instructionType){
@@ -168,12 +169,12 @@ public class Assembler {
         if(file == null)
             throw new FileNotFoundException("no input file");
 
-        initializeLocationCounter();
+        initializeLocationCounter(); // just sets LC from start command
 
         String line;
         BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 
-        while ((line=bufferedReader.readLine())!=null){
+        while ((line=bufferedReader.readLine())!=null){  // read line by line
             interpret(line);
         }
         bufferedReader.close();

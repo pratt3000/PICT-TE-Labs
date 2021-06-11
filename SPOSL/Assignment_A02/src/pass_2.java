@@ -16,6 +16,7 @@ public class pass_2 {
         LiteralTable=new HashMap<>();
         MachineCode=new ArrayList<>();
 
+        // read symbol table
         FileReader file=new FileReader("Assignment_A02/src/symbolTable.txt");
         BufferedReader reader=new BufferedReader(file);
         String line;
@@ -27,6 +28,7 @@ public class pass_2 {
             index++;
         }
 
+        // read literal table
         index=1;
         file=new FileReader("Assignment_A02/src/literalTable.txt");
         reader=new BufferedReader(file);
